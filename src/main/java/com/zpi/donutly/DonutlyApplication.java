@@ -9,4 +9,5 @@ public class DonutlyApplication {
     public static void main(String[] args) {
         SpringApplication.run(DonutlyApplication.class, args);
     }
+
 }
