@@ -1,14 +1,25 @@
 package com.zpi.donutly.model;
 
-import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 public class Deposit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,4 +50,17 @@ public class Deposit {
 
     @Length(max = 500, message = "Field 'message' shouldn't be greater than 500 signs.")
     private String message;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Deposit deposit = (Deposit) o;
+        return id != null && Objects.equals(id, deposit.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
