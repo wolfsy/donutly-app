@@ -2,7 +2,7 @@ package com.zpi.donutly.model;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -14,11 +14,9 @@ public class Payment {
     @Column(name = "id_payment")
     private Long id;
 
-    @NotBlank
-    private Double p_balance;
+    @NotBlank(message = "Field 'paymentBalance' cannot be null.")
+    private Double paymentBalance;
 
-    @NotBlank
-    private LocalDateTime last_withdraw;
-
-
+    @NotBlank(message = "Field 'lastWithdraw' cannot be null.")
+    private LocalDateTime lastWithdraw;
 }

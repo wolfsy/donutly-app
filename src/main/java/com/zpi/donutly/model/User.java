@@ -1,57 +1,51 @@
 package com.zpi.donutly.model;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
+import java.net.URL;
 
 @Data
 @Entity
 public class User {
     @Id
-    // auto-increment
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
     private Long id;
 
-    @NotBlank(message = "first name cannot be empty")
-    @Length(max = 30, message = "first name can't be longer than 30 characters")
+    @NotBlank(message = "Field 'firstName' cannot be null.")
+    @Length(max = 30, message = "Field 'firstName' shouldn't be greater than 30 signs.")
     private String firstName;
 
-    @NotBlank(message = "last name cannot be empty")
-    @Length(max = 50, message = "last name can't be longer than 50 characters")
+    @NotBlank(message = "Field 'lastName' cannot be null.")
+    @Length(max = 50, message = "Field 'lastName' shouldn't be greater than 50 signs.")
     private String lastName;
 
-    @NotBlank(message = "email cannot be empty")
-    @Length(max = 50, message = "email can't be longer than 50 characters")
+    @Email
     private String email;
 
-    @NotBlank(message = "password cannot be empty")
-    @Length(min = 8, max = 50, message = "password must be between 8 and 50 characters")
+    @NotBlank(message = "Field 'password' cannot be null.")
+    @Length(min = 8, max = 60, message = "Field 'password' shouldn't be lesser than 8 and greater than 60 signs.")
     private String password;
 
-    @NotBlank(message = "phone number cannot be empty")
-    @Length(max = 30, message = "phone number can't be longer than 30 characters")
+    @NotBlank(message = "Field 'phone' cannot be null.")
+    @Length(max = 30, message = "Field 'phone' shouldn't be greater than 30 signs.")
     private String phone;
 
     // role: 1 - user, 2 - admin
-    @NotBlank(message = "role cannot be empty")
+    @NotBlank(message = "Field 'role' cannot be null.")
     private Integer role;
 
-    @Length(max = 255, message = "avatarUrl can't be longer than 255 characters")
-    private String avatarUrl;
+    private URL avatarUrl;
 
-    @NotBlank(message = "verification code cannot be empty")
+    @NotBlank(message = "Field 'verification' cannot be null.")
     private Boolean verification;
 
-    @Length(max = 255, message = "instagramUrl can't be longer than 255 characters")
-    private String instagramUrl;
+    private URL instagramUrl;
 
-    @Length(max = 255, message = "youtubeUrl can't be longer than 255 characters")
-    private String youtubeUrl;
+    private URL youtubeUrl;
 
-    @Length(max = 255, message = "tiktokUrl can't be longer than 255 characters")
-    private String tiktokUrl;
-
-
+    private URL tiktokUrl;
 }
