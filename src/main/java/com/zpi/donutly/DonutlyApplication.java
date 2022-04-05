@@ -10,5 +10,4 @@ public class DonutlyApplication {
         SpringApplication.run(DonutlyApplication.class, args);
     }
 
-
 }
