@@ -32,6 +32,9 @@ public class Payment {
     @NotBlank(message = "Field 'lastWithdraw' cannot be null.")
     private LocalDateTime lastWithdraw;
 
+    @NotBlank(message = "Field 'totalPaymentBalance' cannot be null.")
+    private Double totalPaymentBalance;
+
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
