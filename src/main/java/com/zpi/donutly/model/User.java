@@ -36,6 +36,13 @@ public class User {
     @Length(max = 50, message = "Field 'lastName' shouldn't be greater than 50 signs.")
     private String lastName;
 
+    @NotBlank(message = "Field 'login' cannot be null.")
+    @Length(max = 100, message = "Field 'login' shouldn't be greater than 100 signs.")
+    private String login;
+
+    @Length(max = 500, message = "Field 'login' shouldn't be greater than 500 signs.")
+    private String profileDescription;
+
     @Email
     private String email;
 
