@@ -18,6 +18,7 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @Entity
+@Table(name = "Deposit")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
 public class Deposit {
@@ -50,6 +51,10 @@ public class Deposit {
 
     @Length(max = 500, message = "Field 'message' shouldn't be greater than 500 signs.")
     private String message;
+
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
 
     @Override
     public boolean equals(Object o) {

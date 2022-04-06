@@ -17,6 +17,7 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @Entity
+@Table(name = "Payment")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
 public class Payment {
@@ -31,6 +32,10 @@ public class Payment {
     @NotBlank(message = "Field 'lastWithdraw' cannot be null.")
     private LocalDateTime lastWithdraw;
 
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,4 +48,6 @@ public class Payment {
     public int hashCode() {
         return getClass().hashCode();
     }
+
+
 }

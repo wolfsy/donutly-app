@@ -12,6 +12,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.net.URL;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -19,6 +20,7 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @Entity
+@Table(name = "User")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
     @Id
@@ -38,7 +40,8 @@ public class User {
     private String email;
 
     @NotBlank(message = "Field 'password' cannot be null.")
-    @Length(min = 8, max = 60, message = "Field 'password' shouldn't be lesser than 8 and greater than 60 signs.")
+
+    @Length(min = 8, max = 60, message = "Field 'password' should be between 8 and 60 signs.")
     private String password;
 
     @NotBlank(message = "Field 'phone' cannot be null.")
@@ -59,6 +62,22 @@ public class User {
     private URL youtubeUrl;
 
     private URL tiktokUrl;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_address")
+    private Address address;
+
+    @OneToMany(mappedBy = "user")
+    @ToString.Exclude
+    private List<Category> categoryList;
+
+    @OneToMany(mappedBy = "user")
+    @ToString.Exclude
+    private List<Deposit> depositList;
+
+    @OneToMany(mappedBy = "user")
+    @ToString.Exclude
+    private List<Payment> paymentList;
 
     @Override
     public boolean equals(Object o) {

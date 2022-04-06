@@ -18,6 +18,7 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @Entity
+@Table(name = "Category")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
 public class Category {
@@ -31,6 +32,10 @@ public class Category {
     private String name;
 
     private URL iconUrl;
+
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
 
     @Override
     public boolean equals(Object o) {
