@@ -40,7 +40,7 @@ public class User {
     @Length(max = 100, message = "Field 'login' shouldn't be greater than 100 signs.")
     private String login;
 
-    @Length(max = 500, message = "Field 'login' shouldn't be greater than 500 signs.")
+    @Length(max = 500, message = "Field 'profileDescription' shouldn't be greater than 500 signs.")
     private String profileDescription;
 
     @Email
