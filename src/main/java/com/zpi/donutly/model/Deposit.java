@@ -34,18 +34,6 @@ public class Deposit {
     @NotBlank(message = "Field 'amount' cannot be null.")
     private Double amount;
 
-    // virtual field our_pay that is calculated as amount * 0.01
-    @Transient
-    private Double ourPay;
-
-    // virtual field charity_pay that is calculated as amount * 0.01
-    @Transient
-    private Double charityPay;
-
-    // virtual field user_pay that is calculated as amount * 0.98
-    @Transient
-    private Double userPay;
-
     @NotBlank(message = "Field 'time' cannot be null.")
     private LocalDateTime time;
 
