@@ -55,6 +55,9 @@ public class User {
     @Length(max = 30, message = "Field 'phone' shouldn't be greater than 30 signs.")
     private String phone;
 
+    @NotBlank(message = "Field 'status' cannot be null.")
+    private Boolean status;
+
     // role: 1 - user, 2 - admin
     @NotBlank(message = "Field 'role' cannot be null.")
     private Integer role;
