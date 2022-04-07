@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.net.URL;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -33,9 +34,9 @@ public class Category {
 
     private URL iconUrl;
 
-    @ManyToOne
-    @JoinColumn(name = "id_user")
-    private User user;
+    @OneToMany(mappedBy = "category")
+    @ToString.Exclude
+    private List<User> user;
 
     @Override
     public boolean equals(Object o) {

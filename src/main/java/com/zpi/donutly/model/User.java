@@ -74,9 +74,9 @@ public class User {
     @JoinColumn(name = "id_address")
     private Address address;
 
-    @OneToMany(mappedBy = "user")
-    @ToString.Exclude
-    private List<Category> categoryList;
+    @ManyToOne
+    @JoinColumn(name = "id_category")
+    private Category category;
 
     @OneToMany(mappedBy = "user")
     @ToString.Exclude
