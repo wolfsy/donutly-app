@@ -25,4 +25,9 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+
+    @Override
+    public List<User> getAllUsersByCategoryId(Long categoryId) {
+        return userRepository.findUsersByCategoryId(categoryId);
+    }
 }

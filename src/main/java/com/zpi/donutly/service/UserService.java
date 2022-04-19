@@ -9,4 +9,6 @@ public interface UserService {
     User getUserByLogin(String login);
 
     List<User> getAllUsers();
+
+    List<User> getAllUsersByCategoryId(Long categoryId);
 }
