@@ -1,5 +1,6 @@
 package com.zpi.donutly.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -19,9 +20,8 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "Category")
+@Table(name = "Categories")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,10 +30,13 @@ public class Category {
 
     @NotBlank(message = "Field 'name' cannot be null.")
     @Length(max = 30, message = "Field 'name' shouldn't be greater than 30 signs.")
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "icon_url")
     private URL iconUrl;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "category")
     @ToString.Exclude
     private List<User> user;

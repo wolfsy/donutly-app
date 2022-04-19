@@ -7,10 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
@@ -19,14 +16,15 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @Entity
+@Table(name = "Incomes")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-
 public class Income {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "Field 'totalBalance' cannot be null.")
+    @Column(name = "total_balance")
     private Double totalBalance;
 
     @Override

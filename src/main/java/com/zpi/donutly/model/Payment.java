@@ -1,5 +1,6 @@
 package com.zpi.donutly.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +18,8 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "Payment")
+@Table(name = "Payments")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,14 +27,18 @@ public class Payment {
     private Long id;
 
     @NotBlank(message = "Field 'paymentBalance' cannot be null.")
+    @Column(name = "payment_balance")
     private Double paymentBalance;
 
     @NotBlank(message = "Field 'lastWithdraw' cannot be null.")
+    @Column(name = "last_withdraw")
     private LocalDateTime lastWithdraw;
 
     @NotBlank(message = "Field 'totalPaymentBalance' cannot be null.")
+    @Column(name = "total_payment_balance")
     private Double totalPaymentBalance;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
