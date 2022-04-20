@@ -48,6 +48,10 @@ public class Charity {
     @Column(name = "end_time")
     private LocalDateTime endTime;
 
+    @NotBlank(message = "Field 'isActive' cannot be null.")
+    @Column(name = "is_active")
+    private Boolean isActive;
+
     @NotBlank(message = "Field 'charityBalance' cannot be null.")
     @Column(name = "charity_balance")
     private Double charityBalance;
