@@ -78,4 +78,18 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public User editUserStatus(User user) {
+        String login = user.getLogin();
+        User userToEdit = userRepository.findUserByLogin(login);
+
+        if (userToEdit != null) {
+            Boolean status = user.getStatus();
+            userToEdit.setStatus(status);
+            userRepository.save(userToEdit);
+            return userToEdit;
+        }
+        return null;
+    }
 }

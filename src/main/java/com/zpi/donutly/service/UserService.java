@@ -19,4 +19,6 @@ public interface UserService {
     User editUserDescription(User user);
 
     User editUserAvatar(User user);
+
+    User editUserStatus(User user);
 }
