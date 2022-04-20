@@ -15,4 +15,8 @@ public interface UserService {
     User addUser(User user);
 
     User editUserPassword(User user);
+
+    User editUserDescription(User user);
+
+    User editUserAvatar(User user);
 }

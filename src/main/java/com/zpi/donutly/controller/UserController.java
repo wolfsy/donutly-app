@@ -53,4 +53,25 @@ public class UserController {
         return ResponseEntity.ok(newUser);
     }
 
+    // edycja opisu użytkownika
+    @PatchMapping(value = "/description")
+    public ResponseEntity<User> editUserDescription(@RequestBody User user) {
+        User newUser = userService.editUserDescription(user);
+        if (newUser == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(newUser);
+    }
+
+    // edycja avataru użytkownika
+    @PatchMapping(value = "/avatar")
+    public ResponseEntity<User> editUserAvatar(@RequestBody User user) {
+        User newUser = userService.editUserAvatar(user);
+        if (newUser == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(newUser);
+    }
+
+
 }

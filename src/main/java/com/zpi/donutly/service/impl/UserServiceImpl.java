@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.net.URL;
 import java.util.List;
 
 @Service
@@ -44,6 +45,34 @@ public class UserServiceImpl implements UserService {
         if (userToEdit != null) {
             String password = user.getPassword();
             userToEdit.setPassword(password);
+            userRepository.save(userToEdit);
+            return userToEdit;
+        }
+        return null;
+    }
+
+    @Override
+    public User editUserDescription(User user) {
+        String login = user.getLogin();
+        User userToEdit = userRepository.findUserByLogin(login);
+
+        if (userToEdit != null) {
+            String description = user.getProfileDescription();
+            userToEdit.setProfileDescription(description);
+            userRepository.save(userToEdit);
+            return userToEdit;
+        }
+        return null;
+    }
+
+    @Override
+    public User editUserAvatar(User user) {
+        String login = user.getLogin();
+        User userToEdit = userRepository.findUserByLogin(login);
+
+        if (userToEdit != null) {
+            URL avatar = user.getAvatarUrl();
+            userToEdit.setAvatarUrl(avatar);
             userRepository.save(userToEdit);
             return userToEdit;
         }
