@@ -44,6 +44,10 @@ public class Deposit {
     @Column(name = "message")
     private String message;
 
+    @NotBlank(message = "Field 'visibility' cannot be null.")
+    @Column(name = "visibility")
+    private Boolean visibility;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_user")

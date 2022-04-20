@@ -35,4 +35,11 @@ public class UserController {
         List<User> userList = userService.getAllUsersByCategoryId(categoryId);
         return ResponseEntity.ok(userList);
     }
+
+    // dodanie nowego użytkownika
+    @PostMapping(value = "/add")
+    public ResponseEntity<User> addUser(@RequestBody User user) {
+        User newUser = userService.addUser(user);
+        return ResponseEntity.ok(newUser);
+    }
 }
