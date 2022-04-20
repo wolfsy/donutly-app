@@ -62,6 +62,9 @@ public class User {
     @Column(name = "phone")
     private String phone;
 
+    @Column(name = "account_number")
+    private String accountNumber;
+
     @NotBlank(message = "Field 'status' cannot be null.")
     @Column(name = "status")
     private Boolean status;
