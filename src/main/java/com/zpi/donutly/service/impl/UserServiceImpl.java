@@ -30,4 +30,9 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllUsersByCategoryId(Long categoryId) {
         return userRepository.findUsersByCategoryId(categoryId);
     }
+
+    @Override
+    public User addUser(User user) {
+        return userRepository.save(user);
+    }
 }
