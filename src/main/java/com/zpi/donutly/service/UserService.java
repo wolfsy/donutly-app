@@ -13,4 +13,6 @@ public interface UserService {
     List<User> getAllUsersByCategoryId(Long categoryId);
 
     User addUser(User user);
+
+    User editUserPassword(User user);
 }

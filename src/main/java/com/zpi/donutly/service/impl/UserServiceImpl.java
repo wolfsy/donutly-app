@@ -35,4 +35,18 @@ public class UserServiceImpl implements UserService {
     public User addUser(User user) {
         return userRepository.save(user);
     }
+
+    @Override
+    public User editUserPassword(User user) {
+        String login = user.getLogin();
+        User userToEdit = userRepository.findUserByLogin(login);
+
+        if (userToEdit != null) {
+            String password = user.getPassword();
+            userToEdit.setPassword(password);
+            userRepository.save(userToEdit);
+            return userToEdit;
+        }
+        return null;
+    }
 }

@@ -42,4 +42,15 @@ public class UserController {
         User newUser = userService.addUser(user);
         return ResponseEntity.ok(newUser);
     }
+
+    // edycja hasła użytkownika
+    @PatchMapping(value = "/password")
+    public ResponseEntity<User> editUserPassword(@RequestBody User user) {
+        User newUser = userService.editUserPassword(user);
+        if (newUser == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(newUser);
+    }
+
 }
