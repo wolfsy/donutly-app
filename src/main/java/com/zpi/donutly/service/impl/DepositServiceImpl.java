@@ -15,15 +15,12 @@ public class DepositServiceImpl implements DepositService {
     private final DepositRepository depositRepository;
 
     @Override
-    public Deposit editVisibilityById(Deposit deposit) {
-        Long id = deposit.getId();
+    public Deposit editVisibilityById(Long id, boolean visibility) {
         Deposit depositToEdit = depositRepository.findDepositById(id);
-
-        Boolean visibility = deposit.getVisibility();
 
         if (depositToEdit != null) {
             depositToEdit.setVisibility(visibility);
-            depositRepository.save(deposit);
+            depositRepository.save(depositToEdit);
             return depositToEdit;
         }
         return null;

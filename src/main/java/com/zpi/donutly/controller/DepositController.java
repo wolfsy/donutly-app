@@ -13,9 +13,9 @@ public class DepositController {
     private final DepositService depositService;
 
     // zmiana widoczności. "visibility" = true - widoczny dla wszystkich, false - widoczny tylko dla admina
-    @PatchMapping("/visibility")
-    public ResponseEntity<?> editVisibilityById(@RequestBody Deposit deposit) {
-        Deposit updatedDeposit =  depositService.editVisibilityById(deposit);
+    @PatchMapping("/visibility/{id}/{visibility}")
+    public ResponseEntity<?> editVisibilityById(@PathVariable Long id, @PathVariable Boolean visibility) {
+        Deposit updatedDeposit =  depositService.editVisibilityById(id, visibility);
         if (updatedDeposit == null) {
             return ResponseEntity.notFound().build();
         }

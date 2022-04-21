@@ -4,5 +4,5 @@ import com.zpi.donutly.model.Deposit;
 
 public interface DepositService {
 
-    Deposit editVisibilityById(Deposit deposit);
+    Deposit editVisibilityById(Long id, boolean visibility);
 }
