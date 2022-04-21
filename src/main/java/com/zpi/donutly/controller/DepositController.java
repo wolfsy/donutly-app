@@ -22,4 +22,15 @@ public class DepositController {
         return ResponseEntity.ok(updatedDeposit);
     }
 
+    // FIXME: naprawić addDeposit
+    // dodawanie noewego depozytu
+    @PostMapping("/add/{username}")
+    public ResponseEntity<?> addDeposit(@PathVariable String username, @RequestBody Deposit deposit) {
+        Deposit addedDeposit = depositService.addDeposit(username, deposit);
+        if (addedDeposit == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(addedDeposit);
+    }
+
 }
