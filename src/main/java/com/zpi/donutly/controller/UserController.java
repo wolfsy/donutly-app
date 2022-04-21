@@ -1,6 +1,8 @@
 package com.zpi.donutly.controller;
 
+import com.zpi.donutly.model.Category;
 import com.zpi.donutly.model.User;
+import com.zpi.donutly.model.Address;
 import com.zpi.donutly.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -81,6 +83,30 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(newUser);
+    }
+
+    // edycja adresu zamieszkania użytkownika
+    @PatchMapping(value = "/address/{username}")
+    public ResponseEntity<User> editUserAddress(@PathVariable String username, @RequestBody Address address) {
+        User newUser = userService.editUserAddress(username, address);
+        if (newUser == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(newUser);
+    }
+
+    // wyświetlenie adresu użytkownika
+    @GetMapping(value = "/address/{username}")
+    public ResponseEntity<Address> getUserAddress(@PathVariable String username) {
+        Address address = userService.getUserAddress(username);
+        return ResponseEntity.ok(address);
+    }
+
+    // wyświetlenie kategorii użytkownika
+    @GetMapping(value = "/category/{username}")
+    public ResponseEntity<Category> getUserCategory(@PathVariable String username) {
+        Category category = userService.getUserCategory(username);
+        return ResponseEntity.ok(category);
     }
 
 }
