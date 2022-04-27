@@ -4,6 +4,7 @@ import 'typeface-nunito'
 import AppNavbar from './components/navbar/AppNavbar';
 import AvatarList from './components/avatarList/AvatarList';
 import CategoryCarousel from './components/category/CategoryCarousel';
+import CharitySection from './components/charity/CharitySection';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <AppNavbar />
       <AvatarList />
       <CategoryCarousel />
+      <CharitySection />
     </div>
   );
 }
