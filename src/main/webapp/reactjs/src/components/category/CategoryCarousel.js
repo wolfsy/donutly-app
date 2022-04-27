@@ -19,7 +19,7 @@ class CategoryCarousel extends Component {
 
     render() {
         return (
-            <div>Carousel</div>
+            <>CategoryCarousel</>
         )
     }
 
