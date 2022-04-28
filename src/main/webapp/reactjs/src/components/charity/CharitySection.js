@@ -17,6 +17,11 @@ function CharitySection() {
         fetchData();
     }, [])
 
+
+    const today = new Date();
+    const endDate = new Date(charity.endTime);
+    const daysLeft = Math.floor((endDate - today) / (1000 * 60 * 60 * 24));
+
     return (
         <>
             <Container fluid className="charity-section">            
@@ -41,7 +46,7 @@ function CharitySection() {
                         </Button>
                         <Stack gap={0}>
                             <p className="text-secondary fs-4 fw-bold fst-italic ms-auto">
-                                Time left: {charity.endTime}
+                                Time left: {daysLeft} days
                             </p>
                             <p className="text-secondary fs-4 fw-bold fst-italic ms-auto">
                                 Cash collected: {charity.charityBalance}
