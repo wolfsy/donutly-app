@@ -22,14 +22,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration corsConfig = new CorsConfiguration();
         corsConfig.setAllowCredentials(true);
         corsConfig.addAllowedOrigin("http://localhost:3000");
         corsConfig.addAllowedHeader("*");
         corsConfig.addAllowedMethod("*");
-
         source.registerCorsConfiguration("/**", corsConfig);
         return new CorsFilter(source);
     }
