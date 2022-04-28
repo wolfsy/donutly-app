@@ -1,24 +1,27 @@
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'typeface-nunito'
-import AppNavbar from './components/navbar/AppNavbar';
-import AvatarList from './components/avatarList/AvatarList';
-import CategoryCarousel from './components/category/CategoryCarousel';
-import CharitySection from './components/charity/CharitySection';
-import Footer from './components/footer/Footer';
-import AboutUsSection from './components/aboutUs/AboutUsSection';
+import React, { Component } from 'react';
+import './style/index.css';
+import reportWebVitals from './reportWebVitals';
+import MainPage from "./pages";
+import About from "./pages/about";
 
-function App() {
-  return (
-    <div className="App">
-      <AppNavbar />
-      <AvatarList />
-      <AboutUsSection />
-      <CategoryCarousel />
-      <CharitySection />
-      <Footer />
-    </div>
-  );
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+class App extends Component {
+    render() {
+        return (
+            <Router>
+                <Routes>
+                    <Route exact path="/" element={<MainPage />} />
+                    <Route exact path="/about" element={<About />} />
+                </Routes>
+            </Router>
+        );
+    }
 }
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
 
 export default App;
