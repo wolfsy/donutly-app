@@ -5,6 +5,7 @@ import AppNavbar from './components/navbar/AppNavbar';
 import AvatarList from './components/avatarList/AvatarList';
 import CategoryCarousel from './components/category/CategoryCarousel';
 import CharitySection from './components/charity/CharitySection';
+import Footer from './components/footer/Footer';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <AvatarList />
       <CategoryCarousel />
       <CharitySection />
+      <Footer />
     </div>
   );
 }
