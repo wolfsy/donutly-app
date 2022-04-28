@@ -15,7 +15,7 @@ function AboutUsSection() {
                     Quisque et mollis enim. In hac habitasse platea dictumst.
                   </p>
                   <Row>
-                    <Button className="about-us-button mt-4 ms-2">Read more</Button>
+                    <Button onClick={() =>  window.location.href='/about'} className="about-us-button mt-4 ms-2">Read more</Button>
                   </Row>
                 </Col>
                 <Col xl={4} className="ms-auto">
