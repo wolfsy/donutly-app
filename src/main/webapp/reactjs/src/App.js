@@ -6,12 +6,14 @@ import AvatarList from './components/avatarList/AvatarList';
 import CategoryCarousel from './components/category/CategoryCarousel';
 import CharitySection from './components/charity/CharitySection';
 import Footer from './components/footer/Footer';
+import AboutUsSection from './components/aboutUs/AboutUsSection';
 
 function App() {
   return (
     <div className="App">
       <AppNavbar />
       <AvatarList />
+      <AboutUsSection />
       <CategoryCarousel />
       <CharitySection />
       <Footer />
