@@ -34,7 +34,7 @@ public class Category {
     private String name;
 
     @Column(name = "icon_url")
-    private URL iconUrl;
+    private String iconUrl;
 
     @JsonIgnore
     @OneToMany(mappedBy = "category")

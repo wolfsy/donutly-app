@@ -8,8 +8,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
+import * as brands from '@fortawesome/free-brands-svg-icons'
 
-library.add(fas)
+const iconList = Object
+  .keys(brands)
+  .filter(key => key !== "fas" && key !== "prefix" )
+  .map(icon => brands[icon])
+
+library.add(fas, ...iconList)
 
 class App extends Component {
     render() {

@@ -30,16 +30,16 @@ function CategoryCarousel() {
     return (
         <>
             <Container fluid className="mb-5 mt-4">
-                <Row className="mb-2">
+                <Row className="mb-2 w-25">
                     <h1 className="text-start ms-5">Categories</h1>
                 </Row>
                 <Row className="d-flex justify-content-center">
-                    <Col xl={10} className="carousel-container p-3">
+                    <Col xs={10} xl={9} className="carousel-container p-3">
                         <Carousel breakPoints={breakPoints}>
                             {
                                 categories.map(function(x, idx)
                                 {
-                                    return (<CarouselItem key={idx} name={x.name} />)
+                                    return (<CarouselItem key={idx} category={x} />)
                                 })
                             }
                         </Carousel>
