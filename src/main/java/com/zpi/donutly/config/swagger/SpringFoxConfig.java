@@ -1,4 +1,4 @@
-package com.zpi.donutly.config;
+package com.zpi.donutly.config.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

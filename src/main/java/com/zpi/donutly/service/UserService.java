@@ -1,14 +1,16 @@
 package com.zpi.donutly.service;
 
+import com.zpi.donutly.dto.RegistrationRequest;
 import com.zpi.donutly.model.Address;
 import com.zpi.donutly.model.Category;
 import com.zpi.donutly.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
 
-    User getUserByLogin(String login);
+    Optional<User> getUserByLogin(String login);
 
     List<User> getAllUsers();
 
@@ -29,4 +31,10 @@ public interface UserService {
     Address getUserAddress(String username);
 
     Category getUserCategory(String username);
+
+    boolean loginAlreadyExists(String login);
+
+    boolean emailAlreadyExists(String email);
+
+    Optional<User> createUserAccount(RegistrationRequest request);
 }

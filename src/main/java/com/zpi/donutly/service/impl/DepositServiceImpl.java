@@ -32,13 +32,13 @@ public class DepositServiceImpl implements DepositService {
     //FIXME: naprawić addDeposit
     @Override
     public Deposit addDeposit(String username, Deposit deposit) {
-        User user = userRepository.findUserByLogin(username);
+        /*User user = userRepository.findUserByLogin(username);
         Deposit lastDeposit = depositRepository.findFirstIdByOrderByIdDesc();
         if (lastDeposit != null) {
             deposit.setId(lastDeposit.getId() + 1);
             deposit.setUser(user);
             return depositRepository.save(deposit);
-        }
+        }*/
         return null;
     }
 }

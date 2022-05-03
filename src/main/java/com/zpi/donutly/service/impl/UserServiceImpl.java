@@ -1,27 +1,32 @@
 package com.zpi.donutly.service.impl;
 
+import com.zpi.donutly.dto.RegistrationRequest;
 import com.zpi.donutly.model.Address;
 import com.zpi.donutly.model.Category;
 import com.zpi.donutly.model.User;
+import com.zpi.donutly.model.UserRole;
 import com.zpi.donutly.repository.UserRepository;
 import com.zpi.donutly.service.UserService;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
-    public User getUserByLogin(String login) {
-        return userRepository.findUserByLogin(login);
+    public Optional<User> getUserByLogin(String login) {
+        return userRepository.findUserByLogin(login).or(Optional::empty);
     }
 
     @Override
@@ -36,15 +41,53 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User addUser(User user) {
-        return userRepository.save(user);
+        return null;
     }
 
     @Override
     public User editUserPassword(User user) {
-        String login = user.getLogin();
-        User userToEdit = userRepository.findUserByLogin(login);
+        return null;
+    }
 
-        if (userToEdit != null) {
+    @Override
+    public User editUserDescription(User user) {
+        return null;
+    }
+
+    @Override
+    public User editUserAvatar(User user) {
+        return null;
+    }
+
+    @Override
+    public User editUserStatus(User user) {
+        return null;
+    }
+
+    @Override
+    public User editUserAddress(String username, Address address) {
+        return null;
+    }
+
+    @Override
+    public Address getUserAddress(String username) {
+        return null;
+    }
+
+    @Override
+    public Category getUserCategory(String username) {
+        return null;
+    }
+
+    //TODO: do poprawy
+/*
+    @Override
+    public User editUserPassword(User user) {
+        String login = user.getLogin();
+        Optional<User> userToEdit = userRepository.findUserByLogin(login);
+
+        if(userToEdit.isEmpty()) return Optional.empty();
+        if (userToEdit.isPresent()) {
             String password = user.getPassword();
             userToEdit.setPassword(password);
             userRepository.save(userToEdit);
@@ -119,10 +162,40 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Category getUserCategory(String username) {
-        User user = userRepository.findUserByLogin(username);
-        if (user != null) {
+        Optional<User> user = userRepository.findUserByLogin(username);
+        if (user.isPresent()) {
             return user.getCategory();
         }
         return null;
+    }
+*/
+
+    @Override
+    public boolean loginAlreadyExists(String login) {
+        return userRepository.findUserByLogin(login).isPresent();
+    }
+
+    @Override
+    public boolean emailAlreadyExists(String email) {
+        return userRepository.findUserByEmail(email).isPresent();
+    }
+
+    @Override
+    public Optional<User> createUserAccount(RegistrationRequest request) {
+        User user = new User(null, request.firstName(), request.lastName(), request.login(), null,
+                request.email(), passwordEncoder.encode(request.password()), null, null,
+                false, UserRole.USER, null, null, null, null,
+                null, null, null, null, null);
+        user = userRepository.save(user);
+        return Optional.of(user);
+        //TODO: dokoncz
+        /*try {
+            emailVerificationService.createVerificationToken(user);
+            emailVerificationService.sendEmail(user);
+            return Optional.of(user);
+        } catch (NullPointerException nullPointerException) {
+            log.error(nullPointerException.printStackTrace());
+            emailVerificationRepository.findByUser(user)
+        }*/
     }
 }

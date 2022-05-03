@@ -1,13 +1,18 @@
 package com.zpi.donutly.controller;
 
+import com.zpi.donutly.dto.RegistrationRequest;
+import com.zpi.donutly.model.Address;
 import com.zpi.donutly.model.Category;
 import com.zpi.donutly.model.User;
-import com.zpi.donutly.model.Address;
 import com.zpi.donutly.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -17,11 +22,27 @@ public class UserController {
 
     private final UserService userService;
 
+    // rejestrowanie użytkownika w systemie
+    @PostMapping("/register")
+    public ResponseEntity<Void> register(@Valid @RequestBody RegistrationRequest request, Errors errorValidation) {
+        if (errorValidation.hasErrors() || !request.password().equals(request.repeatedPassword())) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        if (userService.loginAlreadyExists(request.login()) || userService.emailAlreadyExists(request.email())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+
+        return userService.createUserAccount(request)
+                .<ResponseEntity<Void>>map(userAccount -> ResponseEntity.created(URI.create("http://localhost:8080/api/user/"
+                        + userAccount.getId())).build())
+                .orElse(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
+    }
+
     // wyświetlenie pojedynczego użytkownika po nazwie
     @GetMapping(value = "/{login}")
-    public ResponseEntity<User> getUser(@PathVariable String login) {
-        User user = userService.getUserByLogin(login);
-        return ResponseEntity.ok(user);
+    public ResponseEntity<User> getUserByLogin(@PathVariable String login) {
+        return ResponseEntity.of(userService.getUserByLogin(login));
     }
 
     // wyświetlenie listy wszystkich użytkowników
@@ -36,13 +57,6 @@ public class UserController {
     public ResponseEntity<List<User>> getAllUsersByCategoryId(@PathVariable Long categoryId) {
         List<User> userList = userService.getAllUsersByCategoryId(categoryId);
         return ResponseEntity.ok(userList);
-    }
-
-    // dodanie nowego użytkownika
-    @PostMapping(value = "/add")
-    public ResponseEntity<User> addUser(@RequestBody User user) {
-        User newUser = userService.addUser(user);
-        return ResponseEntity.ok(newUser);
     }
 
     // edycja hasła użytkownika
