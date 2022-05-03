@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { Stack, Button, Row, Container } from 'react-bootstrap';
+import { useState, useEffect } from 'react'
+import { Stack, Button, Row, Container, Col } from 'react-bootstrap';
 import CharityService from '../../services/CharityService';
 
 import './CharitySection.css';
@@ -26,24 +26,28 @@ function CharitySection() {
         <>
             <Container fluid className="charity-section">            
                 <Row className="my-1 mx-5 pt-4">
-                    <Stack direction="horizontal" gap={1}>
-                        <h1 className="charity-title">
+                    <Col>
+                        <h1 className="text-start">
                             {charity.title}
                         </h1>
-                    </Stack>
+                    </Col>
                 </Row>
-                <Row className="my-1 mx-5">
-                    <Stack direction="horizontal" gap={1}>
-                        <p className="col-5 text-start">
+                <Row className="my-3 mx-5">
+                    <Col xs={12} sm={12} md={10} lg={7} xl={6} xxl={5}>
+                        <p className="text-start">
                             {charity.description}
                         </p>
-                    </Stack>
+                    </Col>
                 </Row>
                 <Row className="my-1 mx-5 pb-3">
-                    <Stack direction="horizontal" gap={1}>
+                    <Col xs={12} sm={12} md={6} lg={6} xl={6} xxl={5}
+                         className="d-flex">
                         <Button className="charity-button">
                             Learn More
                         </Button>
+                    </Col>
+                    <Col xs={12} sm={12} md={6} lg={6} xl={6} xxl={7}
+                         className="mt-5 mt-lg-0">
                         <Stack gap={0}>
                             <p className="text-secondary fs-4 fw-bold fst-italic ms-auto">
                                 Time left: {daysLeft} days
@@ -52,7 +56,7 @@ function CharitySection() {
                                 Cash collected: {charity.charityBalance}
                             </p>
                         </Stack>
-                    </Stack>
+                    </Col>
                 </Row>
             </Container>
         </>

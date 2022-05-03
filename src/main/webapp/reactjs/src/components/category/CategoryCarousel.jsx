@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
 import CategoryService from '../../services/CategoryService'
 import Carousel from 'react-elastic-carousel';
@@ -11,17 +11,17 @@ function CategoryCarousel() {
     const [categories, setCategories] = useState([])
 
     const breakPoints = [
-        { width: 1, itemsToShow: 1 },
-        { width: 550, itemsToShow: 2, itemsToScroll: 2 },
-        { width: 768, itemsToShow: 4 },
+        { width: 350, itemsToShow: 1 },
+        { width: 450, itemsToShow: 2 },
+        { width: 650, itemsToShow: 3, itemsToScroll: 2 },
+        { width: 900, itemsToShow: 4 },
         { width: 1200, itemsToShow: 5 }
       ];
 
     useEffect(() => {
         const fetchData = async () => {
             const response = await CategoryService.getCategories();
-            setCategories(response.data);
-            
+            setCategories(response.data);       
         }
 
         fetchData();
