@@ -1,5 +1,6 @@
 package com.zpi.donutly.controller;
 
+import com.zpi.donutly.dto.LoginRequestForm;
 import com.zpi.donutly.dto.RegistrationRequest;
 import com.zpi.donutly.model.Address;
 import com.zpi.donutly.model.Category;
@@ -16,14 +17,14 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping(value = "/api/user")
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
 
     // rejestrowanie użytkownika w systemie
-    @PostMapping("/register")
+    @PostMapping(value = "/register")
     public ResponseEntity<Void> register(@Valid @RequestBody RegistrationRequest request, Errors errorValidation) {
         if (errorValidation.hasErrors() || !request.password().equals(request.repeatedPassword())) {
             return ResponseEntity.badRequest().build();
@@ -37,6 +38,14 @@ public class UserController {
                 .<ResponseEntity<Void>>map(userAccount -> ResponseEntity.created(URI.create("http://localhost:8080/api/user/"
                         + userAccount.getId())).build())
                 .orElse(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
+    }
+
+    // logowanie do systemu
+    @PostMapping(value = "/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequestForm requestForm) {
+        return userService.generateAccessToken(requestForm)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.badRequest().body(""));
     }
 
     // wyświetlenie pojedynczego użytkownika po nazwie

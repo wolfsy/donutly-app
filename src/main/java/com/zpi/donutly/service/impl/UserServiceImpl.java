@@ -1,18 +1,28 @@
 package com.zpi.donutly.service.impl;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.zpi.donutly.dto.LoginRequestForm;
 import com.zpi.donutly.dto.RegistrationRequest;
 import com.zpi.donutly.model.Address;
 import com.zpi.donutly.model.Category;
 import com.zpi.donutly.model.User;
 import com.zpi.donutly.model.UserRole;
+import com.zpi.donutly.repository.EmailVerificationRepository;
 import com.zpi.donutly.repository.UserRepository;
+import com.zpi.donutly.service.EmailVerificationService;
 import com.zpi.donutly.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +31,12 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
+    private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
+    private final Algorithm jwtAlgorithm;
+    private final UserRepository userRepository;
+    private final EmailVerificationService emailVerificationService;
+    private final EmailVerificationRepository emailVerificationRepository;
 
     @Override
     public Optional<User> getUserByLogin(String login) {
@@ -187,15 +201,34 @@ public class UserServiceImpl implements UserService {
                 false, UserRole.USER, null, null, null, null,
                 null, null, null, null, null);
         user = userRepository.save(user);
-        return Optional.of(user);
-        //TODO: dokoncz
-        /*try {
+
+        try {
             emailVerificationService.createVerificationToken(user);
             emailVerificationService.sendEmail(user);
             return Optional.of(user);
         } catch (NullPointerException nullPointerException) {
-            log.error(nullPointerException.printStackTrace());
-            emailVerificationRepository.findByUser(user)
-        }*/
+            log.error(nullPointerException.getMessage());
+            emailVerificationRepository.findByUser(user).ifPresent(emailVerificationRepository::delete);
+            userRepository.delete(user);
+            return Optional.empty();
+        }
     }
+
+    @Override
+    public Optional<String> generateAccessToken(LoginRequestForm requestForm) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(requestForm.email(), requestForm.password()));
+
+        User user = (User) authentication.getPrincipal();
+        String token = JWT.create()
+                .withExpiresAt(Date.from(LocalDateTime.now().plusMinutes(30).atZone(ZoneId.systemDefault()).toInstant()))
+                .withIssuedAt(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()))
+                .withClaim("name", user.getLogin())
+                .withClaim("role", user.getRole().toString())
+                .sign(jwtAlgorithm);
+
+        return Optional.of(token);
+    }
+
+
 }

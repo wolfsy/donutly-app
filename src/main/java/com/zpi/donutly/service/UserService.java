@@ -1,5 +1,6 @@
 package com.zpi.donutly.service;
 
+import com.zpi.donutly.dto.LoginRequestForm;
 import com.zpi.donutly.dto.RegistrationRequest;
 import com.zpi.donutly.model.Address;
 import com.zpi.donutly.model.Category;
@@ -37,4 +38,6 @@ public interface UserService {
     boolean emailAlreadyExists(String email);
 
     Optional<User> createUserAccount(RegistrationRequest request);
+
+    Optional<String> generateAccessToken(LoginRequestForm requestForm);
 }

@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/deposit")
+@RequestMapping(value = "/api/deposit")
 @RequiredArgsConstructor
 public class DepositController {
     private final DepositService depositService;

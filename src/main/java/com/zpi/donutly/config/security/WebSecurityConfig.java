@@ -1,9 +1,11 @@
 package com.zpi.donutly.config.security;
 
+import com.auth0.jwt.algorithms.Algorithm;
 import com.zpi.donutly.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -56,5 +58,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         corsConfig.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", corsConfig);
         return new CorsFilter(source);
+    }
+
+    @Bean
+    public Algorithm jwtAlgorithm() {
+        return Algorithm.HMAC256("donutly!secret!key");
+    }
+
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 }
