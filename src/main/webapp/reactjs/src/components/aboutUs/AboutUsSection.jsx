@@ -10,10 +10,11 @@ function AboutUsSection() {
                 <Col xs={12} sm={12} md={6} lg={6} xl={6} xxl={5}>
                   <h1 className="text-start">About us</h1>
                   <p className="text-start col-12">
-                    Początkowa koncepcja projektu została utworzona na potrzeby pierwszego
-                    laboratorium i zamieszczona na forum przedmiotu na platformie e-learningowej.
-                    Wówczas określone zostało, że w ramach projektu zostanie utworzona aplikacja
-                    internetowa obsługująca system składania donacji indywidualnym artystom.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                      Tristique sollicitudin nibh sit amet.
+                      Mauris nunc congue nisi vitae suscipit tellus mauris a.
+                      Sit amet nisl suscipit adipiscing bibendum est.
                   </p>
                   <Row>
                     <Button onClick={() =>  window.location.href='/about'} className="about-us-button mt-4 ms-2">Read more</Button>
