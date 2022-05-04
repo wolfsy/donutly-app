@@ -15,7 +15,7 @@ function CategoryCarousel() {
         { width: 450, itemsToShow: 2, itemsToScroll: 2 },
         { width: 650, itemsToShow: 3, itemsToScroll: 3 },
         { width: 900, itemsToShow: 4, itemsToScroll: 4 },
-        { width: 1200, itemsToShow: 5, itemsToScroll: 5 }
+        { width: 1200,itemsToShow: 5, itemsToScroll: 5 }
       ];
 
     useEffect(() => {
