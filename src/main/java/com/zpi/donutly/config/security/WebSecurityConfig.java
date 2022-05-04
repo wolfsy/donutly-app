@@ -62,7 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public Algorithm jwtAlgorithm() {
-        return Algorithm.HMAC256("donutly!secret!key");
+        return Algorithm.HMAC256("2JK/C8vRpG9LPHN8058Nx3w5u/CWWjDWqAYCVuILoOU=");
     }
 
     @Override

@@ -6,7 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.zpi.donutly.repository.UserRepository;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,15 +21,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 @Component
-@RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
-    private final Algorithm jwtAlgorithm;
-    private final UserRepository userRepository;
+    @Autowired
+    private Algorithm jwtAlgorithm;
 
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain)
@@ -40,16 +40,18 @@ public class JwtFilter extends OncePerRequestFilter {
         final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
+            return;
         }
 
-        DecodedJWT decodedJWTtoken = null;
+        DecodedJWT decodedJWTtoken;
         try {
-            decodedJWTtoken = tokenVerification.verify(Objects.requireNonNull(authHeader).split(" ")[1]);
+            decodedJWTtoken = tokenVerification.verify(authHeader.split(" ")[1]);
         } catch (NullPointerException nullPointerException) {
             filterChain.doFilter(request, response);
+            return;
         }
 
-        UserDetails userDetails = userRepository.findUserByLogin(Objects.requireNonNull(decodedJWTtoken).getClaim("name").asString()).orElse(null);
+        UserDetails userDetails = userRepository.findUserByLogin(decodedJWTtoken.getClaim("name").asString()).orElse(null);
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 userDetails,
                 null,

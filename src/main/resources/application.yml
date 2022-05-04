@@ -21,5 +21,14 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
   mail:
-    host: smtp.mailtrap.io
+    host: smtp.gmail.com
+    port: 567
+    username: Pcz Klinika
+    password: pczklinika123
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
