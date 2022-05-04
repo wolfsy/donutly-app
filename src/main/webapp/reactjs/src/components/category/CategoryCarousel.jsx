@@ -29,7 +29,7 @@ function CategoryCarousel() {
 
     return (
         <>
-            <Container fluid className="mb-5 mt-4">
+            <Container fluid className="py-5 mb-3">
                 <Row className="mb-2 w-25">
                     <h1 className="text-start ms-5">Categories</h1>
                 </Row>
