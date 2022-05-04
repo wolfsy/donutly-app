@@ -198,7 +198,7 @@ public class UserServiceImpl implements UserService {
     public Optional<User> createUserAccount(RegistrationRequest request) {
         User user = new User(null, request.firstName(), request.lastName(), request.login(), null,
                 request.email(), passwordEncoder.encode(request.password()), null, null,
-                false, UserRole.USER, null, null, null, null,
+                false, UserRole.USER, null, false, null, null,
                 null, null, null, null, null);
         user = userRepository.save(user);
 
@@ -216,19 +216,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<String> generateAccessToken(LoginRequestForm requestForm) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(requestForm.email(), requestForm.password()));
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(requestForm.email(), requestForm.password()));
 
-        User user = (User) authentication.getPrincipal();
-        String token = JWT.create()
-                .withExpiresAt(Date.from(LocalDateTime.now().plusMinutes(30).atZone(ZoneId.systemDefault()).toInstant()))
-                .withIssuedAt(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()))
-                .withClaim("name", user.getLogin())
-                .withClaim("role", user.getRole().toString())
-                .sign(jwtAlgorithm);
+            User user = (User) authentication.getPrincipal();
+            String token = JWT.create()
+                    .withExpiresAt(Date.from(LocalDateTime.now().plusDays(5).atZone(ZoneId.systemDefault()).toInstant()))
+                    .withIssuedAt(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()))
+                    .withClaim("name", user.getLogin())
+                    .withClaim("role", user.getRole().toString())
+                    .sign(jwtAlgorithm);
 
-        return Optional.of(token);
+            return Optional.of(token);
+        } catch (Exception exception) {
+            log.error("Failed login operation with: " + requestForm.email());
+            return Optional.empty();
+        }
     }
-
-
 }

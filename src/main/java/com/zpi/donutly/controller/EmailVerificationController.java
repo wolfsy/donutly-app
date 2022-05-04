@@ -22,7 +22,8 @@ public class EmailVerificationController {
     public ResponseEntity<String> verifyEmail(@PathVariable UUID token) {
         try {
             emailVerificationService.verifyUserEmailAddress(token);
-            return ResponseEntity.ok("You account has been verified!");
+            return ResponseEntity.ok("Your account has been verified!\n " +
+                    "You might close the window safely.");
         } catch (InvalidEmailTokenException invalidEmailTokenException) {
             return ResponseEntity.badRequest().body("");
         }

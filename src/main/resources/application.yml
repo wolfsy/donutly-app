@@ -22,13 +22,16 @@ spring:
       matching-strategy: ant_path_matcher
   mail:
     host: smtp.gmail.com
-    port: 567
-    username: Pcz Klinika
-    password: pczklinika123
+    port: 587
+    username: noreply.donutly@gmail.com
+    password: donutly111
     properties:
       mail:
         smtp:
           auth: true
           starttls:
             enable: true
-
+            required: true
+          ssl:
+            trust: smtp.gmail.com
+      protocol: smtp

@@ -49,9 +49,9 @@ public class EmailVerificationServiceImpl implements EmailVerificationService {
         String confirmUrlLink = "http://localhost:8080/api/verification/" + token.getToken();
 
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom("noreply@donutly-developer.com");
+        simpleMailMessage.setFrom("noreply.donutly@gmail.com");
         simpleMailMessage.setTo(user.getEmail());
-        simpleMailMessage.setSubject("Address e-mail verification for " + user.getUsername() + " new Donutly system user!");
+        simpleMailMessage.setSubject("Welcome to Donutly " + user.getUsername() + "! Verification link passing.");
         simpleMailMessage.setText("Click the link to confirm address verification: " + confirmUrlLink);
         javaMailSender.send(simpleMailMessage);
     }
