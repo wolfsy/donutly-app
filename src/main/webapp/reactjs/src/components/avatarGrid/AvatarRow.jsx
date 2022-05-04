@@ -1,15 +1,15 @@
-import { Col, Stack } from 'react-bootstrap';
+import { Image, Stack } from 'react-bootstrap';
 
 import './AvatarRow.css'
 
 function AvatarRow({avatars}) {
 
   return (
-    <Stack className="my-1" direction="horizontal">
+    <Stack className="my-2 d-flex justify-content-center" direction="horizontal">
         {
-            avatars.map(function(x)
+            avatars.map(function(x, idx)
             {
-                return (<><h5 className="avatar-img">{x.firstName}</h5></>)
+                return (<Image key={idx} src={x.avatarUrl} className="avatar-img" />)
             })
         }
     </Stack>
