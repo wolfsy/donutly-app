@@ -12,13 +12,13 @@ function AppNavbar() {
             <Nav className="basic-navbar-nav w-100">
               <Row className="w-100 my-4 my-xl-0 my-md-0 mx-lg-3 mx-auto">
                 <Col className="d-flex justify-content-center justify-content-lg-start mb-3 mb-lg-2">
-                  <Button className="nav-button nav-button-small mx-2">
+                  <Button className="nav-button nav-button-small mx-2" onClick={() =>  window.location.href='/'} >
                     <FontAwesomeIcon icon="fa-solid fa-house" />
                   </Button>
                   <Button className="nav-button nav-button-small mx-2">
                     <FontAwesomeIcon icon="fa-solid fa-bars" />
                   </Button>
-                  <Button className="nav-button nav-button-small mx-2">
+                  <Button className="nav-button nav-button-small mx-2" onClick={() =>  window.location.href='/about'} >
                     <FontAwesomeIcon icon="fa-solid fa-envelope" />
                   </Button>
                   <Button className="nav-button nav-button-small mx-2">
