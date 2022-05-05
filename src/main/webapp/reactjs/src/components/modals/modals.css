@@ -1,3 +1,10 @@
-.modal-register-bg .modal-content {
-    background: #e5acc2;
+.modal-register-bg{
+    background: #fff9f9;
+    color: #130335;
+}
+
+.modal-content  {
+    -webkit-border-radius: 15px !important;
+    -moz-border-radius: 15px !important;
+    border-radius: 15px !important;
 }

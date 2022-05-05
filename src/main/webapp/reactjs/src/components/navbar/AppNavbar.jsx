@@ -62,23 +62,21 @@ function AppNavbar() {
         </Modal.Footer>
       </Modal>
 
-
       <Modal
           show={showRegister}
           onHide={handleCloseRegister}
           centered={true}
           aria-labelledby="contained-modal-title-vcenter"
-          className="modal-register-bg"
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Register</Modal.Title>
+        <Modal.Header closeButton className="modal-register-bg">
+          <Modal.Title>Sign up</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <RegisterModal />
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="modal-register-bg">
           <button className="app-button" type="submit" form="registerForm">
-            Register
+            Confirm
           </button>
           <button className="app-button" onClick={handleCloseRegister}>
             Cancel
