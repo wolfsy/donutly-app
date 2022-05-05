@@ -1,4 +1,4 @@
-import {Navbar, Nav, Container, Button, Row, Col, Modal} from 'react-bootstrap';
+import {Navbar, Nav, Container, Button, Row, Col, Modal, Stack} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './AppNavbar.css';
 import '../modals/modals.css';
@@ -68,19 +68,21 @@ function AppNavbar() {
           centered={true}
           aria-labelledby="contained-modal-title-vcenter"
       >
-        <Modal.Header closeButton className="modal-register-bg">
+        <Modal.Header closeButton>
           <Modal.Title>Sign up</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <RegisterModal />
         </Modal.Body>
-        <Modal.Footer className="modal-register-bg">
-          <button className="app-button" type="submit" form="registerForm">
-            Confirm
-          </button>
-          <button className="app-button" onClick={handleCloseRegister}>
-            Cancel
-          </button>
+        <Modal.Footer>
+          <Stack direction="horizontal">
+            <button className="app-button" type="submit" form="registerForm">
+              Confirm
+            </button>
+            <button className="app-button" onClick={handleCloseRegister}>
+              Cancel
+            </button>
+          </Stack>
         </Modal.Footer>
       </Modal>
 
