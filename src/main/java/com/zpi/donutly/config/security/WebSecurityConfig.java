@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 
         provider.setPasswordEncoder(bCryptPasswordEncoder);
-        provider.setUserDetailsService(username -> userRepository.findUserByLogin(username)
+        provider.setUserDetailsService(username -> userRepository.findUserByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username + " not found")));
         return provider;
     }

@@ -1,4 +1,9 @@
 package com.zpi.donutly.dto;
 
-public record LoginRequestForm(String email, String password) {
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+
+public record LoginRequestForm(@NotNull @Email String email,
+                               @NotNull String password
+) {
 }
