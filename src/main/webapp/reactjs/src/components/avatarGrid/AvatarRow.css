@@ -3,6 +3,7 @@
     height: 114px;
     border-radius: 14px;
     margin: 0px 8px 0px 8px;
+    filter: blur(2px);
 }
 
 .logo {
@@ -12,4 +13,5 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 1;
 }
