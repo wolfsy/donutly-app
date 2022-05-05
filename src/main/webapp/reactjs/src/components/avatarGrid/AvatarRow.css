@@ -1,0 +1,15 @@
+.avatar-img {
+    width: 109px;
+    height: 114px;
+    border-radius: 14px;
+    margin: 0px 8px 0px 8px;
+}
+
+.logo {
+    background: #D6E5FA;
+    border-radius: 76px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

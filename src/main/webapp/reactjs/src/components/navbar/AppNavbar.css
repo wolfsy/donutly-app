@@ -3,23 +3,25 @@
 }
 
 .nav-button {
-    width: 220px;
-    height: 60px;
-    left: 736px;
-    top: 15px;
+    width: 170px;
+    height: 50px;
     background: #BAABDA;
     border: #BAABDA;
-    color: #130335;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 16px;
-    font-weight: bold;
     font-size: 20px;
 }
 
-.nav-button:hover {
-    background: rgba(186, 171, 218, 0.75);
+.nav-button-small {
+    width: 65px;
 }
 
-.nav-button:focus {
+.modal-button {
+    width: 75px;
+    height: 40px;
+    background: #BAABDA;
+    border: #BAABDA;
+}
+
+.nav-button:hover, .nav-button-small:hover,
+.nav-button:focus, .nav-button-small:focus {
     background: rgba(186, 171, 218, 0.75);
 }

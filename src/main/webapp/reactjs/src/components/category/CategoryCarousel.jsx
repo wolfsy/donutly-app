@@ -11,11 +11,11 @@ function CategoryCarousel() {
     const [categories, setCategories] = useState([])
 
     const breakPoints = [
-        { width: 350, itemsToShow: 1 },
-        { width: 450, itemsToShow: 2 },
-        { width: 650, itemsToShow: 3, itemsToScroll: 2 },
-        { width: 900, itemsToShow: 4 },
-        { width: 1200, itemsToShow: 5 }
+        { width: 350, itemsToShow: 1, itemsToScroll: 1 },
+        { width: 450, itemsToShow: 2, itemsToScroll: 2 },
+        { width: 650, itemsToShow: 3, itemsToScroll: 3 },
+        { width: 900, itemsToShow: 4, itemsToScroll: 4 },
+        { width: 1200,itemsToShow: 5, itemsToScroll: 5 }
       ];
 
     useEffect(() => {
@@ -29,7 +29,7 @@ function CategoryCarousel() {
 
     return (
         <>
-            <Container fluid className="mb-5 mt-4">
+            <Container fluid className="py-5 mb-3">
                 <Row className="mb-2 w-25">
                     <h1 className="text-start ms-5">Categories</h1>
                 </Row>

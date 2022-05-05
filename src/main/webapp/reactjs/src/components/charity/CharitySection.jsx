@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Stack, Button, Row, Container, Col } from 'react-bootstrap';
+import { Stack, Row, Container, Col } from 'react-bootstrap';
 import CharityService from '../../services/CharityService';
 
 import './CharitySection.css';
@@ -24,8 +24,8 @@ function CharitySection() {
 
     return (
         <>
-            <Container fluid className="charity-section">            
-                <Row className="my-1 mx-5 pt-4">
+            <Container fluid className="charity-section py-5">            
+                <Row className="mx-5">
                     <Col>
                         <h1 className="text-start">
                             {charity.title}
@@ -39,12 +39,12 @@ function CharitySection() {
                         </p>
                     </Col>
                 </Row>
-                <Row className="my-1 mx-5 pb-3">
+                <Row className="my-1 mx-5 pb-2">
                     <Col xs={12} sm={12} md={6} lg={6} xl={6} xxl={5}
                          className="d-flex">
-                        <Button className="charity-button">
+                        <button className="app-button charity-button">
                             Learn More
-                        </Button>
+                        </button>
                     </Col>
                     <Col xs={12} sm={12} md={6} lg={6} xl={6} xxl={7}
                          className="mt-5 mt-lg-0">

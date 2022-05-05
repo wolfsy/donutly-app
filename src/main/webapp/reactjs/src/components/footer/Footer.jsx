@@ -4,8 +4,8 @@ import './Footer.css';
 
 function Footer() {
   return (
-    <Container fluid className="footer d-flex">
-        <span className="fst-italic py-3 fs-5 fw-bold w-100">Donutly&copy; 2022</span>
+    <Container fluid className="footer d-flex py-5">
+        <span className="fst-italic fs-5 fw-bold w-100">Donutly&copy; 2022</span>
     </Container>
   )
 }
