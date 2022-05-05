@@ -25,7 +25,7 @@ function CharitySection() {
     return (
         <>
             <Container fluid className="charity-section py-5">            
-                <Row className="mx-5">
+                <Row className="mx-5 py-4">
                     <Col>
                         <h1 className="text-start">
                             {charity.title}
@@ -39,7 +39,7 @@ function CharitySection() {
                         </p>
                     </Col>
                 </Row>
-                <Row className="my-1 mx-5 pb-2">
+                <Row className="my-1 mx-5 pb-4">
                     <Col xs={12} sm={12} md={6} lg={6} xl={6} xxl={5}
                          className="d-flex">
                         <button className="app-button charity-button">

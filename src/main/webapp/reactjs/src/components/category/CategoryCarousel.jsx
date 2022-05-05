@@ -30,10 +30,10 @@ function CategoryCarousel() {
     return (
         <>
             <Container fluid className="py-5 mb-3">
-                <Row className="mb-2 w-25">
+                <Row className="mb-2 w-25 py-4">
                     <h1 className="text-start ms-5">Categories</h1>
                 </Row>
-                <Row className="d-flex justify-content-center">
+                <Row className="d-flex justify-content-center pb-4">
                     <Col xs={10} xl={9} className="carousel-container p-3">
                         <Carousel breakPoints={breakPoints}>
                             {
