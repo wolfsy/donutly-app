@@ -1,11 +1,11 @@
-import {Navbar, Nav, Container, Button, Row, Col, Modal, Stack} from 'react-bootstrap';
+import {useState} from "react";
+import {Navbar, Nav, Container, Row, Col, Modal, Stack} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import './AppNavbar.css';
-import '../modals/modals.css';
 import LoginModal from "../modals/loginModal";
 import RegisterModal from "../modals/registerModal";
-import {useState} from "react";
 
+import './AppNavbar.css';
+import '../modals/modals.css';
 
 function AppNavbar() {
 
@@ -41,7 +41,7 @@ function AppNavbar() {
                   </button>
                 </Col>
                 <Col className="d-flex justify-content-center justify-content-lg-end">
-                  <button className="app-button nav-button" onClick={handleShowLogin}>Login</button>
+                  <button className="app-button nav-button" onClick={handleShowLogin}>Sign In</button>
                   <button className="app-button nav-button ms-3" onClick={handleShowRegister}>Sign Up</button>
                 </Col>
               </Row>
@@ -50,15 +50,27 @@ function AppNavbar() {
         </Container>
       </Navbar>
 
-      <Modal show={showLogin} onHide={handleCloseLogin}>
+      <Modal 
+          show={showLogin} 
+          onHide={handleCloseLogin}
+          centered={true}
+          aria-labelledby="contained-modal-title-vcenter"
+      >
         <Modal.Header closeButton>
-          <Modal.Title>Login</Modal.Title>
+          <Modal.Title>Sign In</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <LoginModal />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseLogin}>Cancel</Button>
+          <Stack direction="horizontal" gap={3}>
+              <button className="app-button modal-button" type="submit" form="loginForm">
+                Confirm
+              </button>
+              <button className="app-button modal-button" onClick={handleCloseLogin}>
+                Cancel
+              </button>
+            </Stack>
         </Modal.Footer>
       </Modal>
 
@@ -75,11 +87,11 @@ function AppNavbar() {
           <RegisterModal />
         </Modal.Body>
         <Modal.Footer>
-          <Stack direction="horizontal">
-            <button className="app-button" type="submit" form="registerForm">
+          <Stack direction="horizontal" gap={3}>
+            <button className="app-button modal-button" type="submit" form="registerForm">
               Confirm
             </button>
-            <button className="app-button" onClick={handleCloseRegister}>
+            <button className="app-button modal-button" onClick={handleCloseRegister}>
               Cancel
             </button>
           </Stack>
