@@ -1,27 +1,46 @@
 package com.zpi.donutly.service.impl;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.zpi.donutly.dto.LoginRequestForm;
+import com.zpi.donutly.dto.RegistrationRequest;
 import com.zpi.donutly.model.Address;
 import com.zpi.donutly.model.Category;
 import com.zpi.donutly.model.User;
+import com.zpi.donutly.model.UserRole;
+import com.zpi.donutly.repository.EmailVerificationRepository;
 import com.zpi.donutly.repository.UserRepository;
+import com.zpi.donutly.service.EmailVerificationService;
 import com.zpi.donutly.service.UserService;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
+    private final AuthenticationManager authenticationManager;
+    private final PasswordEncoder passwordEncoder;
+    private final Algorithm jwtAlgorithm;
     private final UserRepository userRepository;
+    private final EmailVerificationService emailVerificationService;
+    private final EmailVerificationRepository emailVerificationRepository;
 
     @Override
-    public User getUserByLogin(String login) {
-        return userRepository.findUserByLogin(login);
+    public Optional<User> getUserByLogin(String login) {
+        return userRepository.findUserByLogin(login).or(Optional::empty);
     }
 
     @Override
@@ -36,15 +55,53 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User addUser(User user) {
-        return userRepository.save(user);
+        return null;
     }
 
     @Override
     public User editUserPassword(User user) {
-        String login = user.getLogin();
-        User userToEdit = userRepository.findUserByLogin(login);
+        return null;
+    }
 
-        if (userToEdit != null) {
+    @Override
+    public User editUserDescription(User user) {
+        return null;
+    }
+
+    @Override
+    public User editUserAvatar(User user) {
+        return null;
+    }
+
+    @Override
+    public User editUserStatus(User user) {
+        return null;
+    }
+
+    @Override
+    public User editUserAddress(String username, Address address) {
+        return null;
+    }
+
+    @Override
+    public Address getUserAddress(String username) {
+        return null;
+    }
+
+    @Override
+    public Category getUserCategory(String username) {
+        return null;
+    }
+
+    //TODO: do poprawy
+/*
+    @Override
+    public User editUserPassword(User user) {
+        String login = user.getLogin();
+        Optional<User> userToEdit = userRepository.findUserByLogin(login);
+
+        if(userToEdit.isEmpty()) return Optional.empty();
+        if (userToEdit.isPresent()) {
             String password = user.getPassword();
             userToEdit.setPassword(password);
             userRepository.save(userToEdit);
@@ -119,10 +176,62 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Category getUserCategory(String username) {
-        User user = userRepository.findUserByLogin(username);
-        if (user != null) {
+        Optional<User> user = userRepository.findUserByLogin(username);
+        if (user.isPresent()) {
             return user.getCategory();
         }
         return null;
+    }
+*/
+
+    @Override
+    public boolean loginAlreadyExists(String login) {
+        return userRepository.findUserByLogin(login).isPresent();
+    }
+
+    @Override
+    public boolean emailAlreadyExists(String email) {
+        return userRepository.findUserByEmail(email).isPresent();
+    }
+
+    @Override
+    public Optional<User> createUserAccount(RegistrationRequest request) {
+        User user = new User(userRepository.count() + 1, request.firstName(), request.lastName(), request.login(), null,
+                request.email(), passwordEncoder.encode(request.password()), null, null,
+                false, UserRole.USER, null, false, null, null,
+                null, null, null, null, null);
+        user = userRepository.save(user);
+
+        try {
+            emailVerificationService.createVerificationToken(user);
+            emailVerificationService.sendEmail(user);
+            return Optional.of(user);
+        } catch (NullPointerException nullPointerException) {
+            log.error(nullPointerException.getMessage());
+            emailVerificationRepository.findByUser(user).ifPresent(emailVerificationRepository::delete);
+            userRepository.delete(user);
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<String> generateAccessToken(LoginRequestForm requestForm) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(requestForm.email(), requestForm.password()));
+
+            User user = (User) authentication.getPrincipal();
+            String token = JWT.create()
+                    .withExpiresAt(Date.from(LocalDateTime.now().plusDays(5).atZone(ZoneId.systemDefault()).toInstant()))
+                    .withIssuedAt(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()))
+                    .withClaim("name", user.getLogin())
+                    .withClaim("role", user.getRole().toString())
+                    .sign(jwtAlgorithm);
+
+            return Optional.of(token);
+        } catch (Exception exception) {
+            log.error("Failed login operation with: " + requestForm.email());
+            return Optional.empty();
+        }
     }
 }
