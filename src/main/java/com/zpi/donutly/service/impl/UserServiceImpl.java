@@ -198,7 +198,7 @@ public class UserServiceImpl implements UserService {
     public Optional<User> createUserAccount(RegistrationRequest request) {
         User user = new User(userRepository.count() + 1, request.firstName(), request.lastName(), request.login(), null,
                 request.email(), passwordEncoder.encode(request.password()), null, null,
-                false, UserRole.USER, null, false, null, null,
+                false, UserRole.USER, "https://i0.wp.com/sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png?fit=256%2C256&ssl=1", false, null, null,
                 null, null, null, null, null);
         user = userRepository.save(user);
 

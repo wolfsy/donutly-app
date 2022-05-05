@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import java.net.URL;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -78,20 +76,20 @@ public class User implements UserDetails {
     private UserRole role;
 
     @Column(name = "avatar_url")
-    private URL avatarUrl;
+    private String avatarUrl;
 
     @NotBlank(message = "Field 'verification' cannot be null.")
     @Column(name = "verification")
     private Boolean verification;
 
     @Column(name = "instagram_url")
-    private URL instagramUrl;
+    private String instagramUrl;
 
     @Column(name = "youtube_url")
-    private URL youtubeUrl;
+    private String youtubeUrl;
 
     @Column(name = "tiktok_url")
-    private URL tiktokUrl;
+    private String tiktokUrl;
 
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)

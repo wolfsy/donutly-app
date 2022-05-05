@@ -10,7 +10,6 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -38,7 +37,7 @@ public class Charity {
     private String description;
 
     @Column(name = "picture_url")
-    private URL pictureUrl;
+    private String pictureUrl;
 
     @NotBlank(message = "Field 'startTime' cannot be null.")
     @Column(name = "start_time")
