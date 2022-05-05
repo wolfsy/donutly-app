@@ -131,5 +131,4 @@ public class UserController {
         Category category = userService.getUserCategory(username);
         return ResponseEntity.ok(category);
     }
-
 }

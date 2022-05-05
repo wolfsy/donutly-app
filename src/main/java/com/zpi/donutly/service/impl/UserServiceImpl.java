@@ -196,7 +196,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> createUserAccount(RegistrationRequest request) {
-        User user = new User(null, request.firstName(), request.lastName(), request.login(), null,
+        User user = new User(userRepository.count() + 1, request.firstName(), request.lastName(), request.login(), null,
                 request.email(), passwordEncoder.encode(request.password()), null, null,
                 false, UserRole.USER, null, false, null, null,
                 null, null, null, null, null);

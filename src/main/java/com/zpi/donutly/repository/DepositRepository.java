@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DepositRepository extends JpaRepository<Deposit, Long> {
+
     Deposit findDepositById(Long id);
 
     Deposit findFirstIdByOrderByIdDesc();
