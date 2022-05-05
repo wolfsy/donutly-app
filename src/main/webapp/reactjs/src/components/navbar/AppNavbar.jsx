@@ -1,6 +1,7 @@
 import {Navbar, Nav, Container, Button, Row, Col, Modal} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './AppNavbar.css';
+import '../modals/modals.css';
 import LoginModal from "../modals/loginModal";
 import RegisterModal from "../modals/registerModal";
 import {useState} from "react";
@@ -62,7 +63,13 @@ function AppNavbar() {
       </Modal>
 
 
-      <Modal show={showRegister} onHide={handleCloseRegister}>
+      <Modal
+          show={showRegister}
+          onHide={handleCloseRegister}
+          centered={true}
+          aria-labelledby="contained-modal-title-vcenter"
+          className="modal-register-bg"
+      >
         <Modal.Header closeButton>
           <Modal.Title>Register</Modal.Title>
         </Modal.Header>
@@ -70,7 +77,12 @@ function AppNavbar() {
           <RegisterModal />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseRegister}>Cancel</Button>
+          <button className="app-button" type="submit" form="registerForm">
+            Register
+          </button>
+          <button className="app-button" onClick={handleCloseRegister}>
+            Cancel
+          </button>
         </Modal.Footer>
       </Modal>
 
