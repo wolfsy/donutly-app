@@ -26,22 +26,22 @@ function AppNavbar() {
             <Nav className="basic-navbar-nav w-100">
               <Row className="w-100 my-4 my-xl-0 my-md-0 mx-lg-3 mx-auto">
                 <Col className="d-flex justify-content-center justify-content-lg-start mb-3 mb-lg-2">
-                  <Button className="nav-button nav-button-small mx-2" onClick={() =>  window.location.href='/'} >
+                  <button className="app-button nav-button nav-button-small mx-2" onClick={() =>  window.location.href='/'} >
                     <FontAwesomeIcon icon="fa-solid fa-house" />
-                  </Button>
-                  <Button className="nav-button nav-button-small mx-2">
+                  </button>
+                  <button className="app-button nav-button nav-button-small mx-2">
                     <FontAwesomeIcon icon="fa-solid fa-bars" />
-                  </Button>
-                  <Button className="nav-button nav-button-small mx-2" onClick={() =>  window.location.href='/about'} >
+                  </button>
+                  <button className="app-button nav-button nav-button-small mx-2" onClick={() =>  window.location.href='/about'} >
                     <FontAwesomeIcon icon="fa-solid fa-envelope" />
-                  </Button>
-                  <Button className="nav-button nav-button-small mx-2">
+                  </button>
+                  <button className="app-button nav-button nav-button-small mx-2">
                     <FontAwesomeIcon icon="fa-solid fa-user" />
-                  </Button>
+                  </button>
                 </Col>
                 <Col className="d-flex justify-content-center justify-content-lg-end">
-                    <Button className="nav-button" onClick={handleShowLogin}>Login</Button>
-                    <Button className="nav-button ms-3" onClick={handleShowRegister}>Sign Up</Button>
+                  <button className="app-button nav-button" onClick={handleShowLogin}>Login</button>
+                  <button className="app-button nav-button ms-3" onClick={handleShowRegister}>Sign Up</button>
                 </Col>
               </Row>
             </Nav>

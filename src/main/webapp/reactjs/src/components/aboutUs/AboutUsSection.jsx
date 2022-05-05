@@ -1,4 +1,4 @@
-import { Button, Container, Row, Image, Col } from "react-bootstrap"
+import { Container, Row, Image, Col } from "react-bootstrap"
 
 import './AboutUsSection.css';
 
@@ -17,7 +17,10 @@ function AboutUsSection() {
                       Sit amet nisl suscipit adipiscing bibendum est.
                   </p>
                   <Row>
-                    <Button onClick={() =>  window.location.href='/about'} className="about-us-button mt-4 ms-2">Read more</Button>
+                    <button onClick={() =>  window.location.href='/about'} 
+                            className="app-button about-us-button mt-4 ms-2">
+                              Read more
+                    </button>
                   </Row>
                 </Col>
                 <Col xs={12} sm={12} md={5} lg={5} xl={4} xxl={4} 
