@@ -1,11 +1,10 @@
-import {useState} from "react";
-import {Navbar, Nav, Container, Row, Col, Modal, Stack} from 'react-bootstrap';
+import { useState } from "react";
+import { Navbar, Nav, Container, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import LoginModal from "../modals/loginModal";
-import RegisterModal from "../modals/registerModal";
+import Login from "../authentication/Login";
+import Register from "../authentication/Register";
 
 import './AppNavbar.css';
-import '../modals/modals.css';
 
 function AppNavbar() {
 
@@ -49,32 +48,12 @@ function AppNavbar() {
         </Container>
       </Navbar>
 
-      <Modal 
-          show={showLogin} 
-          onHide={handleCloseLogin}
-          centered={true}
-          aria-labelledby="contained-modal-title-vcenter"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Sign In</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <LoginModal />
-        </Modal.Body>
-        <Modal.Footer>
-          <Stack direction="horizontal" gap={3}>
-              <button className="app-button modal-button" type="submit" form="loginForm">
-                Confirm
-              </button>
-              <button className="app-button modal-button" onClick={handleCloseLogin}>
-                Cancel
-              </button>
-            </Stack>
-        </Modal.Footer>
-      </Modal>
+      <Login handleCloseLogin={handleCloseLogin}
+             showLogin={showLogin}
+      />
 
-      <RegisterModal handleCloseRegister={handleCloseRegister}
-                     showRegister={showRegister}
+      <Register handleCloseRegister={handleCloseRegister}
+                showRegister={showRegister}
       />
 
     </>

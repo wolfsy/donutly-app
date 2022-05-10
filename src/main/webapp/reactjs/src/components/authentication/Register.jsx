@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Form, InputGroup, Modal, Stack } from "react-bootstrap";
 
-const RegisterModal = ({ handleCloseRegister, showRegister }) => {
+import './authentication.css';
+
+const Register = ({ handleCloseRegister, showRegister }) => {
 
     const [form, setForm] = useState({});
     const [errors, setErrors] = useState({});
@@ -216,4 +218,4 @@ const RegisterModal = ({ handleCloseRegister, showRegister }) => {
     );
 }
 
-export default RegisterModal;
+export default Register;
