@@ -1,6 +1,8 @@
-import { useRef, useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Form, InputGroup, Modal, Stack } from "react-bootstrap";
+
 import AuthContext from "../../context/AuthProvider";
 import UserService from "../../services/UserService";
 
@@ -8,91 +10,166 @@ import './authentication.css';
 
 const Login = ({ handleCloseLogin, showLogin }) => {
 
+    const navigate = useNavigate();
+    const errRef = useRef();
+    const formRef = useRef();
     const { setAuth } = useContext(AuthContext);
-
-    const userRef = useRef();
-    // const errRef = useRef();
-
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    // const [errMsg, setErrMsg] = useState('');
-    // const [success, setSuccess] = useState(false);
-
-    // useEffect(() => {
-    //     userRef.current.focus();
-    // }, []);
+    const [form, setForm] = useState({});
+    const [formErrors, setFormErrors] = useState({});
+    const [errMsg, setErrMsg] = useState('');
+    const [success, setSuccess] = useState(false);
 
     useEffect(() => {
-        //setErrMsg('');
-    }, [email, password]);
+        setErrMsg('');
+        setFormErrors({});
+    }, [form]);
+
+    const setField = (field, value) => {
+        setForm({
+             ...form, 
+             [field]: value 
+        });
+
+        if(!!formErrors[field]) {
+            setFormErrors({
+                ...formErrors,
+                [field]: null
+            });
+        }
+    }
+
+    const validateForm = () => {
+        const { email, password } = form;
+        const errors = {};
+
+        if(!email)
+            errors.email = "Email is required";
+        if(!password)
+            errors.password = "Password is required";
+
+        return errors;
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const formErrors = validateForm();
         
-        const response = await UserService.login(email, password);
-        const token = response?.data;
-        setAuth({ email, password, token, isLogged: true });
-        
-        setEmail('');
-        setPassword('');
-        //setSuccess(true);
+        if(Object.keys(formErrors).length > 0) {
+            setFormErrors(formErrors);
+        }
+        else {
+            try {
+                const response = await UserService.login(form.email, form.password);
+                const token = response?.data;
+                setSuccess(true);
+                setAuth({ email: form.email, password: form.password, token, isLogged: true });
+                setForm({});
+            } 
+            catch (err) {
+                if (!err?.response)
+                    setErrMsg('No Server Response');
+                else if (err.response?.status === 400)
+                    setErrMsg('Invalid Email or Password');
+                else 
+                    setErrMsg('Login Failed');
+                errRef.current.focus();
+            }
+        }
+    }
 
+    const modalClose = () => {
+        setForm({});
+        setFormErrors({});
         handleCloseLogin();
+        if(success)
+        {
+            setSuccess(false);
+            navigate('/');
+        }
+    }
+
+    const handleKeyUp = (e) => {
+        if (e.keyCode === 13) {
+            handleSubmit(e);
+        }
     }
 
     return (
         <Modal 
           show={showLogin} 
-          onHide={handleCloseLogin}
+          onHide={modalClose}
           centered={true}
           aria-labelledby="contained-modal-title-vcenter"
         >
             <Modal.Header closeButton>
-            <Modal.Title>Sign In</Modal.Title>
+                <Modal.Title>Sign In</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form>
-                    <Form.Group className="mb-4">
-                        <InputGroup>
-                            <InputGroup.Text>
-                                <FontAwesomeIcon icon="fa-solid fa-at" />
-                            </InputGroup.Text>
-                            <Form.Control 
-                                type="email"
-                                id="email"
-                                placeholder="Email" 
-                                ref={userRef}
-                                onChange={(e) => setEmail(e.target.value)}
-                                value={email}
-                                required
-                            />
-                        </InputGroup>
-                    </Form.Group>
-                    <Form.Group className="mb-4">
-                        <InputGroup>
-                            <InputGroup.Text>
-                                <FontAwesomeIcon icon="fa-solid fa-key" />
-                            </InputGroup.Text>
-                            <Form.Control 
-                                type="password"
-                                id="password"
-                                placeholder="Password" 
-                                onChange={(e) => setPassword(e.target.value)}
-                                value={password}
-                                required />
-                        </InputGroup>
-                    </Form.Group>
-                </Form>
+                {   !success ?
+                    <Form ref={formRef} onKeyUp={handleKeyUp} tabIndex={0}>
+                        <Form.Group className="mb-4">
+                            <InputGroup>
+                                <InputGroup.Text>
+                                    <FontAwesomeIcon icon="fa-solid fa-at" />
+                                </InputGroup.Text>
+                                <Form.Control 
+                                    type="email"
+                                    id="email"
+                                    placeholder="Email" 
+                                    value={form.email || ""}
+                                    onChange={(e) => setField("email", e.target.value)}
+                                    isInvalid={!!formErrors.email}
+                                    required
+                                    autoFocus
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    {formErrors.email}
+                                </Form.Control.Feedback>
+                            </InputGroup>
+                        </Form.Group>
+                        <Form.Group className="mb-4">
+                            <InputGroup>
+                                <InputGroup.Text>
+                                    <FontAwesomeIcon icon="fa-solid fa-key" />
+                                </InputGroup.Text>
+                                <Form.Control 
+                                    type="password"
+                                    id="password"
+                                    placeholder="Password" 
+                                    value={form.password || ""}
+                                    onChange={(e) => setField("password", e.target.value)}
+                                    isInvalid={!!formErrors.password}
+                                    required 
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    {formErrors.password}
+                                </Form.Control.Feedback>
+                            </InputGroup>
+                        </Form.Group>
+                        <p className="text-danger" ref={errRef} aria-live="assertive">
+                        {errMsg}
+                        </p>
+                    </Form> :
+                    <h4>You are logged in!</h4>
+                }
             </Modal.Body>
             <Modal.Footer>
             <Stack direction="horizontal" gap={3}>
-                <button className="app-button modal-button" type="submit" form="loginForm" onClick={handleSubmit}>
-                    Confirm
+                {
+                    !success ?
+                    <button className="app-button modal-button" 
+                        type="submit" 
+                        form="loginForm"
+                        onClick={handleSubmit} 
+                    >
+                        Confirm
+                    </button> : ''
+                }
+                <button className="app-button modal-button" 
+                        onClick={modalClose}>
+                    {!success ? 'Cancel' : 'Close'}
                 </button>
-                <button className="app-button modal-button" onClick={handleCloseLogin}>
-                    Cancel
-                </button>
-                </Stack>
+            </Stack>
             </Modal.Footer>
       </Modal>
     );

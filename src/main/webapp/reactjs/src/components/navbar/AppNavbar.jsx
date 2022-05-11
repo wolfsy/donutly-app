@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { useNavigate } from 'react-router-dom';
 import { Navbar, Nav, Container, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -10,6 +11,7 @@ import './AppNavbar.css';
 
 function AppNavbar() {
 
+  const navigate = useNavigate();
   const { auth, setAuth } = useContext(AuthContext);
   
   const [showLogin, setShowLogin] = useState(false);
@@ -23,7 +25,7 @@ function AppNavbar() {
   const handleLogout = () => {
     localStorage.removeItem('auth');
     setAuth({ email: '', password: '', token: '', isLogged: false });
-    window.location.reload();
+    navigate('/');
   }
 
   return (
