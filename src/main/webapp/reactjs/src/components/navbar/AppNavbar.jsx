@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Navbar, Nav, Container, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import Login from "../authentication/Login";
 import Register from "../authentication/Register";
+import AuthContext from "../../context/AuthProvider";
 
 import './AppNavbar.css';
 
 function AppNavbar() {
 
+  const { auth, setAuth } = useContext(AuthContext);
+  
   const [showLogin, setShowLogin] = useState(false);
   const handleShowLogin = () => setShowLogin(true);
   const handleCloseLogin = () => setShowLogin(false);
@@ -15,6 +19,12 @@ function AppNavbar() {
   const [showRegister, setShowRegister] = useState(false);
   const handleShowRegister = () => setShowRegister(true);
   const handleCloseRegister = () => setShowRegister(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem('auth');
+    setAuth({ email: '', password: '', token: '', isLogged: false });
+    window.location.reload();
+  }
 
   return (
     <>
@@ -34,12 +44,19 @@ function AppNavbar() {
                   <button className="app-button nav-button nav-button-small mx-2" onClick={() =>  window.location.href='/about'} >
                     <FontAwesomeIcon icon="fa-solid fa-envelope" />
                   </button>
-                  <button className="app-button nav-button nav-button-small mx-2">
-                    <FontAwesomeIcon icon="fa-solid fa-user" />
-                  </button>
+                  { 
+                    auth.isLogged ?
+                    <button className="app-button nav-button nav-button-small mx-2">
+                        <FontAwesomeIcon icon="fa-solid fa-user" />
+                    </button> : ''
+                  }
                 </Col>
                 <Col className="d-flex justify-content-center justify-content-lg-end">
-                  <button className="app-button nav-button" onClick={handleShowLogin}>Sign In</button>
+                  {
+                    auth.isLogged ?
+                    <button className="app-button nav-button" onClick={handleLogout}>Sign Out</button> :
+                    <button className="app-button nav-button" onClick={handleShowLogin}>Sign In</button>
+                  }
                   <button className="app-button nav-button ms-3" onClick={handleShowRegister}>Sign Up</button>
                 </Col>
               </Row>
