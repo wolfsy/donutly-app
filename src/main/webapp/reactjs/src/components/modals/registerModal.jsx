@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Form, InputGroup } from "react-bootstrap";
+import { Form, InputGroup, Modal, Stack } from "react-bootstrap";
 
-const RegisterModal = () => {
+const RegisterModal = ({ handleCloseRegister, showRegister }) => {
 
     const [form, setForm] = useState({});
     const [errors, setErrors] = useState({});
+
+    const modalClose = () => {
+        setErrors({});
+        setForm({});
+        handleCloseRegister();
+    }
 
     const setField = (field, value) => {
         setForm({
@@ -41,10 +47,12 @@ const RegisterModal = () => {
             newErrors.uname = "Username must be between 1 and 100 characters long";
         if(!email || !validateEmail(email))
             newErrors.email = "Email is invalid";
-        if(pass.length < 8 || pass.length > 60)
+        if(!pass || pass.length < 8 || pass.length > 60)
             newErrors.pass = "Password must be between 8 and 60 characters long";
-        // if(conf.length < 8 || conf.length > 60)
-        //     newErrors.conf = "Password must be between 8 and 60 characters long";
+        if(!conf || conf.length < 8 || conf.length > 60)
+            newErrors.conf = "Password must be between 8 and 60 characters long";
+        else if(pass !== conf)
+            newErrors.conf = "Passwords do not match";
 
         return newErrors;
     }
@@ -59,11 +67,19 @@ const RegisterModal = () => {
         else {
             alert("Form submitted");
         }
-
-        console.log(form);
     }
 
     return (
+        <Modal
+          show={showRegister}
+          onHide={modalClose}
+          centered={true}
+          aria-labelledby="contained-modal-title-vcenter"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Sign up</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
         <Form id="registerForm">
             <Form.Group className="mb-4">
                 <Form.Group className="mb-2">
@@ -179,13 +195,24 @@ const RegisterModal = () => {
                         </Form.Control.Feedback>
                     </InputGroup>
                 </Form.Group>
-                {/* <Form.Group controlId="submit">
-                    <button type="submit" onClick={handleSubmit}>
-                        Submit
-                    </button>
-                </Form.Group> */}
             </Form.Group>
         </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Stack direction="horizontal" gap={3}>
+            <button className="app-button modal-button" 
+                    type="submit" 
+                    form="registerForm"
+                    onClick={handleSubmit}>
+              Confirm
+            </button>
+            <button className="app-button modal-button" onClick={modalClose}>
+              Cancel
+            </button>
+          </Stack>
+        </Modal.Footer>
+      </Modal>
+        
     );
 }
 

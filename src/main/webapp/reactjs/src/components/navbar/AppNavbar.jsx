@@ -17,7 +17,6 @@ function AppNavbar() {
   const handleShowRegister = () => setShowRegister(true);
   const handleCloseRegister = () => setShowRegister(false);
 
-
   return (
     <>
       <Navbar className="app-navbar py-4" expand="md">
@@ -74,29 +73,9 @@ function AppNavbar() {
         </Modal.Footer>
       </Modal>
 
-      <Modal
-          show={showRegister}
-          onHide={handleCloseRegister}
-          centered={true}
-          aria-labelledby="contained-modal-title-vcenter"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Sign up</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <RegisterModal />
-        </Modal.Body>
-        <Modal.Footer>
-          <Stack direction="horizontal" gap={3}>
-            <button className="app-button modal-button" type="submit" form="registerForm">
-              Confirm
-            </button>
-            <button className="app-button modal-button" onClick={handleCloseRegister}>
-              Cancel
-            </button>
-          </Stack>
-        </Modal.Footer>
-      </Modal>
+      <RegisterModal handleCloseRegister={handleCloseRegister}
+                     showRegister={showRegister}
+      />
 
     </>
   )
