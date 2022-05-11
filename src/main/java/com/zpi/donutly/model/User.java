@@ -78,9 +78,13 @@ public class User implements UserDetails {
     @Column(name = "avatar_url")
     private String avatarUrl;
 
-    @NotBlank(message = "Field 'verification' cannot be null.")
-    @Column(name = "verification")
-    private Boolean verification;
+    @NotBlank(message = "Field 'emailVerification' cannot be null.")
+    @Column(name = "emailVerification")
+    private Boolean emailVerification;
+
+    @NotBlank(message = "Field 'adminVerification' cannot be null.")
+    @Column(name = "adminVerification")
+    private Boolean adminVerification;
 
     @Column(name = "instagram_url")
     private String instagramUrl;
@@ -157,6 +161,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return verification;
+        return emailVerification;
     }
 }

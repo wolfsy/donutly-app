@@ -33,7 +33,7 @@ public class EmailVerificationServiceImpl implements EmailVerificationService {
             throw new InvalidEmailTokenException();
         }
 
-        user.setVerification(true);
+        user.setEmailVerification(true);
         user.setRole(UserRole.USER);
         userRepository.save(user);
     }
