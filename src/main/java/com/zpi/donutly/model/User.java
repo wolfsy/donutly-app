@@ -79,11 +79,11 @@ public class User implements UserDetails {
     private String avatarUrl;
 
     @NotBlank(message = "Field 'emailVerification' cannot be null.")
-    @Column(name = "emailVerification")
+    @Column(name = "email_verification")
     private Boolean emailVerification;
 
     @NotBlank(message = "Field 'adminVerification' cannot be null.")
-    @Column(name = "adminVerification")
+    @Column(name = "admin_verification")
     private Boolean adminVerification;
 
     @Column(name = "instagram_url")
