@@ -22,6 +22,17 @@ class UserService {
         return response;
     }
 
+    async register(email, firstName, lastName, login, password, repeatedPassword) {
+        const response = await axios.post(USER_API_BASE_URL + 'register',
+            JSON.stringify({ email, firstName, lastName, login, password, repeatedPassword }),
+            {
+                headers: { 'Content-Type': 'application/json' },
+            }
+        );
+
+        return response;
+    }
+
 }
 
 export default new UserService()

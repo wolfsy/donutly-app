@@ -11,17 +11,16 @@ import './authentication.css';
 const Login = ({ handleCloseLogin, showLogin }) => {
 
     const navigate = useNavigate();
-    const errRef = useRef();
     const formRef = useRef();
+    const errorRef = useRef();
     const { setAuth } = useContext(AuthContext);
     const [form, setForm] = useState({});
     const [formErrors, setFormErrors] = useState({});
-    const [errMsg, setErrMsg] = useState('');
+    const [errorMsg, setErrorMsg] = useState('');
     const [success, setSuccess] = useState(false);
 
     useEffect(() => {
-        setErrMsg('');
-        setFormErrors({});
+        setErrorMsg('');
     }, [form]);
 
     const setField = (field, value) => {
@@ -67,12 +66,12 @@ const Login = ({ handleCloseLogin, showLogin }) => {
             } 
             catch (err) {
                 if (!err?.response)
-                    setErrMsg('No Server Response');
+                    setErrorMsg('No Server Response');
                 else if (err.response?.status === 400)
-                    setErrMsg('Invalid Email or Password');
+                    setErrorMsg('Invalid Email or Password');
                 else 
-                    setErrMsg('Login Failed');
-                errRef.current.focus();
+                    setErrorMsg('Login Failed');
+                errorRef.current.focus();
             }
         }
     }
@@ -146,11 +145,11 @@ const Login = ({ handleCloseLogin, showLogin }) => {
                                 </Form.Control.Feedback>
                             </InputGroup>
                         </Form.Group>
-                        <p className="text-danger" ref={errRef} aria-live="assertive">
-                        {errMsg}
+                        <p className="text-danger" ref={errorRef} aria-live="assertive">
+                            {errorMsg}
                         </p>
                     </Form> :
-                    <h4>You are logged in!</h4>
+                    <h4>You are signed in!</h4>
                 }
             </Modal.Body>
             <Modal.Footer>
