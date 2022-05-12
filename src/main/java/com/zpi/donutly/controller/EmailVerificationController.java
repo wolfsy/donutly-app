@@ -61,20 +61,6 @@ public class EmailVerificationController {
                                    align-items: center;
                                    margin-top: 2rem;
                                }
-                       
-                               .logo {
-                                   display: flex;
-                                   flex-direction: column;
-                                   justify-content: center;
-                                   align-items: center;
-                                   margin-top: 4rem;
-                       
-                               }
-                       
-                               .logo img{
-                                   width: 50%;
-                                   height: auto;
-                               }
                            </style>
                        </head>
                        <body>
@@ -82,9 +68,6 @@ public class EmailVerificationController {
                                <div class="info">
                                    <h1>Your account has been verified properly!</h1>
                                    <h1>You might now close this window safely.</h1>
-                               </div>
-                               <div class="logo">
-                                   <img src="donutly_logo.PNG" alt="Donutly logo">
                                </div>
                            </div>
                        </body>
