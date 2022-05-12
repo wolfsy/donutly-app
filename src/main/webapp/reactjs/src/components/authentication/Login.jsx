@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Form, InputGroup, Modal, Stack } from "react-bootstrap";
+import { Form, InputGroup, Modal, Stack, Spinner } from "react-bootstrap";
 
 import AuthContext from "../../context/AuthProvider";
 import UserService from "../../services/UserService";
@@ -18,6 +18,7 @@ const Login = ({ handleCloseLogin, showLogin }) => {
     const [formErrors, setFormErrors] = useState({});
     const [errorMsg, setErrorMsg] = useState('');
     const [success, setSuccess] = useState(false);
+    const [submited, setSubmited] = useState(false);
 
     useEffect(() => {
         setErrorMsg('');
@@ -58,8 +59,11 @@ const Login = ({ handleCloseLogin, showLogin }) => {
         }
         else {
             try {
+                setSubmited(true);
                 const response = await UserService.login(form.email, form.password);
                 const token = response?.data;
+
+                setSubmited(false);
                 setSuccess(true);
                 setAuth({ email: form.email, password: form.password, token, isLogged: true });
                 setForm({});
@@ -71,6 +75,8 @@ const Login = ({ handleCloseLogin, showLogin }) => {
                     setErrorMsg('Invalid Email or Password');
                 else 
                     setErrorMsg('Login Failed');
+
+                setSubmited(false);
                 errorRef.current.focus();
             }
         }
@@ -106,45 +112,47 @@ const Login = ({ handleCloseLogin, showLogin }) => {
             <Modal.Body>
                 {   !success ?
                     <Form ref={formRef} onKeyUp={handleKeyUp} tabIndex={0}>
-                        <Form.Group className="mb-4">
-                            <InputGroup>
-                                <InputGroup.Text>
-                                    <FontAwesomeIcon icon="fa-solid fa-at" />
-                                </InputGroup.Text>
-                                <Form.Control 
-                                    type="email"
-                                    id="email"
-                                    placeholder="Email" 
-                                    value={form.email || ""}
-                                    onChange={(e) => setField("email", e.target.value)}
-                                    isInvalid={!!formErrors.email}
-                                    required
-                                    autoFocus
-                                />
-                                <Form.Control.Feedback type="invalid">
-                                    {formErrors.email}
-                                </Form.Control.Feedback>
-                            </InputGroup>
-                        </Form.Group>
-                        <Form.Group className="mb-4">
-                            <InputGroup>
-                                <InputGroup.Text>
-                                    <FontAwesomeIcon icon="fa-solid fa-key" />
-                                </InputGroup.Text>
-                                <Form.Control 
-                                    type="password"
-                                    id="password"
-                                    placeholder="Password" 
-                                    value={form.password || ""}
-                                    onChange={(e) => setField("password", e.target.value)}
-                                    isInvalid={!!formErrors.password}
-                                    required 
-                                />
-                                <Form.Control.Feedback type="invalid">
-                                    {formErrors.password}
-                                </Form.Control.Feedback>
-                            </InputGroup>
-                        </Form.Group>
+                        <fieldset disabled={submited}>
+                            <Form.Group className="mb-4">
+                                <InputGroup>
+                                    <InputGroup.Text>
+                                        <FontAwesomeIcon icon="fa-solid fa-at" />
+                                    </InputGroup.Text>
+                                    <Form.Control 
+                                        type="email"
+                                        id="email"
+                                        placeholder="Email" 
+                                        value={form.email || ""}
+                                        onChange={(e) => setField("email", e.target.value)}
+                                        isInvalid={!!formErrors.email}
+                                        required
+                                        autoFocus
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {formErrors.email}
+                                    </Form.Control.Feedback>
+                                </InputGroup>
+                            </Form.Group>
+                            <Form.Group className="mb-4">
+                                <InputGroup>
+                                    <InputGroup.Text>
+                                        <FontAwesomeIcon icon="fa-solid fa-key" />
+                                    </InputGroup.Text>
+                                    <Form.Control 
+                                        type="password"
+                                        id="password"
+                                        placeholder="Password" 
+                                        value={form.password || ""}
+                                        onChange={(e) => setField("password", e.target.value)}
+                                        isInvalid={!!formErrors.password}
+                                        required 
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {formErrors.password}
+                                    </Form.Control.Feedback>
+                                </InputGroup>
+                            </Form.Group>
+                        </fieldset>
                         <p className="text-danger" ref={errorRef} aria-live="assertive">
                             {errorMsg}
                         </p>
@@ -159,13 +167,26 @@ const Login = ({ handleCloseLogin, showLogin }) => {
                     <button className="app-button modal-button" 
                         type="submit" 
                         form="loginForm"
-                        onClick={handleSubmit} 
+                        onClick={handleSubmit}
+                        disabled={submited}
                     >
-                        Confirm
+                        {
+                            submited ? 
+                            <Spinner
+                              as="span"
+                              animation="border"
+                              size="sm"
+                              role="status"
+                              aria-hidden="true"
+                            /> : 
+                            <span>Confirm</span>
+                        }
                     </button> : ''
                 }
                 <button className="app-button modal-button" 
-                        onClick={modalClose}>
+                        onClick={modalClose}
+                        disabled={submited}
+                >
                     {!success ? 'Cancel' : 'Close'}
                 </button>
             </Stack>

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Form, InputGroup, Modal, Stack, Row } from "react-bootstrap";
+import { Form, InputGroup, Modal, Stack, Row, Spinner } from "react-bootstrap";
 
 import UserService from "../../services/UserService";
 
@@ -16,6 +16,7 @@ const Register = ({ handleCloseRegister, showRegister }) => {
     const [formErrors, setFormErrors] = useState({});
     const [errorMsg, setErrorMsg] = useState('');
     const [success, setSuccess] = useState(false);
+    const [submited, setSubmited] = useState(false);
 
     useEffect(() => {
         setErrorMsg('');
@@ -72,10 +73,12 @@ const Register = ({ handleCloseRegister, showRegister }) => {
         }
         else {
             try {
+                setSubmited(true);
                 await UserService.register(
                     form.email, form.firstName, form.lastName,
                     form.userName, form.password, form.confirmPassword);
-    
+
+                setSubmited(false);
                 setSuccess(true);
                 setForm({});
             }
@@ -86,6 +89,8 @@ const Register = ({ handleCloseRegister, showRegister }) => {
                     setErrorMsg('Chosen Email or Username is already taken');
                 else 
                     setErrorMsg('Register Failed');
+                    
+                setSubmited(false);
                 errorRef.current.focus();
             }
         }
@@ -122,122 +127,124 @@ const Register = ({ handleCloseRegister, showRegister }) => {
             {
                 !success ?
                 <Form ref={formRef} onKeyUp={handleKeyUp} tabIndex={0}>
-                <Form.Group className="mb-4">
-                    <Form.Group className="mb-2">
-                        <InputGroup>
-                            <InputGroup.Text>
-                                <FontAwesomeIcon icon="fa-solid fa-user" />
-                            </InputGroup.Text>
-                            <Form.Control 
-                                type="text" 
-                                placeholder="First Name" 
-                                required
-                                value={form.firstName || ""}
-                                onChange={(e) => setField("firstName", e.target.value)}
-                                isInvalid={!!formErrors.firstName}
-                                autoFocus
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {formErrors.firstName}
-                            </Form.Control.Feedback>
-                        </InputGroup>
-                    </Form.Group>
-                    <Form.Group className="mb-2">
-                        <InputGroup>
-                            <InputGroup.Text>
-                                <FontAwesomeIcon icon="fa-solid fa-user" />
-                            </InputGroup.Text>
-                            <Form.Control 
-                                type="text" 
-                                placeholder="Last Name" 
-                                required
-                                value={form.lastName || ""}
-                                onChange={(e) => setField("lastName", e.target.value)}
-                                isInvalid={!!formErrors.lastName} 
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {formErrors.lastName}
-                            </Form.Control.Feedback>
-                        </InputGroup>  
-                    </Form.Group>
-                </Form.Group>
+                    <fieldset disabled={submited}>
+                        <Form.Group className="mb-4">
+                            <Form.Group className="mb-2">
+                                <InputGroup>
+                                    <InputGroup.Text>
+                                        <FontAwesomeIcon icon="fa-solid fa-user" />
+                                    </InputGroup.Text>
+                                    <Form.Control 
+                                        type="text" 
+                                        placeholder="First Name" 
+                                        required
+                                        value={form.firstName || ""}
+                                        onChange={(e) => setField("firstName", e.target.value)}
+                                        isInvalid={!!formErrors.firstName}
+                                        autoFocus
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {formErrors.firstName}
+                                    </Form.Control.Feedback>
+                                </InputGroup>
+                            </Form.Group>
+                            <Form.Group className="mb-2">
+                                <InputGroup>
+                                    <InputGroup.Text>
+                                        <FontAwesomeIcon icon="fa-solid fa-user" />
+                                    </InputGroup.Text>
+                                    <Form.Control 
+                                        type="text" 
+                                        placeholder="Last Name" 
+                                        required
+                                        value={form.lastName || ""}
+                                        onChange={(e) => setField("lastName", e.target.value)}
+                                        isInvalid={!!formErrors.lastName} 
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {formErrors.lastName}
+                                    </Form.Control.Feedback>
+                                </InputGroup>  
+                            </Form.Group>
+                        </Form.Group>
 
-                <Form.Group className="mb-4">
-                    <Form.Group className="mb-2">
-                        <InputGroup>
-                            <InputGroup.Text>
-                                <FontAwesomeIcon icon="fa-solid fa-user" />
-                            </InputGroup.Text>
-                            <Form.Control 
-                                type="text" 
-                                placeholder="Username"
-                                value={form.userName || ""}
-                                onChange={(e) => setField("userName", e.target.value)}
-                                isInvalid={!!formErrors.userName}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {formErrors.userName}
-                            </Form.Control.Feedback>
-                        </InputGroup>  
-                    </Form.Group>
-                    <Form.Group className="mb-2">
-                        <InputGroup>
-                            <InputGroup.Text>
-                                <FontAwesomeIcon icon="fa-solid fa-at" />
-                            </InputGroup.Text>
-                            <Form.Control 
-                                type="email" 
-                                placeholder="Email" 
-                                required
-                                value={form.email || ""}
-                                onChange={(e) => setField("email", e.target.value)}
-                                isInvalid={!!formErrors.email}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {formErrors.email}
-                            </Form.Control.Feedback>
-                            </InputGroup> 
-                        </Form.Group>
-                    </Form.Group>
+                        <Form.Group className="mb-4">
+                            <Form.Group className="mb-2">
+                                <InputGroup>
+                                    <InputGroup.Text>
+                                        <FontAwesomeIcon icon="fa-solid fa-user" />
+                                    </InputGroup.Text>
+                                    <Form.Control 
+                                        type="text" 
+                                        placeholder="Username"
+                                        value={form.userName || ""}
+                                        onChange={(e) => setField("userName", e.target.value)}
+                                        isInvalid={!!formErrors.userName}
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {formErrors.userName}
+                                    </Form.Control.Feedback>
+                                </InputGroup>  
+                            </Form.Group>
+                            <Form.Group className="mb-2">
+                                <InputGroup>
+                                    <InputGroup.Text>
+                                        <FontAwesomeIcon icon="fa-solid fa-at" />
+                                    </InputGroup.Text>
+                                    <Form.Control 
+                                        type="email" 
+                                        placeholder="Email" 
+                                        required
+                                        value={form.email || ""}
+                                        onChange={(e) => setField("email", e.target.value)}
+                                        isInvalid={!!formErrors.email}
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {formErrors.email}
+                                    </Form.Control.Feedback>
+                                    </InputGroup> 
+                                </Form.Group>
+                            </Form.Group>
 
-                    <Form.Group className="mb-4">
-                        <Form.Group className="mb-2">
-                            <InputGroup>
-                                <InputGroup.Text>
-                                    <FontAwesomeIcon icon="fa-solid fa-key" />
-                                </InputGroup.Text>
-                                <Form.Control 
-                                    type="password" 
-                                    placeholder="Password" 
-                                    required
-                                    value={form.password || ""}
-                                    onChange={(e) => setField("password", e.target.value)}
-                                    isInvalid={!!formErrors.password}
-                                />
-                                <Form.Control.Feedback type="invalid">
-                                    {formErrors.password}
-                                </Form.Control.Feedback>
-                            </InputGroup>
+                            <Form.Group className="mb-4">
+                                <Form.Group className="mb-2">
+                                    <InputGroup>
+                                        <InputGroup.Text>
+                                            <FontAwesomeIcon icon="fa-solid fa-key" />
+                                        </InputGroup.Text>
+                                        <Form.Control 
+                                            type="password" 
+                                            placeholder="Password" 
+                                            required
+                                            value={form.password || ""}
+                                            onChange={(e) => setField("password", e.target.value)}
+                                            isInvalid={!!formErrors.password}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            {formErrors.password}
+                                        </Form.Control.Feedback>
+                                    </InputGroup>
+                                </Form.Group>
+                            <Form.Group className="mb-2">
+                                <InputGroup>
+                                    <InputGroup.Text>
+                                        <FontAwesomeIcon icon="fa-solid fa-key" />
+                                    </InputGroup.Text>
+                                    <Form.Control 
+                                        type="password" 
+                                        placeholder="Confirm Password" 
+                                        required
+                                        value={form.confirmPassword || ""}
+                                        onChange={(e) => setField("confirmPassword", e.target.value)}
+                                        isInvalid={!!formErrors.confirmPassword}
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {formErrors.confirmPassword}
+                                    </Form.Control.Feedback>
+                                </InputGroup>
+                            </Form.Group>
                         </Form.Group>
-                        <Form.Group className="mb-2">
-                            <InputGroup>
-                                <InputGroup.Text>
-                                    <FontAwesomeIcon icon="fa-solid fa-key" />
-                                </InputGroup.Text>
-                                <Form.Control 
-                                    type="password" 
-                                    placeholder="Confirm Password" 
-                                    required
-                                    value={form.confirmPassword || ""}
-                                    onChange={(e) => setField("confirmPassword", e.target.value)}
-                                    isInvalid={!!formErrors.confirmPassword}
-                                />
-                                <Form.Control.Feedback type="invalid">
-                                    {formErrors.confirmPassword}
-                                </Form.Control.Feedback>
-                            </InputGroup>
-                        </Form.Group>
-                    </Form.Group>
+                    </fieldset>
                     <p className="text-danger" ref={errorRef} aria-live="assertive">
                             {errorMsg}
                     </p>
@@ -255,11 +262,26 @@ const Register = ({ handleCloseRegister, showRegister }) => {
                     <button className="app-button modal-button" 
                             type="submit" 
                             form="registerForm"
-                            onClick={handleSubmit}>
-                            Confirm
+                            onClick={handleSubmit}
+                            disabled={submited}
+                    >
+                        {
+                            submited ? 
+                            <Spinner
+                              as="span"
+                              animation="border"
+                              size="sm"
+                              role="status"
+                              aria-hidden="true"
+                            /> : 
+                            <span>Confirm</span>
+                        }
                     </button> : ''
               }
-              <button className="app-button modal-button" onClick={modalClose}>
+              <button className="app-button modal-button" 
+                      onClick={modalClose}
+                      disabled={submited}
+              >
                   {!success ? 'Cancel' : 'Close'}
               </button>
           </Stack>

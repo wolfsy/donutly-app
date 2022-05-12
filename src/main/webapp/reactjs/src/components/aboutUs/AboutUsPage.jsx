@@ -51,17 +51,17 @@ function AboutUsPage() {
                 <Row className="bg-white py-5 justify-content-center">
                     <p className="fw-bold fs-3">Why donutly?</p>
                     <Row className="d-flex mt-2 mb-xl-5 justify-content-center">
-                        <Col sm={7} xl={3} className="mb-5">
+                        <Col sm={7} xl={4} className="mb-5 px-5">
                             <div className="icon-container">
                                 <FontAwesomeIcon className="h-100" icon="fa-solid fa-mug-hot" />
                             </div>
                             <p className="fw-bold mt-3">Causal</p>
-                            <p>
+                            <p xl={3}>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                                 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             </p>
                         </Col>
-                        <Col sm={7} xl={3} className="mb-5">
+                        <Col sm={7} xl={4} className="mb-5 px-5">
                             <div className="icon-container">
                                 <FontAwesomeIcon className="h-100" icon="fa-solid fa-money-bill-1-wave" />
                             </div>
@@ -71,7 +71,7 @@ function AboutUsPage() {
                                 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             </p>
                         </Col>
-                        <Col sm={7} xl={3} className="mb-5">
+                        <Col sm={7} xl={4} className="mb-5 px-5">
                             <div className="icon-container">
                                 <FontAwesomeIcon className="h-100" icon="fa-solid fa-stopwatch" />
                             </div>
@@ -83,7 +83,7 @@ function AboutUsPage() {
                         </Col>
                     </Row>
                     <Row className="d-flex justify-content-center">
-                        <Col sm={7} xl={3} className="mb-5">
+                        <Col sm={7} xl={4} className="mb-5 px-5">
                             <div className="icon-container">
                                 <FontAwesomeIcon className="h-100" icon="fa-solid fa-face-smile-beam" />
                             </div>
@@ -93,7 +93,7 @@ function AboutUsPage() {
                                 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             </p>
                         </Col>
-                        <Col sm={7} xl={3} className="mb-5">
+                        <Col sm={7} xl={4} className="mb-5 px-5">
                             <div className="icon-container">
                                 <FontAwesomeIcon className="h-100" icon="fa-solid fa-handshake-slash" />
                             </div>
@@ -103,7 +103,7 @@ function AboutUsPage() {
                                 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             </p>
                         </Col>
-                        <Col sm={7} xl={3} className="mb-5">
+                        <Col sm={7} xl={4} className="mb-5 px-5">
                             <div className="icon-container">
                                 <FontAwesomeIcon className="h-100"  icon="fa-solid fa-user-shield" />
                             </div>
