@@ -1,8 +1,10 @@
-import { Container, Row, Image, Col } from "react-bootstrap"
+import { Container, Row, Image, Col, Accordion } from "react-bootstrap"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import './AboutUsSection.css';
 
 function AboutUsPage() {
+
     return (
         <>
             <Container fluid className="about-us-section">
@@ -44,6 +46,152 @@ function AboutUsPage() {
                             className="img-fluid about-us-img"
                             src="https://i0.wp.com/www.biggerbolderbaking.com/wp-content/uploads/2020/11/Homemade-Dunkin-Donuts-WS-Thumb-scaled.jpg?w=1920&ssl=1"
                         />
+                    </Col>
+                </Row>
+                <Row className="bg-white py-5 justify-content-center">
+                    <p className="fw-bold fs-3">Why donutly?</p>
+                    <Row className="d-flex mt-2 mb-xl-5 justify-content-center">
+                        <Col sm={7} xl={3} className="mb-5">
+                            <div className="icon-container">
+                                <FontAwesomeIcon className="h-100" icon="fa-solid fa-mug-hot" />
+                            </div>
+                            <p className="fw-bold mt-3">Causal</p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </p>
+                        </Col>
+                        <Col sm={7} xl={3} className="mb-5">
+                            <div className="icon-container">
+                                <FontAwesomeIcon className="h-100" icon="fa-solid fa-money-bill-1-wave" />
+                            </div>
+                            <p className="fw-bold mt-3">Greater freedom</p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </p>
+                        </Col>
+                        <Col sm={7} xl={3} className="mb-5">
+                            <div className="icon-container">
+                                <FontAwesomeIcon className="h-100" icon="fa-solid fa-stopwatch" />
+                            </div>
+                            <p className="fw-bold mt-3">Quick</p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </p>
+                        </Col>
+                    </Row>
+                    <Row className="d-flex justify-content-center">
+                        <Col sm={7} xl={3} className="mb-5">
+                            <div className="icon-container">
+                                <FontAwesomeIcon className="h-100" icon="fa-solid fa-face-smile-beam" />
+                            </div>
+                            <p className="fw-bold mt-3">Comfort for supporters</p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </p>
+                        </Col>
+                        <Col sm={7} xl={3} className="mb-5">
+                            <div className="icon-container">
+                                <FontAwesomeIcon className="h-100" icon="fa-solid fa-handshake-slash" />
+                            </div>
+                            <p className="fw-bold mt-3">Unbound</p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </p>
+                        </Col>
+                        <Col sm={7} xl={3} className="mb-5">
+                            <div className="icon-container">
+                                <FontAwesomeIcon className="h-100"  icon="fa-solid fa-user-shield" />
+                            </div>
+                            <p className="fw-bold mt-3">Safe</p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </p>
+                        </Col>
+                    </Row>
+                </Row>
+                <Row className="py-5 justify-content-center">
+                    <p className="fw-bold fs-3">Frequently asked Questions</p>
+                    <Col lg={9}>
+                        <Accordion>
+                            <Accordion.Item eventKey="0">
+                                <Accordion.Header>Lorem ipsum dolor sit amet</Accordion.Header>
+                                <Accordion.Body>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+                                est laborum.
+                                </Accordion.Body>
+                            </Accordion.Item>
+                            <Accordion.Item eventKey="1">
+                                <Accordion.Header>Lorem ipsum dolor sit amet</Accordion.Header>
+                                <Accordion.Body>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+                                est laborum.
+                                </Accordion.Body>
+                            </Accordion.Item>
+                            <Accordion.Item eventKey="2">
+                                <Accordion.Header>Lorem ipsum dolor sit amet</Accordion.Header>
+                                <Accordion.Body>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+                                est laborum.
+                                </Accordion.Body>
+                            </Accordion.Item>
+                            <Accordion.Item eventKey="3">
+                                <Accordion.Header>Lorem ipsum dolor sit amet</Accordion.Header>
+                                <Accordion.Body>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+                                est laborum.
+                                </Accordion.Body>
+                            </Accordion.Item>
+                            <Accordion.Item eventKey="4">
+                                <Accordion.Header>Lorem ipsum dolor sit amet</Accordion.Header>
+                                <Accordion.Body>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+                                est laborum.
+                                </Accordion.Body>
+                            </Accordion.Item>
+                            <Accordion.Item eventKey="5">
+                                <Accordion.Header>Lorem ipsum dolor sit amet</Accordion.Header>
+                                <Accordion.Body>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+                                est laborum.
+                                </Accordion.Body>
+                            </Accordion.Item>
+                        </Accordion>
                     </Col>
                 </Row>
             </Container>
