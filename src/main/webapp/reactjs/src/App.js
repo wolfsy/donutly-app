@@ -3,6 +3,8 @@ import './style/index.css';
 import reportWebVitals from './reportWebVitals';
 import MainPage from "./pages";
 import About from "./pages/about";
+import UserPage from "./pages/user";
+import CategoriesPage from "./pages/categories";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -24,6 +26,8 @@ class App extends Component {
                 <Routes>
                     <Route exact path="/" element={<MainPage />} />
                     <Route exact path="/about" element={<About />} />
+                    <Route exact path="/user" element={<UserPage />} />
+                    <Route exact path="/categories" element={<CategoriesPage />} />
                 </Routes>
             </Router>
         );

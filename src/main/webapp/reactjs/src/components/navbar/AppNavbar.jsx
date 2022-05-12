@@ -29,13 +29,13 @@ function AppNavbar() {
                   <button className="app-button nav-button nav-button-small mx-2" onClick={() =>  window.location.href='/'} >
                     <FontAwesomeIcon icon="fa-solid fa-house" />
                   </button>
-                  <button className="app-button nav-button nav-button-small mx-2">
+                  <button className="app-button nav-button nav-button-small mx-2" onClick={() => window.location.href='/categories'} >
                     <FontAwesomeIcon icon="fa-solid fa-bars" />
                   </button>
                   <button className="app-button nav-button nav-button-small mx-2" onClick={() =>  window.location.href='/about'} >
                     <FontAwesomeIcon icon="fa-solid fa-envelope" />
                   </button>
-                  <button className="app-button nav-button nav-button-small mx-2">
+                  <button className="app-button nav-button nav-button-small mx-2" onClick={() =>  window.location.href='/user'}>
                     <FontAwesomeIcon icon="fa-solid fa-user" />
                   </button>
                 </Col>
