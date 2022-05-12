@@ -1,14 +1,19 @@
-import {useState} from "react";
-import {Navbar, Nav, Container, Row, Col, Modal, Stack} from 'react-bootstrap';
+import { useState, useContext } from "react";
+import { useNavigate } from 'react-router-dom';
+import { Navbar, Nav, Container, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import LoginModal from "../modals/loginModal";
-import RegisterModal from "../modals/registerModal";
+
+import Login from "../authentication/Login";
+import Register from "../authentication/Register";
+import AuthContext from "../../context/AuthProvider";
 
 import './AppNavbar.css';
-import '../modals/modals.css';
 
 function AppNavbar() {
 
+  const navigate = useNavigate();
+  const { auth, setAuth } = useContext(AuthContext);
+  
   const [showLogin, setShowLogin] = useState(false);
   const handleShowLogin = () => setShowLogin(true);
   const handleCloseLogin = () => setShowLogin(false);
@@ -16,6 +21,12 @@ function AppNavbar() {
   const [showRegister, setShowRegister] = useState(false);
   const handleShowRegister = () => setShowRegister(true);
   const handleCloseRegister = () => setShowRegister(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem('auth');
+    setAuth({ email: '', password: '', token: '', isLogged: false });
+    navigate('/');
+  }
 
   return (
     <>
@@ -35,12 +46,19 @@ function AppNavbar() {
                   <button className="app-button nav-button nav-button-small mx-2" onClick={() =>  window.location.href='/about'} >
                     <FontAwesomeIcon icon="fa-solid fa-envelope" />
                   </button>
-                  <button className="app-button nav-button nav-button-small mx-2" onClick={() =>  window.location.href='/user'}>
-                    <FontAwesomeIcon icon="fa-solid fa-user" />
-                  </button>
+                  { 
+                    auth.isLogged ?
+                    <button className="app-button nav-button nav-button-small mx-2">
+                        <FontAwesomeIcon icon="fa-solid fa-user" />
+                    </button> : ''
+                  }
                 </Col>
                 <Col className="d-flex justify-content-center justify-content-lg-end">
-                  <button className="app-button nav-button" onClick={handleShowLogin}>Sign In</button>
+                  {
+                    auth.isLogged ?
+                    <button className="app-button nav-button" onClick={handleLogout}>Sign Out</button> :
+                    <button className="app-button nav-button" onClick={handleShowLogin}>Sign In</button>
+                  }
                   <button className="app-button nav-button ms-3" onClick={handleShowRegister}>Sign Up</button>
                 </Col>
               </Row>
@@ -49,32 +67,12 @@ function AppNavbar() {
         </Container>
       </Navbar>
 
-      <Modal 
-          show={showLogin} 
-          onHide={handleCloseLogin}
-          centered={true}
-          aria-labelledby="contained-modal-title-vcenter"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Sign In</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <LoginModal />
-        </Modal.Body>
-        <Modal.Footer>
-          <Stack direction="horizontal" gap={3}>
-              <button className="app-button modal-button" type="submit" form="loginForm">
-                Confirm
-              </button>
-              <button className="app-button modal-button" onClick={handleCloseLogin}>
-                Cancel
-              </button>
-            </Stack>
-        </Modal.Footer>
-      </Modal>
+      <Login handleCloseLogin={handleCloseLogin}
+             showLogin={showLogin}
+      />
 
-      <RegisterModal handleCloseRegister={handleCloseRegister}
-                     showRegister={showRegister}
+      <Register handleCloseRegister={handleCloseRegister}
+                showRegister={showRegister}
       />
 
     </>
