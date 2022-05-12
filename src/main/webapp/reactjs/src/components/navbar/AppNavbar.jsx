@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Login from "../authentication/Login";
 import Register from "../authentication/Register";
+import Logout from "../authentication/Logout";
 import AuthContext from "../../context/AuthProvider";
 
 import './AppNavbar.css';
@@ -22,9 +23,14 @@ function AppNavbar() {
   const handleShowRegister = () => setShowRegister(true);
   const handleCloseRegister = () => setShowRegister(false);
 
+  const [showLogout, setShowLogout] = useState(false);
+  const handleShowLogout = () => setShowLogout(true);
+  const handleCloseLogout = () => setShowLogout(false);
+
   const handleLogout = () => {
     localStorage.removeItem('auth');
     setAuth({ email: '', password: '', token: '', isLogged: false });
+    handleShowLogout();
     navigate('/');
   }
 
@@ -77,6 +83,10 @@ function AppNavbar() {
 
       <Register handleCloseRegister={handleCloseRegister}
                 showRegister={showRegister}
+      />
+
+      <Logout handleCloseLogout={handleCloseLogout}
+              showLogout={showLogout}
       />
 
     </>
