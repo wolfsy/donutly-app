@@ -59,7 +59,11 @@ function AppNavbar() {
                     <button className="app-button nav-button" onClick={handleLogout}>Sign Out</button> :
                     <button className="app-button nav-button" onClick={handleShowLogin}>Sign In</button>
                   }
-                  <button className="app-button nav-button ms-3" onClick={handleShowRegister}>Sign Up</button>
+                  {
+                    !auth.isLogged ?
+                    <button className="app-button nav-button ms-3" onClick={handleShowRegister}>Sign Up</button>
+                    : ''
+                  }
                 </Col>
               </Row>
             </Nav>
