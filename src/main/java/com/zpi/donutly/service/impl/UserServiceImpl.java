@@ -24,6 +24,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -192,6 +193,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean emailAlreadyExists(String email) {
         return userRepository.findUserByEmail(email).isPresent();
+    }
+
+    @Override
+    public boolean userVerificationConfirmed(String email) {
+        return Objects.requireNonNull(userRepository.findUserByEmail(email).orElse(null)).isEnabled();
     }
 
     @Override

@@ -43,9 +43,13 @@ public class UserController {
     // logowanie do systemu
     @PostMapping(value = "/login")
     public ResponseEntity<String> login(@RequestBody LoginRequestForm requestForm) {
+        if (userService.emailAlreadyExists(requestForm.email()) && !userService.userVerificationConfirmed(requestForm.email())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
         return userService.generateAccessToken(requestForm)
                 .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.badRequest().body(""));
+                .orElse(ResponseEntity.badRequest().build());
     }
 
     // wyświetlenie pojedynczego użytkownika po nazwie

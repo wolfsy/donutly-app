@@ -37,6 +37,8 @@ public interface UserService {
 
     boolean emailAlreadyExists(String email);
 
+    boolean userVerificationConfirmed(String email);
+
     Optional<User> createUserAccount(RegistrationRequest request);
 
     Optional<String> generateAccessToken(LoginRequestForm requestForm);
