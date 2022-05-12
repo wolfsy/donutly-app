@@ -243,8 +243,8 @@ const Register = ({ handleCloseRegister, showRegister }) => {
                     </p>
                 </Form> :
                 <Row>
-                    <h4>Thanks! your account has been successfully created.</h4>
-                    <p>Please check your inbox, an account confirmation link is sent on your email</p>
+                    <h4>Your donutly account has been successfully created!</h4>
+                    <p>Please check your inbox. The account confirmation link has been sent to your email address.</p>
                 </Row>
             }
         </Modal.Body>
