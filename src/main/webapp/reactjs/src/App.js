@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './style/index.css';
+import 'typeface-nunito'
+
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 import MainPage from "./pages";
 import About from "./pages/about";
 import UserPage from "./pages/user";
 import CategoriesPage from "./pages/categories";
-
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'

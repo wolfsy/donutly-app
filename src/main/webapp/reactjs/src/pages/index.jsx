@@ -1,6 +1,5 @@
 import '../style/App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'typeface-nunito'
+
 import AppNavbar from '../components/navbar/AppNavbar';
 import AvatarGrid from '../components/avatarGrid/AvatarGrid';
 import CategoryCarousel from '../components/category/CategoryCarousel';
