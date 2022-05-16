@@ -1,5 +1,6 @@
-import { Container, Row, Image, Col, Accordion } from "react-bootstrap"
+import { Container, Row, Image, Col, Accordion, Stack } from "react-bootstrap"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import GoogleMap from "./GoogleMap";
 
 import './AboutUsSection.css';
 
@@ -192,6 +193,37 @@ function AboutUsPage() {
                                 </Accordion.Body>
                             </Accordion.Item>
                         </Accordion>
+                    </Col>
+                </Row>
+                <Row className="py-5 justify-content-center bg-white">
+                    <p className="fw-bold fs-3 mb-4">Where to find us?</p>
+                    <Col className="d-flex justify-content-center mt-md-5 mb-3">
+                        <div>
+                            <h4 className="mt-2 text-center">Post address</h4>
+                            <p className="mt-3">Politechnika Częstochowska
+                                ul. J.H. Dąbrowskiego 69, 42-201 Częstochowa
+                            </p>
+                            <h4 className="mt-5 text-center">Follow Us</h4>
+                            <div className="d-flex justify-content-center"> 
+                                <Stack className="mt-3" direction="horizontal" gap={4}>
+                                    <a className="follow-link" href="#">
+                                        <FontAwesomeIcon className="h-100" icon="fa-brands fa-facebook" />
+                                    </a>
+                                    <a className="follow-link" href="#">
+                                        <FontAwesomeIcon className="h-100" icon="fa-brands fa-twitter" />
+                                    </a>
+                                    <a className="follow-link" href="#">
+                                        <FontAwesomeIcon className="h-100" icon="fa-brands fa-instagram" />
+                                    </a>
+                                    <a className="follow-link" href="#">
+                                        <FontAwesomeIcon className="h-100" icon="fa-brands fa-youtube" />
+                                    </a>
+                                </Stack>
+                            </div>
+                        </div>
+                    </Col>
+                    <Col className="d-flex justify-content-center mt-5">
+                        <GoogleMap />
                     </Col>
                 </Row>
             </Container>
