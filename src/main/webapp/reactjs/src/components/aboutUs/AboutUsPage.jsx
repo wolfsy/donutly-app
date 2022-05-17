@@ -52,7 +52,7 @@ function AboutUsPage() {
                 <Row className="bg-white py-5 justify-content-center">
                     <p className="fw-bold fs-3">Why donutly?</p>
                     <Row className="d-flex mt-2 mb-xl-5 justify-content-center">
-                        <Col sm={7} xl={4} className="mb-5 px-5">
+                        <Col sm={7} xl={4} className="mb-5 px-5 why-donutly-conatiner">
                             <div className="icon-container">
                                 <FontAwesomeIcon className="h-100" icon="fa-solid fa-mug-hot" />
                             </div>
@@ -62,7 +62,7 @@ function AboutUsPage() {
                                 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             </p>
                         </Col>
-                        <Col sm={7} xl={4} className="mb-5 px-5">
+                        <Col sm={7} xl={4} className="mb-5 px-5 why-donutly-conatiner">
                             <div className="icon-container">
                                 <FontAwesomeIcon className="h-100" icon="fa-solid fa-money-bill-1-wave" />
                             </div>
@@ -72,7 +72,7 @@ function AboutUsPage() {
                                 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             </p>
                         </Col>
-                        <Col sm={7} xl={4} className="mb-5 px-5">
+                        <Col sm={7} xl={4} className="mb-5 px-5 why-donutly-conatiner">
                             <div className="icon-container">
                                 <FontAwesomeIcon className="h-100" icon="fa-solid fa-stopwatch" />
                             </div>
@@ -84,7 +84,7 @@ function AboutUsPage() {
                         </Col>
                     </Row>
                     <Row className="d-flex justify-content-center">
-                        <Col sm={7} xl={4} className="mb-5 px-5">
+                        <Col sm={7} xl={4} className="mb-5 px-5 why-donutly-conatiner">
                             <div className="icon-container">
                                 <FontAwesomeIcon className="h-100" icon="fa-solid fa-face-smile-beam" />
                             </div>
@@ -94,7 +94,7 @@ function AboutUsPage() {
                                 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             </p>
                         </Col>
-                        <Col sm={7} xl={4} className="mb-5 px-5">
+                        <Col sm={7} xl={4} className="mb-5 px-5 why-donutly-conatiner">
                             <div className="icon-container">
                                 <FontAwesomeIcon className="h-100" icon="fa-solid fa-handshake-slash" />
                             </div>
@@ -104,7 +104,7 @@ function AboutUsPage() {
                                 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             </p>
                         </Col>
-                        <Col sm={7} xl={4} className="mb-5 px-5">
+                        <Col sm={7} xl={4} className="mb-5 px-5 why-donutly-conatiner">
                             <div className="icon-container">
                                 <FontAwesomeIcon className="h-100"  icon="fa-solid fa-user-shield" />
                             </div>
@@ -199,31 +199,39 @@ function AboutUsPage() {
                     <p className="fw-bold fs-3 mb-4">Where to find us?</p>
                     <Col className="d-flex justify-content-center mt-md-5 mb-3">
                         <div>
-                            <h4 className="mt-2 text-center">Post address</h4>
-                            <p className="mt-3">Politechnika Częstochowska
-                                ul. J.H. Dąbrowskiego 69, 42-201 Częstochowa
-                            </p>
-                            <h4 className="mt-5 text-center">Follow Us</h4>
+                            <h4 className="mt-2 mb-3 text-center">Contact details</h4>
+                            <p>Piotr Jonczyk</p>
+                            <p>Grzegorz Wisniewski</p>
+                            <p>Pawel Wnuk</p>
+                            <p className="mt-4">ul. J.H. Dąbrowskiego 69</p>
+                            <p>42-201 Częstochowa</p>
+                            <p>Politechnika Częstochowska</p>
+                            <p>Phone: XXX-XXX-XXX</p>
+                            <p>NIP: 0123456789</p>
+                            <h4 className="mt-5 text-center">Socials</h4>
                             <div className="d-flex justify-content-center"> 
                                 <Stack className="mt-3" direction="horizontal" gap={4}>
                                     <a className="follow-link" href="#">
-                                        <FontAwesomeIcon className="h-100" icon="fa-brands fa-facebook" />
+                                        <FontAwesomeIcon className="h-100 blue-icon-hover" icon="fa-brands fa-facebook" />
                                     </a>
                                     <a className="follow-link" href="#">
-                                        <FontAwesomeIcon className="h-100" icon="fa-brands fa-twitter" />
+                                        <FontAwesomeIcon className="h-100 purple-icon-hover" icon="fa-brands fa-instagram" />
                                     </a>
                                     <a className="follow-link" href="#">
-                                        <FontAwesomeIcon className="h-100" icon="fa-brands fa-instagram" />
+                                        <FontAwesomeIcon className="h-100 red-icon-hover" icon="fa-brands fa-youtube" />
                                     </a>
                                     <a className="follow-link" href="#">
-                                        <FontAwesomeIcon className="h-100" icon="fa-brands fa-youtube" />
+                                        <FontAwesomeIcon className="h-100 blue-icon-hover" icon="fa-brands fa-twitter" />
                                     </a>
                                 </Stack>
                             </div>
                         </div>
                     </Col>
-                    <Col className="d-flex justify-content-center mt-5">
-                        <GoogleMap />
+                    <Col className="mt-5">
+                        <h4 className="mt-2 mb-3">Localization</h4>
+                        <div className="d-flex justify-content-center">
+                            <GoogleMap />   
+                        </div>
                     </Col>
                 </Row>
             </Container>
