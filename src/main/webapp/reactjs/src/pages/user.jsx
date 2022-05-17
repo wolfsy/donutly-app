@@ -1,15 +1,10 @@
-import '../style/App.css';
 
-import AppNavbar from '../components/navbar/AppNavbar';
-import Footer from '../components/footer/Footer';
-
-const UserPage = () => {
+const User = () => {
     return (
-        <div className="App">
-            <AppNavbar />
-            <Footer />
+        <div>
+            User page
         </div>
     );
 }
 
-export default UserPage;
+export default User;

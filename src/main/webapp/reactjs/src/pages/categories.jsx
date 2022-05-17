@@ -1,15 +1,10 @@
-import '../style/App.css';
 
-import AppNavbar from '../components/navbar/AppNavbar';
-import Footer from '../components/footer/Footer';
-
-const CategoriesPage = () => {
+const Categories = () => {
     return (
-        <div className="App">
-            <AppNavbar />
-            <Footer />
+        <div>
+            Categories
         </div>
     );
 }
 
-export default CategoriesPage;
+export default Categories;

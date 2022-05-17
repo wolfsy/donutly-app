@@ -1,14 +1,17 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './style/App.css';
 import './style/index.css';
 import 'typeface-nunito'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
-import MainPage from "./pages";
-import About from "./pages/about";
-import UserPage from "./pages/user";
-import CategoriesPage from "./pages/categories";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import User from "./pages/User";
+import Categories from "./pages/Categories";
+import AppNavbar from './components/navbar/AppNavbar';
+import Footer from './components/footer/Footer';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
@@ -25,12 +28,16 @@ class App extends Component {
     render() {
         return (
             <Router>
-                <Routes>
-                    <Route exact path="/" element={<MainPage />} />
-                    <Route exact path="/about" element={<About />} />
-                    <Route exact path="/user" element={<UserPage />} />
-                    <Route exact path="/categories" element={<CategoriesPage />} />
-                </Routes>
+                <div className="App">
+                    <AppNavbar />
+                    <Routes>
+                        <Route exact path="/" element={<Home />} />
+                        <Route exact path="/about" element={<About />} />
+                        <Route exact path="/user" element={<User />} />
+                        <Route exact path="/categories" element={<Categories />} />
+                    </Routes>
+                    <Footer />
+                </div>
             </Router>
         );
     }

@@ -9,7 +9,7 @@ function AboutUsPage() {
     return (
         <>
             <Container fluid className="about-us-section">
-                <Row className="my-1 mx-5 py-4">
+                <Row className="mx-5 py-4">
                     <Col xl={4}>
                         <h1 className="text-start">About us</h1>
                         <p className="text-start col-12">
