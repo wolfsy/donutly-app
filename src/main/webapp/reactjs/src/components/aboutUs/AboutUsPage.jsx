@@ -1,6 +1,7 @@
 import { Container, Row, Image, Col, Accordion, Stack } from "react-bootstrap"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import GoogleMap from "./GoogleMap";
+import DonutsSvg from "./DonutsSvg";
 
 import './AboutUsSection.css';
 
@@ -43,10 +44,7 @@ function AboutUsPage() {
                         </p>
                     </Col>
                     <Col xl={4} className="ms-auto">
-                        <Image
-                            className="img-fluid about-us-img"
-                            src="https://i0.wp.com/www.biggerbolderbaking.com/wp-content/uploads/2020/11/Homemade-Dunkin-Donuts-WS-Thumb-scaled.jpg?w=1920&ssl=1"
-                        />
+                        <DonutsSvg />
                     </Col>
                 </Row>
                 <Row className="bg-white py-5 justify-content-center">

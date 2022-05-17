@@ -1,6 +1,7 @@
 import { Container, Row, Image, Col } from "react-bootstrap"
 
 import './AboutUsSection.css';
+import DonutsSvg from "./DonutsSvg";
 
 function AboutUsSection() {
   return (
@@ -25,10 +26,7 @@ function AboutUsSection() {
                 </Col>
                 <Col xs={12} sm={12} md={5} lg={5} xl={4} xxl={4} 
                      className="ms-auto mt-4 mt-md-0">
-                  <Image 
-                    className="img-fluid about-us-img"
-                    src="https://i0.wp.com/www.biggerbolderbaking.com/wp-content/uploads/2020/11/Homemade-Dunkin-Donuts-WS-Thumb-scaled.jpg?w=1920&ssl=1" 
-                  />
+                  <DonutsSvg />
                 </Col>
             </Row>
         </Container>
