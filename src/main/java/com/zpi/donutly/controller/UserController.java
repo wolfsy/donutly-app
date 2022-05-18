@@ -65,6 +65,8 @@ public class UserController {
         return ResponseEntity.ok(usersList);
     }
 
+    //TODO: wyświetlenie listy użytkownikow do danej kategorii wylacznie uzytkownikow z rola USER (poprawa)
+
     // wyświetlenie listy użytkowników do danej kategorii
     @GetMapping(value = "/users/{categoryId}")
     public ResponseEntity<List<User>> getAllUsersByCategoryId(@PathVariable Long categoryId) {

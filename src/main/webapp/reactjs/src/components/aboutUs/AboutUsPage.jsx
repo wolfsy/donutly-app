@@ -178,18 +178,6 @@ function AboutUsPage() {
                                 est laborum.
                                 </Accordion.Body>
                             </Accordion.Item>
-                            <Accordion.Item eventKey="5">
-                                <Accordion.Header>Lorem ipsum dolor sit amet</Accordion.Header>
-                                <Accordion.Body>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                                est laborum.
-                                </Accordion.Body>
-                            </Accordion.Item>
                         </Accordion>
                     </Col>
                 </Row>
@@ -201,9 +189,9 @@ function AboutUsPage() {
                             <p>Piotr Jonczyk</p>
                             <p>Grzegorz Wisniewski</p>
                             <p>Pawel Wnuk</p>
-                            <p className="mt-4">ul. J.H. Dąbrowskiego 69</p>
-                            <p>42-201 Częstochowa</p>
-                            <p>Politechnika Częstochowska</p>
+                            <p className="mt-4">ul. J.H. Dabrowskiego 69</p>
+                            <p>42-201 Czestochowa</p>
+                            <p>Politechnika Czestochowska</p>
                             <p>Phone: XXX-XXX-XXX</p>
                             <p>NIP: 0123456789</p>
                             <h4 className="mt-5 text-center">Socials</h4>

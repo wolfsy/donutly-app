@@ -1,6 +1,6 @@
 .App {
-  text-align: center;
-  font-family: 'Nunito', serif
+    font-family: 'Nunito', sans-serif, "Liberation Sans";
+    text-align: center;
 }
 
 .app-button {
