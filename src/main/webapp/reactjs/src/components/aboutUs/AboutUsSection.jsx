@@ -1,4 +1,4 @@
-import { Container, Row, Image, Col } from "react-bootstrap"
+import { Container, Row, Col } from "react-bootstrap"
 
 import './AboutUsSection.css';
 import DonutsSvg from "./DonutsSvg";
