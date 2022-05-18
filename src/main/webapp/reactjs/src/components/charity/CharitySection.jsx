@@ -24,7 +24,7 @@ function CharitySection() {
 
     return (
         <>
-            <Container fluid className="charity-section py-5">            
+            <Container fluid className="bg-light-powder py-5">            
                 <Row className="mx-5 py-4">
                     <Col>
                         <h1 className="text-start">

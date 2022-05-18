@@ -1,8 +1,9 @@
+import UserBrowser from "../components/user/browser/UserBrowser";
 
 const Categories = () => {
     return (
         <div>
-            Categories
+            <UserBrowser />
         </div>
     );
 }

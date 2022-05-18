@@ -1,4 +1,4 @@
-import { Container, Row, Image, Col } from "react-bootstrap"
+import { Container, Row, Col } from "react-bootstrap"
 
 import './AboutUsSection.css';
 import DonutsSvg from "./DonutsSvg";
@@ -6,7 +6,7 @@ import DonutsSvg from "./DonutsSvg";
 function AboutUsSection() {
   return (
     <>
-        <Container fluid className="about-us-section py-5 ">
+        <Container fluid className="bg-light-powder py-5 ">
             <Row className="my-1 mx-5 py-4">
                 <Col xs={12} sm={12} md={6} lg={6} xl={6} xxl={5}>
                   <h1 className="text-start">About us</h1>
