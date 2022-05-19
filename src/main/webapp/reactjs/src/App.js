@@ -27,18 +27,24 @@ library.add(fas, ...iconList)
 class App extends Component {
     render() {
         return (
-            <Router>
+            <div className="page-container">
+                <div className="content-wrap">
+                    <Router>
+                        <div className="App">
+                            <AppNavbar />
+                            <Routes>
+                                <Route exact path="/" element={<Home />} />
+                                <Route exact path="/about" element={<About />} />
+                                <Route exact path="/user" element={<User />} />
+                                <Route exact path="/categories" element={<Categories />} />
+                            </Routes>
+                        </div>
+                    </Router>
+                </div>
                 <div className="App">
-                    <AppNavbar />
-                    <Routes>
-                        <Route exact path="/" element={<Home />} />
-                        <Route exact path="/about" element={<About />} />
-                        <Route exact path="/user" element={<User />} />
-                        <Route exact path="/categories" element={<Categories />} />
-                    </Routes>
                     <Footer />
                 </div>
-            </Router>
+            </div>
         );
     }
 }

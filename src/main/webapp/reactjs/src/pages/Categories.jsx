@@ -2,7 +2,7 @@ import UserBrowser from "../components/user/browser/UserBrowser";
 
 const Categories = () => {
     return (
-        <div>
+        <div className="border-2">
             <UserBrowser />
         </div>
     );

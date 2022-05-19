@@ -1,6 +1,9 @@
-.footer {
+.app-footer {
     background: rgba(215, 127, 161, 0.65) !important;
     color: #130335;
     /* position: absolute;
     bottom: 0; */
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }

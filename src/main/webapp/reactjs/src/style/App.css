@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  font-family: 'Nunito', serif
+  font-family: 'Nunito', serif;
 }
 
 .app-button {
@@ -25,10 +25,25 @@
   border: 1px solid #ced4da !important;
 }
 
+.form-select:focus {
+  outline: solid rgba(215, 127, 161, 0.65) !important;
+  box-shadow: none !important;
+  border: 1px solid #ced4da !important;
+}
+
 h1 {
     color: #130335;
 }
 
 .bg-light-powder {
   background: #FFF9F9 !important;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.content-wrap {
+  flex: 1;
 }
