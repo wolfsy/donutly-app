@@ -20,6 +20,10 @@ function UserList({ categoryId, userLogin }) {
                 if(userLogin !== '') {
                     response = await UserService.getUserByLogin(userLogin);
                     userList.push(response.data);
+
+                    // response = await UserService.getUsersByLoginContaining(userLogin);
+                    // console.log(response.data);
+                    // userList = response.data;
                 }
                 else {
                     response = await UserService.getUsersByCategoryId(categoryId)

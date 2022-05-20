@@ -15,7 +15,7 @@ function CarouselItem({ category }) {
   return (
     <>
         <Container className="carousels-item mt-3 d-flex justify-content-center"
-                   onClick={handleNavigateToCategory}
+                   onDoubleClick={handleNavigateToCategory}
         >
             <Row className="mt-4">
               <Col lg={12} className="w-100 h-100 p-5">
