@@ -24,3 +24,9 @@
 #spinner-container {
     min-height: 40px;
 }
+
+#user-list {
+    height: 1250px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

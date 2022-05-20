@@ -19,8 +19,8 @@ function UserListItem({ user }) {
                                 <Form.Group>
                                     <Form.Check 
                                         type="checkbox" 
-                                        label={user.status ? 'Verified' : 'Not verified'}
-                                        checked={user.status ? true : false}
+                                        label={user.adminVerification ? 'Verified' : 'Not verified'}
+                                        checked={user.adminVerification ? true : false}
                                         readOnly
                                     />
                                 </Form.Group>
@@ -31,7 +31,6 @@ function UserListItem({ user }) {
                         >
                             <h3>{user.login}</h3>
                             <p>{`${user.firstName} ${user.lastName}`}</p>
-                            <p>{}</p>
                         </Col>
                         <Col className="d-flex justify-content-end align-items-end">
                             <button 

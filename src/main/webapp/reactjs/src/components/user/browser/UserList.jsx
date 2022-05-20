@@ -2,42 +2,70 @@ import { useState, useEffect } from 'react'
 import { Spinner } from 'react-bootstrap';
 import UserListItem from './UserListItem';
 import UserService from "../../../services/UserService";
+import './UserBrowser.css';
 
-function UserList({ categoryId }) {
+function UserList({ categoryId, userLogin }) {
 
     const [users, setUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await UserService.getUsersByCategoryId(categoryId);
+            var response = null;
+            var userList = [];
+            setError('');
+
+            try {
+                if(userLogin !== '') {
+                    response = await UserService.getUserByLogin(userLogin);
+                    userList.push(response.data);
+                }
+                else {
+                    response = await UserService.getUsersByCategoryId(categoryId)
+                    userList = response.data;
+                }
+            }
+            catch(err) {
+                if(err.response?.status !== 404)
+                    setError('Error while loading users');
+            }
+
             setIsLoading(false);
-            setUsers(response.data);
+            setUsers(userList);
         }
         
         fetchData();
-    }, [categoryId])
+    }, [categoryId, userLogin])
 
   return (
     <div>
             <div id="spinner-container">
-                {
-                    isLoading && <Spinner animation="border" variant="secondary" />
-                }
+            {
+                isLoading && <Spinner animation="border" variant="secondary" />
+            }
             </div>
             <div>
             {
-                !isLoading ?
+                !isLoading && !error ?
                 (
                     users.length > 0 ? 
-                    users.map((user) => (
-                        <UserListItem key={user.id} user={user} />
-                    ))
+                    <div id="user-list">
+                        {
+                            users.map((user) => 
+                            (
+                                <UserListItem key={user.id} user={user} />
+                            ))
+                        }
+                    </div>
                     : <h2>No results</h2>
                 )
                 : ''
             }
             </div>
+            {
+                error && <h3 className="text-danger">{error}</h3>
+            }
     </div>
   )
 }

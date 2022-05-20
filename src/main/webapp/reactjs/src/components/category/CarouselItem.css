@@ -4,4 +4,10 @@
     height: 223px;
     width: 211px;
     color: #130335;
+    cursor: pointer;
+}
+
+.carousels-item:hover {
+    background: rgba(214, 229, 250, 0.75);
+    transition: 0.25s;
 }

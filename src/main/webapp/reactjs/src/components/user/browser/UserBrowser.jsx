@@ -5,10 +5,11 @@ import CategoryService from "../../../services/CategoryService";
 
 import './UserBrowser.css';
 
-function UserBrowser() {
+function UserBrowser({categoryId}) {
 
     const [categories, setCategories] = useState([]);
     const [selectedCategoryId, setSelectedCategoryId] = useState(1);
+    const [userLogin, setUserLogin] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -17,7 +18,14 @@ function UserBrowser() {
         }
 
         fetchData();
+        if(categoryId)
+            setSelectedCategoryId(categoryId);
     }, [])
+
+    const handleCategoryChange = (e) => {
+        setSelectedCategoryId(e.target.value);
+        setUserLogin('');
+    }
     
   return (
     <>
@@ -42,7 +50,8 @@ function UserBrowser() {
                                             <Col xs={12} sm={7} xl={7}>
                                                 <Form.Select 
                                                     aria-label="Default select example"
-                                                    onChange={(e) => setSelectedCategoryId(e.target.value)}
+                                                    onChange={handleCategoryChange}
+                                                    value={selectedCategoryId}
                                                 >
                                                     {
                                                         categories.map((category) => (
@@ -68,7 +77,11 @@ function UserBrowser() {
                                                 <Form.Label>Find user by login:</Form.Label>
                                             </Col>
                                             <Col xs={12} sm={7} xl={7}>
-                                                <Form.Control type="text" placeholder="" />
+                                                <Form.Control 
+                                                    type="text" 
+                                                    placeholder=""
+                                                    onChange={(e) => setUserLogin(e.target.value)}
+                                                />
                                             </Col>
                                         </Row>
                                     </Form.Group>
@@ -77,7 +90,11 @@ function UserBrowser() {
                         </Row>
                         <Row>
                             <hr />
-                            <UserList key={selectedCategoryId} categoryId={selectedCategoryId} />
+                            <UserList 
+                                key={selectedCategoryId} 
+                                categoryId={selectedCategoryId}
+                                userLogin={userLogin}
+                            />
                         </Row>
                     </Card>
                 </Col>
