@@ -1,4 +1,5 @@
-import { Card, Image, Row, Col, Form } from 'react-bootstrap';
+import { Card, Image, Row, Col, Stack } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './UserBrowser.css';
 
 function UserListItem({ user }) {
@@ -15,16 +16,12 @@ function UserListItem({ user }) {
                             <div className="user-card-img-container pb-2 me-2">
                                 <Image className="user-card-img" src={user.avatarUrl} />
                             </div>
-                            <Form>
-                                <Form.Group>
-                                    <Form.Check 
-                                        type="checkbox" 
-                                        label={user.adminVerification ? 'Verified' : 'Not verified'}
-                                        checked={user.adminVerification ? true : false}
-                                        readOnly
-                                    />
-                                </Form.Group>
-                            </Form>
+                            <Stack className="f-flex mt-auto" direction="horizontal" gap={2}>
+                                <FontAwesomeIcon 
+                                    icon={user.adminVerification ? "fa-solid fa-square-check" : "fa-solid fa-square"}
+                                    className="verified-check" />
+                                <span>{user.adminVerification ? "Verified" : "Not verified"}</span>
+                            </Stack>
                         </Col>
                         <Col sm={4} md={5} xl={7} 
                              className="text-start mt-4 my-sm-1"
