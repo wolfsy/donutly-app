@@ -1,5 +1,5 @@
-import UserBrowser from "../components/user/browser/UserBrowser";
 import { useLocation } from 'react-router-dom';
+import UserBrowser from "../components/user/browser/UserBrowser";
 
 const Categories = () => {
 

@@ -12,6 +12,7 @@ import User from "./pages/User";
 import Categories from "./pages/Categories";
 import AppNavbar from './components/navbar/AppNavbar';
 import Footer from './components/footer/Footer';
+import ScrollToTop from './components/common/ScrollToTop';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
@@ -30,15 +31,17 @@ class App extends Component {
             <div className="page-container">
                 <div className="content-wrap">
                     <Router>
-                        <div className="App">
-                            <AppNavbar />
-                            <Routes>
-                                <Route exact path="/" element={<Home />} />
-                                <Route exact path="/about" element={<About />} />
-                                <Route exact path="/user" element={<User />} />
-                                <Route exact path="/categories" element={<Categories />} />
-                            </Routes>
-                        </div>
+                        <ScrollToTop>
+                            <div className="App">
+                                <AppNavbar />
+                                <Routes>
+                                    <Route exact path="/" element={<Home />} />
+                                    <Route exact path="/about" element={<About />} />
+                                    <Route exact path="/user" element={<User />} />
+                                    <Route exact path="/categories" element={<Categories />} />
+                                </Routes>
+                            </div>
+                        </ScrollToTop>
                     </Router>
                 </div>
                 <div className="App">
