@@ -58,13 +58,6 @@ public class UserController {
         return ResponseEntity.of(userService.getUserByLogin(login));
     }
 
-    // wyświetlenie wszystkich użytkowników których login zawiera podaną frazę
-    @GetMapping(value = "/logins/{login}")
-    public ResponseEntity<List<User>> getUsersByLoginContaining(@PathVariable String login) {
-        List<User> userList = userService.getUsersByLoginContaining(login);
-        return ResponseEntity.ok(userList);
-    }
-
     // wyświetlenie listy wszystkich użytkowników
     @GetMapping(value = "/users")
     public ResponseEntity<List<User>> getAllUsers() {

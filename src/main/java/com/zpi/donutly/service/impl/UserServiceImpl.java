@@ -45,11 +45,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getUsersByLoginContaining(String login) {
-        return userRepository.findUsersByLoginContaining(login);
-    }
-
-    @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }

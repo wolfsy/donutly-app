@@ -13,8 +13,6 @@ public interface UserService {
 
     Optional<User> getUserByLogin(String login);
 
-    List<User> getUsersByLoginContaining(String login);
-
     List<User> getAllUsers();
 
     List<User> getAllUsersByCategoryId(Long categoryId);
