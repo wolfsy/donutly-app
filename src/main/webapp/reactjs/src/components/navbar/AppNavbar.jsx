@@ -46,7 +46,7 @@ function AppNavbar() {
                   <button className="app-button nav-button nav-button-small mx-2" onClick={() =>  window.location.href='/'} >
                     <FontAwesomeIcon icon="fa-solid fa-house" />
                   </button>
-                  <button className="app-button nav-button nav-button-small mx-2" onClick={() => window.location.href='/categories'} >
+                  <button className="app-button nav-button nav-button-small mx-2" onClick={() => window.location.href='/browser'} >
                     <FontAwesomeIcon icon="fa-solid fa-bars" />
                   </button>
                   <button className="app-button nav-button nav-button-small mx-2" onClick={() =>  window.location.href='/about'} >

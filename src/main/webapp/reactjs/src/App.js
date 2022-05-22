@@ -9,7 +9,7 @@ import reportWebVitals from './reportWebVitals';
 import Home from "./pages/Home";
 import About from "./pages/About";
 import User from "./pages/User";
-import Categories from "./pages/Categories";
+import Browser from "./pages/Browser";
 import AppNavbar from './components/navbar/AppNavbar';
 import Footer from './components/footer/Footer';
 import ScrollToTop from './components/common/ScrollToTop';
@@ -38,7 +38,7 @@ class App extends Component {
                                     <Route exact path="/" element={<Home />} />
                                     <Route exact path="/about" element={<About />} />
                                     <Route exact path="/user" element={<User />} />
-                                    <Route exact path="/categories" element={<Categories />} />
+                                    <Route exact path="/browser" element={<Browser />} />
                                 </Routes>
                             </div>
                         </ScrollToTop>

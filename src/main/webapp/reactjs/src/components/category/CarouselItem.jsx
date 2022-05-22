@@ -9,7 +9,7 @@ function CarouselItem({ category }) {
   const navigate = useNavigate();
 
   const handleNavigateToCategory = () => {
-    navigate("/categories", { state: { categoryId: category.id } });
+    navigate("/browser", { state: { categoryId: category.id } });
   }
 
   return (

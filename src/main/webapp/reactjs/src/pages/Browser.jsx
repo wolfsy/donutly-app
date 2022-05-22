@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import UserBrowser from "../components/user/browser/UserBrowser";
 
-const Categories = () => {
+const Browser = () => {
 
     const location = useLocation();
 
@@ -12,4 +12,4 @@ const Categories = () => {
     );
 }
 
-export default Categories;
+export default Browser;
