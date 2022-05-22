@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { Spinner } from 'react-bootstrap';
 import UserListItem from './UserListItem';
 import UserService from "../../../services/UserService";
+import PaymentService from "../../../services/PaymentService";
+
 import './UserBrowser.css';
 
 function UserList({ categoryId, userLogin }) {
@@ -24,6 +26,11 @@ function UserList({ categoryId, userLogin }) {
                 else {
                     response = await UserService.getUsersByCategoryId(categoryId)
                     userList = response.data;
+                }
+
+                for(var i = 0; i < userList.length; i++) {
+                    response = await PaymentService.getPaymentByUserId(userList[i].id);
+                    userList[i].payment = response.data.totalPaymentBalance;
                 }
             }
             catch(err) {

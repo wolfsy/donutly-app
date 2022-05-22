@@ -30,8 +30,8 @@ function UserBrowser({categoryId}) {
   return (
     <>
         <Container>
-            <Row className="mt-5 mb-2">
-                    <h3 className="text-start ms-5">Available users</h3>
+            <Row className="mt-5 mb-2 w-50">
+                    <h3 className="text-start ms-md-5">Available users</h3>
             </Row>
             <Row className="d-flex justify-content-center">
                 <Col xs={12}>

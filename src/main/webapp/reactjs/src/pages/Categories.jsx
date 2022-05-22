@@ -6,7 +6,7 @@ const Categories = () => {
     const location = useLocation();
 
     return (
-        <div className="border-2">
+        <div>
             <UserBrowser categoryId={location?.state?.categoryId} />
         </div>
     );
