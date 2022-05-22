@@ -1,3 +1,7 @@
+html {
+  overflow-y: scroll;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Nunito', sans-serif, 'Nunito', "Liberation Sans",
@@ -9,10 +13,6 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-html {
-  overflow-y: scroll;
 }
 
 .modal-open {

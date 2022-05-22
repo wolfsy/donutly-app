@@ -33,4 +33,10 @@ public class DepositController {
         return ResponseEntity.ok(addedDeposit);
     }
 
+    // pobranie wszystkich depozytów dla id danego użytkownika
+    @GetMapping("/all/{userId}")
+    public ResponseEntity<?> getAllDepositsByUserId(@PathVariable Long userId) {
+        return ResponseEntity.ok(depositService.getAllDepositsByUserId(userId));
+    }
+
 }

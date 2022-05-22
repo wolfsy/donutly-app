@@ -1,0 +1,40 @@
+.user-card {
+    border-radius: 20px !important;
+}
+
+.user-card-img {
+    width: 100px;
+    height: 100px;
+}
+
+.user-card-img-container {
+    border: 1px solid  	#dee2e6;
+    border-radius: 15px;
+}
+
+.user-card-btn {
+    width: 120px;
+    height: 40px;
+}
+
+#user-browser-container {
+    min-height: 800px;
+}
+
+#spinner-container {
+    min-height: 40px;
+}
+
+#user-list {
+    height: 1250px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.verified-check {
+    color: rgba(215, 127, 161, 0.65);
+}
+
+select, option {
+    font: -moz-pull-down-menu;
+}

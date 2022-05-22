@@ -9,9 +9,10 @@ import reportWebVitals from './reportWebVitals';
 import Home from "./pages/Home";
 import About from "./pages/About";
 import User from "./pages/User";
-import Categories from "./pages/Categories";
+import Browser from "./pages/Browser";
 import AppNavbar from './components/navbar/AppNavbar';
 import Footer from './components/footer/Footer';
+import ScrollToTop from './components/common/ScrollToTop';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
@@ -27,18 +28,26 @@ library.add(fas, ...iconList)
 class App extends Component {
     render() {
         return (
-            <Router>
+            <div className="page-container">
+                <div className="content-wrap">
+                    <Router>
+                        <ScrollToTop>
+                            <div className="App">
+                                <AppNavbar />
+                                <Routes>
+                                    <Route exact path="/" element={<Home />} />
+                                    <Route exact path="/about" element={<About />} />
+                                    <Route exact path="/user" element={<User />} />
+                                    <Route exact path="/browser" element={<Browser />} />
+                                </Routes>
+                            </div>
+                        </ScrollToTop>
+                    </Router>
+                </div>
                 <div className="App">
-                    <AppNavbar />
-                    <Routes>
-                        <Route exact path="/" element={<Home />} />
-                        <Route exact path="/about" element={<About />} />
-                        <Route exact path="/user" element={<User />} />
-                        <Route exact path="/categories" element={<Categories />} />
-                    </Routes>
                     <Footer />
                 </div>
-            </Router>
+            </div>
         );
     }
 }

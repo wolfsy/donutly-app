@@ -17,6 +17,8 @@ public interface UserService {
 
     List<User> getAllUsersByCategoryId(Long categoryId);
 
+    List<User> getUsersByCategoryIdNonBlocked(Long categoryId);
+
     User addUser(User user);
 
     User editUserPassword(User user);

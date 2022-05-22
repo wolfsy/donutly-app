@@ -10,6 +10,18 @@ class UserService {
         return response;
     }
 
+    async getUsersByCategoryId(categoryId) {
+        const response = await axios.get(USER_API_BASE_URL + `users/${categoryId}`);
+
+        return response;
+    }
+
+    async getUserByLogin(login) {
+        const response = await axios.get(USER_API_BASE_URL + login);
+
+        return response;
+    }
+
     async login(email, password) {
         const response = await axios.post(USER_API_BASE_URL + 'login',
             JSON.stringify({ email, password }),
