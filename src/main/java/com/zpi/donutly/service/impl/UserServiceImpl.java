@@ -55,6 +55,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> getUsersByCategoryIdNonBlocked(Long categoryId) {
+        return userRepository.findUsersByCategoryIdAndStatusIsFalse(categoryId);
+    }
+
+    @Override
     public User addUser(User user) {
         return null;
     }

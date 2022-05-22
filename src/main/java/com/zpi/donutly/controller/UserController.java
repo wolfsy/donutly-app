@@ -66,9 +66,16 @@ public class UserController {
     }
 
     // wyświetlenie listy użytkowników do danej kategorii
-    @GetMapping(value = "/users/{categoryId}")
+    @GetMapping(value = "/users/{categoryId}/all")
     public ResponseEntity<List<User>> getAllUsersByCategoryId(@PathVariable Long categoryId) {
         List<User> userList = userService.getAllUsersByCategoryId(categoryId);
+        return ResponseEntity.ok(userList);
+    }
+
+    // wyświetlanie listy użytkowników niezablokowwanych do danej kategorii z wyłaczeniem adminów
+    @GetMapping(value = "/users/{categoryId}")
+    public ResponseEntity<List<User>> getUsersByCategoryIdNonBlocked(@PathVariable Long categoryId) {
+        List<User> userList = userService.getUsersByCategoryIdNonBlocked(categoryId);
         return ResponseEntity.ok(userList);
     }
 

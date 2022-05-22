@@ -12,6 +12,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findUsersByCategoryId(Long categoryId);
 
+    List<User> findUsersByCategoryIdAndStatusIsFalse(Long categoryId);
+
     Optional<User> findUserByLogin(String login);
 
     Optional<User> findUserByEmail(String email);
