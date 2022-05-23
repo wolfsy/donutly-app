@@ -13,7 +13,7 @@ function UserListItem({ user }) {
                         <Col xs={12} sm={12} md={5} lg={5} xl={5}
                              className="d-flex justify-content-start align-items-end"
                         >
-                            <div className="user-card-img-container p-3 pb-4 me-2">
+                            <div className="user-card-img-container p-4 me-2">
                                 <Image className="user-card-img" src={user.avatarUrl} />
                             </div>
                             <Stack className="f-flex mt-auto" direction="horizontal" gap={2}>
