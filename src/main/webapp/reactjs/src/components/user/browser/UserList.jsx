@@ -30,7 +30,8 @@ function UserList({ categoryId, userLogin }) {
 
                 for(var i = 0; i < userList.length; i++) {
                     response = await PaymentService.getPaymentByUserId(userList[i].id);
-                    userList[i].payment = response.data.totalPaymentBalance;
+                    userList[i].payment = response.data.totalPaymentBalance 
+                        ? response.data.totalPaymentBalance : 0;
                 }
             }
             catch(err) {
