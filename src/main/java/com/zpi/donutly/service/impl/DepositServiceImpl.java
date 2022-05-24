@@ -37,6 +37,7 @@ public class DepositServiceImpl implements DepositService {
         User user = userRepository.findUserById(userId);
         deposit.setId(depositRepository.count() + 1);
         user.getDepositList().add(deposit);
+        deposit.setUser(user);
         return depositRepository.save(deposit);
     }
 
