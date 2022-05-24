@@ -9,7 +9,7 @@ public interface DepositService {
 
     Deposit editVisibilityById(Long id, boolean visibility);
 
-    Deposit addDeposit(Long depositId, Deposit deposit);
+    Deposit addDeposit(Long userId, Deposit deposit);
 
     Optional<Deposit> hideDeposit(Long depositId);
 
