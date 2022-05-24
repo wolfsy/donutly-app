@@ -39,6 +39,6 @@ public class DepositController {
     // ustawienie depozytu na ukryty - blokada wiadomosci naruszajacej regulamin
     @PutMapping("/hide/{depositId}")
     public ResponseEntity<Deposit> hideDeposit(@PathVariable Long depositId) {
-        return ResponseEntity.of(depositService.hideDeposit(depositId));
+        return ResponseEntity.of(depositService.setDepositVisibility(depositId));
     }
 }

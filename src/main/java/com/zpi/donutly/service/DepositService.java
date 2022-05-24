@@ -11,7 +11,7 @@ public interface DepositService {
 
     Deposit addDeposit(Long userId, Deposit deposit);
 
-    Optional<Deposit> hideDeposit(Long depositId);
+    Optional<Deposit> setDepositVisibility(Long depositId);
 
     List<Deposit> getAllDepositsByUserId(Long userId);
 }

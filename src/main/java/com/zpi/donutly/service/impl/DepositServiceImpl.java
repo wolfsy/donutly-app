@@ -42,7 +42,7 @@ public class DepositServiceImpl implements DepositService {
     }
 
     @Override
-    public Optional<Deposit> hideDeposit(Long depositId) {
+    public Optional<Deposit> setDepositVisibility(Long depositId) {
         Optional<Deposit> optionalDeposit = depositRepository.findById(depositId);
 
         if (optionalDeposit.isEmpty()) {
@@ -50,7 +50,7 @@ public class DepositServiceImpl implements DepositService {
         }
 
         Deposit deposit = optionalDeposit.get();
-        deposit.setVisibility(false);
+        deposit.setVisibility(!deposit.getVisibility());
         depositRepository.save(deposit);
         return Optional.of(deposit);
     }
