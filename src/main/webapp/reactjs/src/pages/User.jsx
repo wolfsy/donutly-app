@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 
-import UserDetailsCart from '../components/user/details/UserDetailsCard';
+import UserDetailsCard from '../components/user/details/UserDetailsCard';
 import DonationsOptions from '../components/user/details/DonationsOptions';
 import UserDonatorsList from '../components/user/details/UserDonatorsList';
 
@@ -9,11 +10,10 @@ const User = () => {
     const location = useLocation();
 
     return (
-        <div>
-            <UserDetailsCart user={location.state.user} />
-            {/* <DonationsOptions />
-            <UserDonatorsList /> */}
-        </div>
+        <Container fluid>
+                <UserDetailsCard user={location.state.user} />
+                <DonationsOptions  />
+        </Container>
     );
 }
 

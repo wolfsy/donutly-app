@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import './UserDetails.css';
 
-function UserDetailsCart({ user }) {
+function UserDetailsCard({ user }) {
   return (
-    <Row className="d-flex justify-content-center bg-light-powder w-100 py-4">
+    <Row className="d-flex justify-content-center bg-light-powder py-4">
         <Col xs={11} xl={9}>
             <Card className="my-3 user-card p-3 shadow-sm">
                 <Card.Body>
@@ -56,4 +56,4 @@ function UserDetailsCart({ user }) {
   )
 }
 
-export default UserDetailsCart
+export default UserDetailsCard
