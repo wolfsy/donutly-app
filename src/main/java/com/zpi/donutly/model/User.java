@@ -106,7 +106,7 @@ public class User implements UserDetails {
     private Category category;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     @ToString.Exclude
     private List<Deposit> depositList;
 

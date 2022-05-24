@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -31,15 +32,25 @@ public class DepositServiceImpl implements DepositService {
         return null;
     }
 
-    //FIXME: naprawić addDeposit
     @Override
     public Deposit addDeposit(Long userId, Deposit deposit) {
         User user = userRepository.findUserById(userId);
-        if (user != null) {
-            deposit.setUser(user);
-            return depositRepository.save(deposit);
+        deposit.setId(depositRepository.count() + 1);
+        user.getDepositList().add(deposit);
+        return depositRepository.save(deposit);
+    }
+
+    @Override
+    public Optional<Deposit> hideDeposit(Long depositId) {
+        Optional<Deposit> optionalDeposit = depositRepository.findById(depositId);
+
+        if (optionalDeposit.isEmpty()) {
+            return Optional.empty();
         }
-        return null;
+
+        Deposit deposit = optionalDeposit.get();
+        deposit.setVisibility(false);
+        return Optional.of(deposit);
     }
 
     @Override

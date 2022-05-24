@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/api/deposit")
 @RequiredArgsConstructor
@@ -15,7 +17,7 @@ public class DepositController {
     // zmiana widoczności. "visibility" = true - widoczny dla wszystkich, false - widoczny tylko dla admina
     @PatchMapping("/visibility/{id}/{visibility}")
     public ResponseEntity<?> editVisibilityById(@PathVariable Long id, @PathVariable Boolean visibility) {
-        Deposit updatedDeposit =  depositService.editVisibilityById(id, visibility);
+        Deposit updatedDeposit = depositService.editVisibilityById(id, visibility);
         if (updatedDeposit == null) {
             return ResponseEntity.notFound().build();
         }
@@ -29,13 +31,14 @@ public class DepositController {
     }
 
     // wstawienie nowego depozytu do bazy danych (zapis do tabeli deposits)
-    @PutMapping("/add/{userId}")
-    public ResponseEntity<?> addDeposit(@PathVariable Long userId, @RequestBody Deposit deposit) {
-        Deposit addedDeposit = depositService.addDeposit(userId, deposit);
-        if (addedDeposit == null) {
-            return ResponseEntity.badRequest().build();
-        }
-        return ResponseEntity.ok(addedDeposit);
+    @PostMapping("/add/{userId}")
+    public ResponseEntity<Deposit> addDeposit(@PathVariable Long userId, @Valid @RequestBody Deposit deposit) {
+        return ResponseEntity.ok(depositService.addDeposit(userId, deposit));
     }
 
+    // ustawienie depozytu na ukryty - blokada wiadomosci naruszajacej regulamin
+    @PutMapping("/hide/{depositId}")
+    public ResponseEntity<Deposit> hideDeposit(@PathVariable Long depositId) {
+        return ResponseEntity.of(depositService.hideDeposit(depositId));
+    }
 }
