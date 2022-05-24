@@ -12,3 +12,22 @@
     height: 120px;
     width: 120px;
 }
+
+.donation-card-btn {
+    width: 100px;
+    height: 40px;
+}
+
+#spinner-container {
+    min-height: 40px;
+}
+
+#donation-list {
+    height: 1100px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#donation-browser-container {
+    min-height: 700px;
+}

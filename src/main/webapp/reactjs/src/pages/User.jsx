@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 
 import UserDetailsCard from '../components/user/details/UserDetailsCard';
 import DonationsOptions from '../components/user/details/DonationsOptions';
-import UserDonatorsList from '../components/user/details/UserDonatorsList';
+import UserDonationList from '../components/user/details/UserDonationList';
 
 const User = () => {
 
@@ -13,6 +13,7 @@ const User = () => {
         <Container fluid>
                 <UserDetailsCard user={location.state.user} />
                 <DonationsOptions  />
+                <UserDonationList userId={location.state.user.id} />
         </Container>
     );
 }
