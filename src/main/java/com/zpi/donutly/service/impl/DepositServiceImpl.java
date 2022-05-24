@@ -51,6 +51,7 @@ public class DepositServiceImpl implements DepositService {
 
         Deposit deposit = optionalDeposit.get();
         deposit.setVisibility(false);
+        depositRepository.save(deposit);
         return Optional.of(deposit);
     }
 
