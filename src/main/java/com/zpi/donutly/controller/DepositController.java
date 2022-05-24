@@ -22,21 +22,20 @@ public class DepositController {
         return ResponseEntity.ok(updatedDeposit);
     }
 
-    // FIXME: naprawić addDeposit
-    // dodawanie noewego depozytu
-    @PostMapping("/add/{username}")
-    public ResponseEntity<?> addDeposit(@PathVariable String username, @RequestBody Deposit deposit) {
-        Deposit addedDeposit = depositService.addDeposit(username, deposit);
-        if (addedDeposit == null) {
-            return ResponseEntity.badRequest().build();
-        }
-        return ResponseEntity.ok(addedDeposit);
-    }
-
     // pobranie wszystkich depozytów dla id danego użytkownika
     @GetMapping("/all/{userId}")
     public ResponseEntity<?> getAllDepositsByUserId(@PathVariable Long userId) {
         return ResponseEntity.ok(depositService.getAllDepositsByUserId(userId));
+    }
+
+    // wstawienie nowego depozytu do bazy danych (zapis do tabeli deposits)
+    @PutMapping("/add/{userId}")
+    public ResponseEntity<?> addDeposit(@PathVariable Long userId, @RequestBody Deposit deposit) {
+        Deposit addedDeposit = depositService.addDeposit(userId, deposit);
+        if (addedDeposit == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(addedDeposit);
     }
 
 }
