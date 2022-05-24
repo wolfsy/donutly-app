@@ -10,9 +10,9 @@ const User = () => {
 
     return (
         <div>
-            <UserDetailsCart />
-            <DonationsOptions />
-            <UserDonatorsList />
+            <UserDetailsCart user={location.state.user} />
+            {/* <DonationsOptions />
+            <UserDonatorsList /> */}
         </div>
     );
 }

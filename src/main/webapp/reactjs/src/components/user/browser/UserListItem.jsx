@@ -8,7 +8,7 @@ function UserListItem({ user }) {
     const navigate = useNavigate();
 
     const handleNavigateToUser = () => {
-        navigate("/user", { state: { userId: user.id } });
+        navigate("/user", { state: { user: user } });
     }
 
   return (
