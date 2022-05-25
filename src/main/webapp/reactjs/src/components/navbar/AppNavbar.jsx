@@ -34,8 +34,6 @@ function AppNavbar() {
     navigate('/');
   }
 
-  console.log(auth.token);
-
   return (
     <>
       <Navbar className="app-navbar py-4" expand="md">

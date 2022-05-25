@@ -11,10 +11,10 @@ const User = () => {
 
     return (
         <Container fluid>
-                <UserDetailsCard user={location.state.user} />
-                <DonationsOptions  />
-                <UserDonationList userId={location.state.user.id} />
-        </Container>
+            <UserDetailsCard user={location.state.user} />
+            <DonationsOptions />
+            <UserDonationList userId={location.state.user.id} />
+        </Container>  
     );
 }
 
