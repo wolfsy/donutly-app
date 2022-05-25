@@ -5,7 +5,7 @@ import './UserDetails.css';
 
 function UserDetailsCard({ user }) {
   return (
-    <Row className="d-flex justify-content-center bg-light-powder py-4">
+    <Row className="d-flex justify-content-center bg-light-powder py-5">
         <Col xs={11} xl={9}>
             <Card className="my-3 user-card p-3 shadow-sm">
                 <Card.Body>
@@ -26,13 +26,13 @@ function UserDetailsCard({ user }) {
                               </Stack>
                             </div>
                             <Stack className="mt-4 ms-1" direction="horizontal" gap={1}>
-                              <a className="follow-link" href={user.youtubeUrl} target="_blank">
+                              <a className="follow-link" href={user.youtubeUrl} target="_blank" rel="noreferrer">
                                 <FontAwesomeIcon className="user-card-icon red-icon-hover" icon="fa-brands fa-youtube" />
                               </a>
-                              <a className="follow-link" href={user.instagramUrl} target="_blank">
+                              <a className="follow-link" href={user.instagramUrl} target="_blank" rel="noreferrer">
                                 <FontAwesomeIcon className="user-card-icon purple-icon-hover" icon="fa-brands fa-instagram" />
                               </a>
-                              <a className="follow-link" href={user.tiktokUrl} target="_blank">
+                              <a className="follow-link" href={user.tiktokUrl} target="_blank" rel="noreferrer">
                                 <FontAwesomeIcon className="user-card-icon gray-icon-hover" icon="fa-brands fa-tiktok" />
                               </a>
                             </Stack>

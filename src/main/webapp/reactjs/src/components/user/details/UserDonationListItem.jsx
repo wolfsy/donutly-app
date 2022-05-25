@@ -9,7 +9,7 @@ function UserDonationListItem({ donation }) {
         var time = new Date(donation.time);
         const strTime = time.toLocaleString();
         setDate(strTime.substring(0, strTime.length - 3));
-    }, [])
+    }, [donation.time])
 
   return (
         <Row className="d-flex justify-content-center">
@@ -21,7 +21,7 @@ function UserDonationListItem({ donation }) {
                                 className="d-flex flex-column align-items-start"
                             >
                                 <p className="fs-4">{donation.donator}</p>
-                                <p>{date}</p>
+                                <p className="fst-italic text-secondary">{date}</p>
                             </Col>
                             <Col xs={12} sm={9} md={9} lg={6} xl={6} xxl={7}
                                 className="text-start mt-5 mt-md-0"
