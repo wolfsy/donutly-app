@@ -62,10 +62,10 @@ const Login = ({ handleCloseLogin, showLogin }) => {
                 setSubmited(true);
                 const response = await UserService.login(form.email, form.password);
                 const token = response?.data;
-
+                
                 setSubmited(false);
                 setSuccess(true);
-                setAuth({ email: form.email, password: form.password, token, isLogged: true });
+                setAuth({ token, isLogged: true });
                 setForm({});
             } 
             catch (err) {
