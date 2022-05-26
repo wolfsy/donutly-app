@@ -25,7 +25,7 @@ function UserList({ categoryId, userLogin }) {
 
             try {
                 if(userLogin !== '') {
-                    response = await UserService.getUserByLogin(userLogin);
+                    response = await UserService.getUserByLoginForRole(userLogin, token.decoded?.name);
                     userList.push(response.data);
                 }
                 else {

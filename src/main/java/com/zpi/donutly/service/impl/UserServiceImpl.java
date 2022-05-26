@@ -45,6 +45,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Optional<User> getUserByLoginForRole(String login, String currentUserLogin) {
+        Optional<User> user = userRepository.findUserByLogin(login).or(Optional::empty);
+        if (user.isPresent() && !user.get().getStatus()) {
+            return user;
+        }
+        return Optional.empty();
+    }
+    @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }

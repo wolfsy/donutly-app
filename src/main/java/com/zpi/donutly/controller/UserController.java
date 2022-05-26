@@ -62,12 +62,20 @@ public class UserController {
         return ResponseEntity.of(userService.getUserByLogin(login));
     }
 
+    // wyświetlenie pojedynczego użytkownika po nazwie dla dalej roli (wnioskowanej na podstweir loginu)
+    @GetMapping(value = "/{login}/{currentUserLogin}")
+    public ResponseEntity<User> getUserByLoginForRole(@PathVariable String login, @PathVariable String currentUserLogin) {
+        return ResponseEntity.of(userService.getUserByLoginForRole(login, currentUserLogin));
+    }
+
     // wyświetlenie listy wszystkich użytkowników
     @GetMapping(value = "/users")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> usersList = userService.getAllUsers();
         return ResponseEntity.ok(usersList);
     }
+
+
 
     // wyświetlenie listy użytkowników do danej kategorii
     @GetMapping(value = "/users/{categoryId}/all")
