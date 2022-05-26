@@ -78,3 +78,10 @@ h1 {
   color: gray;
   transition: 0.25s;
 }
+
+.hidden-card-border {
+  -webkit-box-shadow: 2px 1px 25px -6px rgba(231, 21, 21, 1);
+  -moz-box-shadow: 2px 1px 25px -6px rgba(231, 21, 21, 1);
+  box-shadow: 2px 1px 25px -6px rgba(231, 21, 21, 1);
+  border: 1px solid rgba(231, 21, 21, 1);
+}
