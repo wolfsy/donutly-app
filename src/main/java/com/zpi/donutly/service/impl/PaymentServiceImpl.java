@@ -20,7 +20,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public Payment getPaymentByUserId(Long userId) {
         User user = userRepository.findById(userId).orElse(null);
-        if (user != null) {
+        if (user != null && user.getPayment() != null) {
             Long repositoryId = user.getPayment().getId();
             return paymentRepository.findById(repositoryId).orElse(null);
         }
