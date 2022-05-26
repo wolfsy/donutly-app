@@ -45,6 +45,12 @@ class UserService {
         return response;
     }
 
+    async changeUserStatus(userId) {
+        const response = await axios.patch(USER_API_BASE_URL + `status/${userId}`);
+        
+        return response;
+    }
+
 }
 
 export default new UserService()

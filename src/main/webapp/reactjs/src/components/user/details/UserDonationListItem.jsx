@@ -35,7 +35,7 @@ function UserDonationListItem({ donation, token }) {
   return (
         <Row className="d-flex justify-content-center">
             <Col xs={11} xl={10}>
-                <Card className={`my-3 user-card p-3 ${!visibility ? 'hidden-card-border' : ''}`}>
+                <Card className={`my-3 user-card p-3 ${!visibility ? 'hidden-card-border' : 'unhidden-card-border'}`}>
                     <Card.Body>
                         <Row>
                             <Col xs={12} sm={12} md={12} lg={4} xl={4} xxl={3}
@@ -55,9 +55,9 @@ function UserDonationListItem({ donation, token }) {
                                     token?.decoded?.role === 'ADMIN' &&
                                     <div>
                                         <button 
-                                        className="app-button donation-card-btn mt-auto"
-                                        onClick={changeVisibility}
-                                        disabled={isLoading}
+                                            className="app-button donation-card-btn mt-auto"
+                                            onClick={changeVisibility}
+                                            disabled={isLoading}
                                         >
                                             {
                                                 isLoading ? 
