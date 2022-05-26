@@ -46,4 +46,6 @@ public interface UserService {
     Optional<String> generateAccessToken(LoginRequestForm requestForm);
 
     boolean userIsBlocked(String email);
+
+    List<User> getUsersByCategoryIdForRole(Long categoryId, Long userId);
 }

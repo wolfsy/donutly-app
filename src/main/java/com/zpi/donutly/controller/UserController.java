@@ -83,6 +83,13 @@ public class UserController {
         return ResponseEntity.ok(userList);
     }
 
+    // wyświetlanie listy użytkowników do danej kategorii w zależności od roli podanego użytkownika
+    @GetMapping(value = "/users/{categoryId}/{userId}")
+public ResponseEntity<List<User>> getUsersByCategoryIdForRole(@PathVariable Long categoryId, @PathVariable Long userId) {
+        List<User> userList = userService.getUsersByCategoryIdForRole(categoryId, userId);
+        return ResponseEntity.ok(userList);
+    }
+
     // edycja hasła użytkownika
     @PatchMapping(value = "/password")
     public ResponseEntity<User> editUserPassword(@RequestBody User user) {
