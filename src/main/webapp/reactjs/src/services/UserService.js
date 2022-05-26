@@ -10,8 +10,9 @@ class UserService {
         return response;
     }
 
-    async getUsersByCategoryId(categoryId) {
-        const response = await axios.get(USER_API_BASE_URL + `users/${categoryId}`);
+    async getUsersByCategoryIdForRole(categoryId, currentUserLogin) {
+        const response = await axios.get(USER_API_BASE_URL 
+            + `users/${categoryId}/${currentUserLogin}`);
 
         return response;
     }

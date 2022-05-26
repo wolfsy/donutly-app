@@ -14,7 +14,7 @@ function UserListItem({ user }) {
   return (
     <Row className="d-flex justify-content-center">
         <Col xs={11} xl={10}>
-            <Card className="my-3 user-card p-3 shadow-sm">
+            <Card className={`my-3 user-card p-3 ${user.status ? 'hidden-card-border' : 'unhidden-card-border'}`}>
                 <Card.Body>
                     <Row>
                         <Col xs={12} sm={12} md={5} lg={5} xl={5}

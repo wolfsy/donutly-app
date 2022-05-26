@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Spinner } from 'react-bootstrap';
 import UserListItem from './UserListItem';
 import UserService from "../../../services/UserService";
 import PaymentService from "../../../services/PaymentService";
+
+import TokenContext from '../../../context/TokenProvider';
 
 import './UserBrowser.css';
 
@@ -11,7 +13,10 @@ function UserList({ categoryId, userLogin }) {
     const [users, setUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
+    const { token } = useContext(TokenContext);
 
+    console.log(token)
+ 
     useEffect(() => {
         const fetchData = async () => {
             var response = null;
@@ -24,7 +29,7 @@ function UserList({ categoryId, userLogin }) {
                     userList.push(response.data);
                 }
                 else {
-                    response = await UserService.getUsersByCategoryId(categoryId)
+                    response = await UserService.getUsersByCategoryIdForRole(categoryId, token.decoded?.name)
                     userList = response.data;
                 }
 
@@ -44,7 +49,7 @@ function UserList({ categoryId, userLogin }) {
         }
         
         fetchData();
-    }, [categoryId, userLogin])
+    }, [categoryId, userLogin, token]);
 
   return (
     <div>
