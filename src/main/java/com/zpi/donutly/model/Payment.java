@@ -38,11 +38,6 @@ public class Payment {
     @Column(name = "total_payment_balance")
     private Double totalPaymentBalance;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "id_user")
-    private User user;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

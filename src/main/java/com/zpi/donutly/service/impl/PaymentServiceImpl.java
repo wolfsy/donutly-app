@@ -15,7 +15,7 @@ public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
 
     @Override
-    public Payment getPaymentByUserId(Long id) {
-        return paymentRepository.findPaymentByUser_Id(id);
+    public Payment getPaymentByUserId(Long userId) {
+        return paymentRepository.getById(userId);
     }
 }

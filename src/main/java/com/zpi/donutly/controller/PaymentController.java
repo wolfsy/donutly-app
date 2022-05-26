@@ -13,8 +13,8 @@ public class PaymentController {
 
     private final PaymentService paymentService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Payment> getPaymentByUserId(@PathVariable Long id) {
-        return ResponseEntity.ok(paymentService.getPaymentByUserId(id));
+    @GetMapping("/{userId}")
+    public ResponseEntity<Payment> getPaymentByUserId(@PathVariable Long userId) {
+        return ResponseEntity.ok(paymentService.getPaymentByUserId(userId));
     }
 }
