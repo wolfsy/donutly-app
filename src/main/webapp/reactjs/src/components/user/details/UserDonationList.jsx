@@ -17,7 +17,7 @@ function UserDonationList({ userId, token }) {
             setError('');
 
             try {
-              const response = await DepositService.getAllDepositsByUserId(userId);
+              const response = await DepositService.getDepositsForRoleByUserId(userId, token.decoded?.name);
               setDonations(response.data);
             }
             catch(err) {

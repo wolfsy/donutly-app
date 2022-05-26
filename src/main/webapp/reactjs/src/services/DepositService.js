@@ -4,8 +4,9 @@ const DEPOSIT_API_BASE_URL = 'http://localhost:8080/api/deposit/';
 
 class DepositService {
 
-    async getAllDepositsByUserId(userId) {
-        const response = await axios.get(DEPOSIT_API_BASE_URL + `all/${userId}`);
+    async getDepositsForRoleByUserId(userId, currentUserLogin) {
+        const response = await axios.get(DEPOSIT_API_BASE_URL 
+            + `role/${currentUserLogin}/${userId}`);
 
         return response;
     }
