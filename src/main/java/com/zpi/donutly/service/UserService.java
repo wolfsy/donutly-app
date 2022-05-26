@@ -27,7 +27,7 @@ public interface UserService {
 
     User editUserAvatar(User user);
 
-    User editUserStatus(User user);
+    User editUserStatus(Long userId);
 
     User editUserAddress(String username, Address address);
 

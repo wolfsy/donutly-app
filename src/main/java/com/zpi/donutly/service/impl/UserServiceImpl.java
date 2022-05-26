@@ -80,7 +80,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User editUserStatus(User user) {
+    public User editUserStatus(Long userId) {
+        User user = userRepository.findUserById(userId);
+        if (user != null) {
+            user.setStatus(!user.getStatus());
+            userRepository.save(user);
+            return user;
+        }
         return null;
     }
 

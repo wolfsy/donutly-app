@@ -110,9 +110,9 @@ public class UserController {
     }
 
     // edycja statusu zablokowania - "status" = true - zablokowany, "status" = false - odblokowany
-    @PatchMapping(value = "/status")
-    public ResponseEntity<User> editUserStatus(@RequestBody User user) {
-        User newUser = userService.editUserStatus(user);
+    @PatchMapping(value = "/status/{userId}")
+    public ResponseEntity<User> editUserStatus(@PathVariable Long userId) {
+        User newUser = userService.editUserStatus(userId);
         if (newUser == null) {
             return ResponseEntity.notFound().build();
         }
