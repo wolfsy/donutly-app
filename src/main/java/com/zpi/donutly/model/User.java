@@ -111,9 +111,9 @@ public class User implements UserDetails {
     private List<Deposit> depositList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user")
-    @ToString.Exclude
-    private List<Payment> paymentList;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_payment")
+    private Payment payment;
 
     @Override
     public boolean equals(Object o) {
