@@ -44,4 +44,6 @@ public interface UserService {
     Optional<User> createUserAccount(RegistrationRequest request);
 
     Optional<String> generateAccessToken(LoginRequestForm requestForm);
+
+    boolean userIsBlocked(String email);
 }

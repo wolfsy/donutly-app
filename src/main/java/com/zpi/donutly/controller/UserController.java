@@ -44,6 +44,10 @@ public class UserController {
     @PostMapping(value = "/login")
     public ResponseEntity<String> login(@RequestBody LoginRequestForm requestForm) {
         if (userService.emailAlreadyExists(requestForm.email()) && !userService.userVerificationConfirmed(requestForm.email())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        if(userService.userIsBlocked(requestForm.email())) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
