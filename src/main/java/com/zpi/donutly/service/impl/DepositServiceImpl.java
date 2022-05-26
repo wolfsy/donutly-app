@@ -58,7 +58,7 @@ public class DepositServiceImpl implements DepositService {
 
     @Override
     public List<Deposit> getAllDepositsByUserId(Long userId) {
-        return depositRepository.findAllByUserId(userId);
+        return depositRepository.findAllByUserIdOrderByTimeDesc(userId);
     }
 
     @Override
@@ -66,9 +66,9 @@ public class DepositServiceImpl implements DepositService {
         User user = userRepository.findUserByLogin(username).orElse(null);
 
         if (user != null && user.getRole() == UserRole.ADMIN) {
-            return depositRepository.findAllByUserId(userId);
+            return depositRepository.findAllByUserIdOrderByTimeDesc(userId);
         }
-        return depositRepository.findAllByUserIdAndVisibilityIsTrue(userId);
+        return depositRepository.findAllByUserIdAndVisibilityIsTrueOrderByTimeDesc(userId);
     }
 
 }
