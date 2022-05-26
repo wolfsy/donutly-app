@@ -2,6 +2,7 @@ package com.zpi.donutly.service.impl;
 
 import com.zpi.donutly.model.Deposit;
 import com.zpi.donutly.model.User;
+import com.zpi.donutly.model.UserRole;
 import com.zpi.donutly.repository.DepositRepository;
 import com.zpi.donutly.repository.UserRepository;
 import com.zpi.donutly.service.DepositService;
@@ -59,4 +60,15 @@ public class DepositServiceImpl implements DepositService {
     public List<Deposit> getAllDepositsByUserId(Long userId) {
         return depositRepository.findAllByUserId(userId);
     }
+
+    @Override
+    public List<Deposit> getDepositsForRoleByUserId(String username, Long userId) {
+        User user = userRepository.findUserByLogin(username).orElse(null);
+
+        if (user != null && user.getRole() == UserRole.ADMIN) {
+            return depositRepository.findAllByUserId(userId);
+        }
+        return depositRepository.findAllByUserIdAndVisibilityIsTrue(userId);
+    }
+
 }

@@ -30,6 +30,13 @@ public class DepositController {
         return ResponseEntity.ok(depositService.getAllDepositsByUserId(userId));
     }
 
+    // pobieranie depozytów w zależności od roli użytkownika (wnioskowanej z loginu) dla id danego użytkownika
+    @GetMapping("/role/{username}/{userId}")
+    public ResponseEntity<?> getDepositsForRoleByUserId(@PathVariable String username, @PathVariable Long userId) {
+        return ResponseEntity.ok(depositService.getDepositsForRoleByUserId(username, userId));
+    }
+
+
     // wstawienie nowego depozytu do bazy danych (zapis do tabeli deposits)
     @PostMapping("/add/{userId}")
     public ResponseEntity<Deposit> addDeposit(@PathVariable Long userId, @Valid @RequestBody Deposit deposit) {

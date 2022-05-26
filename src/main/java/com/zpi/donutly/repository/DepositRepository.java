@@ -14,4 +14,6 @@ public interface DepositRepository extends JpaRepository<Deposit, Long> {
     Deposit findFirstIdByOrderByIdDesc();
 
     List<Deposit> findAllByUserId(Long userId);
+
+    List<Deposit> findAllByUserIdAndVisibilityIsTrue(Long userId);
 }

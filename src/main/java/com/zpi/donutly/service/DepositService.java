@@ -14,4 +14,6 @@ public interface DepositService {
     Optional<Deposit> setDepositVisibility(Long depositId);
 
     List<Deposit> getAllDepositsByUserId(Long userId);
+
+    List<Deposit> getDepositsForRoleByUserId(String username, Long userId);
 }
