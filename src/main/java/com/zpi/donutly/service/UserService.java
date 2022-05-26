@@ -47,5 +47,5 @@ public interface UserService {
 
     boolean userIsBlocked(String email);
 
-    List<User> getUsersByCategoryIdForRole(Long categoryId, Long userId);
+    List<User> getUsersByCategoryIdForRole(Long categoryId, String login);
 }

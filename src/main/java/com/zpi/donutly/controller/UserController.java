@@ -84,9 +84,9 @@ public class UserController {
     }
 
     // wyświetlanie listy użytkowników do danej kategorii w zależności od roli podanego użytkownika
-    @GetMapping(value = "/users/{categoryId}/{userId}")
-    public ResponseEntity<List<User>> getUsersByCategoryIdForRole(@PathVariable Long categoryId, @PathVariable Long userId) {
-        List<User> userList = userService.getUsersByCategoryIdForRole(categoryId, userId);
+    @GetMapping(value = "/users/{categoryId}/{login}")
+    public ResponseEntity<List<User>> getUsersByCategoryIdForRole(@PathVariable Long categoryId, @PathVariable String login) {
+        List<User> userList = userService.getUsersByCategoryIdForRole(categoryId, login);
         return ResponseEntity.ok(userList);
     }
 
