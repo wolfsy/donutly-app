@@ -5,7 +5,7 @@ import CategoryService from "../../../services/CategoryService";
 
 import './UserBrowser.css';
 
-function UserBrowser({categoryId}) {
+function UserBrowser({ categoryId }) {
 
     const [categories, setCategories] = useState([]);
     const [selectedCategoryId, setSelectedCategoryId] = useState(1);
@@ -20,7 +20,7 @@ function UserBrowser({categoryId}) {
         fetchData();
         if(categoryId)
             setSelectedCategoryId(categoryId);
-    }, [])
+    }, [categoryId])
 
     const handleCategoryChange = (e) => {
         setSelectedCategoryId(e.target.value);

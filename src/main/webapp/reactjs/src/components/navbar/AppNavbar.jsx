@@ -29,7 +29,7 @@ function AppNavbar() {
 
   const handleLogout = () => {
     localStorage.removeItem('auth');
-    setAuth({ email: '', password: '', token: '', isLogged: false });
+    setAuth({ token: null, isLogged: false });
     handleShowLogout();
     navigate('/');
   }

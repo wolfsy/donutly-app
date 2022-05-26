@@ -1,8 +1,15 @@
+import { useNavigate } from 'react-router-dom';
 import { Card, Image, Row, Col, Stack } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './UserBrowser.css';
 
 function UserListItem({ user }) {
+
+    const navigate = useNavigate();
+
+    const handleNavigateToUser = () => {
+        navigate("/user", { state: { user: user } });
+    }
 
   return (
     <Row className="d-flex justify-content-center">
@@ -33,6 +40,7 @@ function UserListItem({ user }) {
                             <p className="mb-5 fst-italic">{user.payment} PLN</p>
                             <button 
                                 className="app-button user-card-btn mt-auto"
+                                onClick={handleNavigateToUser}
                             >
                                     Visit profile
                             </button>
