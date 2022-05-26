@@ -66,10 +66,12 @@
 .anim span {
     visibility: hidden;
     position: absolute;
-    top: calc(-42px * var(--i));
-    left: calc(40px * var(--j) - 140px);
+    top: calc(-30px * var(--i) + 90px);
+    left: calc(20px * var(--j) + 10px);
     bottom: 0;
     right: 0;
+    width: 10%;
+    height: 10%;
 }
 
 .anim:hover span {
