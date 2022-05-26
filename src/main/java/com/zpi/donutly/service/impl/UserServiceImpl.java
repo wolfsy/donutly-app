@@ -261,4 +261,13 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+
+    @Override
+    public List<User> getUsersByCategoryIdForRole(Long categoryId, Long userId) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user != null && user.getRole().equals(UserRole.ADMIN)) {
+            return userRepository.findUsersByCategoryId(categoryId);
+        }
+        return userRepository.findUsersByCategoryIdAndStatusIsFalse(categoryId);
+    }
 }

@@ -47,7 +47,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        if(userService.userIsBlocked(requestForm.email())) {
+        if (userService.userIsBlocked(requestForm.email())) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
@@ -80,6 +80,13 @@ public class UserController {
     @GetMapping(value = "/users/{categoryId}")
     public ResponseEntity<List<User>> getUsersByCategoryIdNonBlocked(@PathVariable Long categoryId) {
         List<User> userList = userService.getUsersByCategoryIdNonBlocked(categoryId);
+        return ResponseEntity.ok(userList);
+    }
+
+    // wyświetlanie listy użytkowników do danej kategorii w zależności od roli podanego użytkownika
+    @GetMapping(value = "/users/{categoryId}/{userId}")
+    public ResponseEntity<List<User>> getUsersByCategoryIdForRole(@PathVariable Long categoryId, @PathVariable Long userId) {
+        List<User> userList = userService.getUsersByCategoryIdForRole(categoryId, userId);
         return ResponseEntity.ok(userList);
     }
 
