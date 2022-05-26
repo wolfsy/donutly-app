@@ -257,7 +257,7 @@ public class UserServiceImpl implements UserService {
     public boolean userIsBlocked(String email) {
         User user = userRepository.findUserByEmail(email).orElse(null);
         if (user != null) {
-            return user.isAccountNonLocked();
+            return !user.isAccountNonLocked();
         }
         return false;
     }
