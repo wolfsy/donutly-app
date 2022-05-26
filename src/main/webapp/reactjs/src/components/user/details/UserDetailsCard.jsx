@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import './UserDetails.css';
 
-function UserDetailsCard({ user }) {
+function UserDetailsCard({ user, token }) {
   return (
     <Row className="d-flex justify-content-center bg-light-powder py-5">
         <Col xs={11} xl={9}>
@@ -37,16 +37,27 @@ function UserDetailsCard({ user }) {
                               </a>
                             </Stack>
                         </Col>
-                        <Col xs={9} sm={10} md={4} lg={6} xl={6} 
+                        <Col xs={12} sm={10} md={4} lg={6} xl={6} 
                              className="text-start mt-5 mt-md-0"
                         >
                             <h3>{user.login}</h3>
                             <p>{`${user.firstName} ${user.lastName}`}</p>
                             <p>{user.profileDescription}</p>
                         </Col>
-                        <Col xs={3} sm={2} md={3} lg={2} xl={2} 
+                        <Col xs={12} sm={2} md={3} lg={2} xl={2} 
                              className="d-flex flex-column justify-content-start align-items-center mt-5 mt-sm-5 mt-md-0">
                             <p className="mb-5 fst-italic">{user.payment} PLN</p>
+                            {
+                              token?.decoded?.role === 'ADMIN' && 
+                              <div className="mt-auto">
+                                <button className="app-button donation-card-btn mb-3 mx-3">
+                                  Check data
+                                </button>
+                                <button className="app-button donation-card-btn">
+                                  Block
+                                </button>
+                              </div>
+                            }
                         </Col>
                     </Row>
                 </Card.Body>

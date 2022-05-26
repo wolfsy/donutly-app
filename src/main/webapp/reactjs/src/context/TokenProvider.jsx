@@ -11,7 +11,7 @@ export const TokenProvider = ({ children }) => {
     
     useEffect(() => {
         
-        var token = { raw: null, decoded: null };
+        var token = {};
         const authToken = auth.token;
 
         if (authToken) {

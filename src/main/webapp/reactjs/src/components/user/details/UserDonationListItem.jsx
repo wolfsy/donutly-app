@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Row, Col, Card } from 'react-bootstrap';
 
-function UserDonationListItem({ donation }) {
+function UserDonationListItem({ donation, token }) {
 
     const [date, setDate] = useState(null);
 
@@ -30,12 +30,14 @@ function UserDonationListItem({ donation }) {
                             </Col>
                             <Col xs={12} sm={3} md={3} lg={2} xl={2} xxl={2} className="d-flex flex-column justify-content-start align-items-center mt-5 mt-sm-5 mt-md-0">
                                 <p className="mb-5 fst-italic">{donation.amount} PLN</p>
-                                <button 
-                                    className="app-button donation-card-btn mt-auto"
- 
-                                >
+                                {
+                                    token?.decoded?.role === 'ADMIN' &&
+                                    <button 
+                                        className="app-button donation-card-btn mt-auto"
+                                    >
                                         Hide
-                                </button>
+                                    </button>
+                                }
                             </Col>
                         </Row>
                     </Card.Body>

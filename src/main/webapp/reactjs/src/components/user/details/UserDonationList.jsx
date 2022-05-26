@@ -6,7 +6,7 @@ import DepositService from '../../../services/DepositService';
 
 import './UserDetails.css';
 
-function UserDonationList({ userId }) {
+function UserDonationList({ userId, token }) {
 
     const [donations, setDonations] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -57,7 +57,8 @@ function UserDonationList({ userId }) {
                                         donations.map((donation) => 
                                         (
                                             <UserDonationListItem key={donation.id} 
-                                                                    donation={donation} 
+                                                                  donation={donation}
+                                                                  token={token} 
                                             />
                                         ))
                                     }
