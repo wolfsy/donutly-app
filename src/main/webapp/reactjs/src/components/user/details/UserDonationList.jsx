@@ -28,7 +28,7 @@ function UserDonationList({ userId, token }) {
         }
         
         fetchData();
-    }, [userId])
+    }, [userId, token])
 
   return (
         <>
