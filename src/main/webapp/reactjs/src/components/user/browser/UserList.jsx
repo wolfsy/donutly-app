@@ -14,8 +14,6 @@ function UserList({ categoryId, userLogin }) {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
     const { token } = useContext(TokenContext);
-
-    console.log(token)
  
     useEffect(() => {
         const fetchData = async () => {

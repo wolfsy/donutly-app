@@ -73,8 +73,10 @@ const Login = ({ handleCloseLogin, showLogin }) => {
                     setErrorMsg('No Server Response');
                 else if (err.response?.status === 400)
                     setErrorMsg('Invalid Email or Password');
-                else if (err.response?.status === 403)
+                else if (err.response?.status === 401)
                     setErrorMsg('Email is not verified');
+                else if (err.response?.status === 403)
+                    setErrorMsg('Account is blocked');
                 else 
                     setErrorMsg('Login Failed');
 
