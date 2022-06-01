@@ -1,4 +1,4 @@
-import './UserDetails.css';
+import '../UserDetails.css';
 
 const Donut10Anim = () => {
     return (

@@ -1,10 +1,10 @@
 import { Card, Row, Col } from 'react-bootstrap';
-import Donut5Anim from "./Donut5Anim";
-import Donut10Anim from "./Donut10Anim";
-import Donut25Anim from "./Donut25Anim";
-import Donut100Anim from "./Donut100Anim";
-import Donut50Anim from "./Donut50Anim";
-import DonutCustomAnim from "./DonutCustomAnim";
+import Donut5Anim from "./donutAnimations/Donut5Anim";
+import Donut10Anim from "./donutAnimations/Donut10Anim";
+import Donut25Anim from "./donutAnimations/Donut25Anim";
+import Donut100Anim from "./donutAnimations/Donut100Anim";
+import Donut50Anim from "./donutAnimations/Donut50Anim";
+import DonutCustomAnim from "./donutAnimations/DonutCustomAnim";
 
 function DonationsOptions() {
   return (
