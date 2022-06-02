@@ -54,7 +54,7 @@ function AppNavbar() {
                   </button>
                   { 
                     auth.isLogged ?
-                    <button className="app-button nav-button nav-button-small mx-2" onClick={() =>  window.location.href='/user'}>
+                    <button className="app-button nav-button nav-button-small mx-2" onClick={() =>  window.location.href='/userSettings'}>
                         <FontAwesomeIcon icon="fa-solid fa-user" />
                     </button> : ''
                   }

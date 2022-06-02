@@ -13,6 +13,7 @@ import Browser from "./pages/Browser";
 import AppNavbar from './components/navbar/AppNavbar';
 import Footer from './components/footer/Footer';
 import ScrollToTop from './components/common/ScrollToTop';
+import UserSettings from './pages/UserSettings';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
@@ -39,6 +40,7 @@ class App extends Component {
                                     <Route exact path="/about" element={<About />} />
                                     <Route exact path="/user" element={<User />} />
                                     <Route exact path="/browser" element={<Browser />} />
+                                    <Route exact path="/userSettings" element={<UserSettings />} />
                                 </Routes>
                             </div>
                         </ScrollToTop>
