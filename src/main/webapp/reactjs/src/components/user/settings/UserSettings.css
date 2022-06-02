@@ -2,3 +2,7 @@
     min-height: 1000px;
     border-radius: 20px !important;
 }
+
+.user-settings-smaller-card {
+    border-radius: 20px !important;
+}
