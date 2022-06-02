@@ -4,10 +4,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.zpi.donutly.dto.LoginRequestForm;
 import com.zpi.donutly.dto.RegistrationRequest;
-import com.zpi.donutly.model.Address;
-import com.zpi.donutly.model.Category;
-import com.zpi.donutly.model.User;
-import com.zpi.donutly.model.UserRole;
+import com.zpi.donutly.model.*;
+import com.zpi.donutly.repository.AddressRepository;
 import com.zpi.donutly.repository.EmailVerificationRepository;
 import com.zpi.donutly.repository.UserRepository;
 import com.zpi.donutly.service.EmailVerificationService;
@@ -36,6 +34,8 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final Algorithm jwtAlgorithm;
     private final UserRepository userRepository;
+
+    private final AddressRepository addressRepository;
     private final EmailVerificationService emailVerificationService;
     private final EmailVerificationRepository emailVerificationRepository;
 
@@ -56,6 +56,40 @@ public class UserServiceImpl implements UserService {
         }
         return Optional.empty();
     }
+
+    @Override
+    public UserInfo getUserInfo(String username, String currentUserLogin) {
+        User user = userRepository.findUserByLogin(username).orElse(null);
+        User currentUser = userRepository.findUserByLogin(currentUserLogin).orElse(null);
+
+        if (user == null || currentUser == null || currentUser.getRole() != UserRole.ADMIN) {
+            return null;
+        }
+
+        Address address = user.getAddress();
+        if (address == null) {
+            return null;
+        }
+
+        Payment payment = user.getPayment();
+        if (payment == null) {
+            return null;
+        }
+
+        UserInfo userInfo = new UserInfo();
+        userInfo.setEmail(user.getEmail());
+        userInfo.setCurrentUserBalance(payment.getPaymentBalance());
+        userInfo.setLastWithdrawRequest(payment.getLastWithdraw());
+        userInfo.setBankAccountNumber(user.getAccountNumber());
+        userInfo.setPhoneNumber(user.getPhone());
+        userInfo.setStreet(address.getStreet());
+        userInfo.setBuildingNumber(address.getNumber());
+        userInfo.setCity(address.getCity());
+        userInfo.setZipCode(address.getZipCode());
+
+        return userInfo;
+    }
+
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();

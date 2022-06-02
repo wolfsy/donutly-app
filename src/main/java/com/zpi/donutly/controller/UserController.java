@@ -5,6 +5,7 @@ import com.zpi.donutly.dto.RegistrationRequest;
 import com.zpi.donutly.model.Address;
 import com.zpi.donutly.model.Category;
 import com.zpi.donutly.model.User;
+import com.zpi.donutly.model.UserInfo;
 import com.zpi.donutly.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -160,5 +161,15 @@ public class UserController {
     public ResponseEntity<Category> getUserCategory(@PathVariable String username) {
         Category category = userService.getUserCategory(username);
         return ResponseEntity.ok(category);
+    }
+
+    // wyświetlenie informacji o użytkowniku
+    @GetMapping(value = "/info/{username}/{currentUserLogin}")
+    public ResponseEntity<UserInfo> getUserInfo(@PathVariable String username, @PathVariable String currentUserLogin) {
+        UserInfo userInfo = userService.getUserInfo(username, currentUserLogin);
+        if (userInfo == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(userInfo);
     }
 }

@@ -5,6 +5,7 @@ import com.zpi.donutly.dto.RegistrationRequest;
 import com.zpi.donutly.model.Address;
 import com.zpi.donutly.model.Category;
 import com.zpi.donutly.model.User;
+import com.zpi.donutly.model.UserInfo;
 
 import java.util.List;
 import java.util.Optional;
@@ -50,4 +51,6 @@ public interface UserService {
     List<User> getUsersByCategoryIdForRole(Long categoryId, String login);
 
     Optional<User> getUserByLoginForRole(String login, String currentUserLogin);
+
+    UserInfo getUserInfo(String username, String currentUserLogin);
 }
