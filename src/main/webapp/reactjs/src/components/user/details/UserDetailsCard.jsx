@@ -2,11 +2,16 @@ import { useState, useRef } from 'react';
 import { Card, Image, Row, Col, Stack, Spinner } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import UserDetailsModal from './UserDetailsModal';
 import UserService from '../../../services/UserService';
 
 import './UserDetails.css';
 
 function UserDetailsCard({ user, token }) {
+
+  const [showModal, setShowModal] = useState(false);
+  const handleShowModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
 
   const [visibility, setVisibility] = useState(!user.status);
   const [isLoading, setIsLoading] = useState(false);
@@ -74,7 +79,9 @@ function UserDetailsCard({ user, token }) {
                             {
                               token?.decoded?.role === 'ADMIN' && 
                               <div className="mt-auto">
-                                <button className="app-button donation-card-btn mb-3 mx-3">
+                                <button className="app-button donation-card-btn mb-3 mx-3"
+                                        onClick={handleShowModal}
+                                >
                                   Check data
                                 </button>
                                 <button className="app-button donation-card-btn"
@@ -103,6 +110,14 @@ function UserDetailsCard({ user, token }) {
                 </Card.Body>
             </Card>
         </Col>
+
+        <UserDetailsModal
+          handleCloseModal={handleCloseModal}
+          showModal={showModal}
+          token={token}
+          username={user.login}
+        />
+
     </Row>
   )
 }

@@ -58,6 +58,12 @@ class UserService {
         return response;
     }
 
+    async getUserInfo(login, currentUserLogin) {
+        const response = await axios.get(USER_API_BASE_URL + `info/${login}/${currentUserLogin}`);
+        
+        return response;
+    }
+
 }
 
 export default new UserService()
