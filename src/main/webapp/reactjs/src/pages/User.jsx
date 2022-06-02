@@ -16,7 +16,7 @@ const User = () => {
     return (
         <Container fluid>
             <UserDetailsCard user={location.state.user} token={token} />
-            <DonationsOptions />
+            <DonationsOptions userId={location.state.user.id} />
             <UserDonationList userId={location.state.user.id} token={token} />
         </Container>  
     );

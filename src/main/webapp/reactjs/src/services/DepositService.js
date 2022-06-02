@@ -18,6 +18,17 @@ class DepositService {
         return response;
     }
 
+    async addDeposit(userId, deposit) {
+        const response = await axios.post(DEPOSIT_API_BASE_URL + `add/${userId}`,
+            JSON.stringify(deposit),
+            {
+                headers: { 'Content-Type': 'application/json' },
+            }
+        );
+        
+        return response;
+    }
+
 }
 
 export default new DepositService()
