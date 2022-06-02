@@ -1,29 +1,29 @@
 package com.zpi.donutly.dto;
 
+import javax.validation.constraints.Null;
 import java.time.LocalDateTime;
 
 public record UserProfileInfo(
-        Double totalPaymentBalance,
-        Double paymentBalance,
-        LocalDateTime lastWithdraw,
-        String accountNumber,
-        String phone,
+        @Null Double totalPaymentBalance,
+        @Null Double paymentBalance,
+        @Null LocalDateTime lastWithdraw,
+        @Null String accountNumber,
+        @Null String phone,
         String avatarURL,
         String login,
         String email,
-        String login,
         String firstName,
         String lastName,
-        String profileDescription,
+        @Null String profileDescription,
         Boolean status,
         Boolean emailVerification,
         Boolean adminVerification,
-        String InstagramURL,
-        String YouTubeURL,
-        String TikTokURL,
-        String street,
-        String number,
-        String city,
-        String zipCode
+        @Null String InstagramURL,
+        @Null String YouTubeURL,
+        @Null String TikTokURL,
+        @Null String street,
+        @Null String number,
+        @Null String city,
+        @Null String zipCode
 ){
 }

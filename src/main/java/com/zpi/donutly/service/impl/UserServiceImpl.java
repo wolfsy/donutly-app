@@ -100,16 +100,18 @@ public class UserServiceImpl implements UserService {
             return null;
         }
 
-        return new UserProfileInfo(
-                user.getPayment().getTotalPaymentBalance(),
-                user.getPayment().getPaymentBalance(),
-                user.getPayment().getLastWithdraw(),
+        Payment payment = user.getPayment();
+        Address address = user.getAddress();
+
+        UserProfileInfo userProfileInfo = new UserProfileInfo(
+                payment != null ? payment.getTotalPaymentBalance() : null,
+                payment != null ? payment.getPaymentBalance() : null,
+                payment != null ? payment.getLastWithdraw() : null,
                 user.getAccountNumber(),
                 user.getPhone(),
                 user.getAvatarUrl(),
                 user.getLogin(),
                 user.getEmail(),
-                user.getLogin(),
                 user.getFirstName(),
                 user.getLastName(),
                 user.getProfileDescription(),
@@ -119,11 +121,13 @@ public class UserServiceImpl implements UserService {
                 user.getInstagramUrl(),
                 user.getYoutubeUrl(),
                 user.getTiktokUrl(),
-                user.getAddress().getStreet(),
-                user.getAddress().getNumber(),
-                user.getAddress().getCity(),
-                user.getAddress().getZipCode()
+                address != null ? address.getStreet() : null,
+                address != null ? address.getNumber() : null,
+                address != null ? address.getCity() : null,
+                address != null ? address.getZipCode() : null
         );
+
+        return userProfileInfo;
     }
 
     @Override
