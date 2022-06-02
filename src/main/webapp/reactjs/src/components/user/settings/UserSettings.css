@@ -6,3 +6,8 @@
 .user-settings-smaller-card {
     border-radius: 20px !important;
 }
+
+.social-icon {
+    width: 25px;
+    height: 25px;
+}

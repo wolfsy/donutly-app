@@ -20,9 +20,9 @@ function UserSettingsPanel() {
                 setErrorMsg('');
                 const response = await UserService.getUserInfoForUser(token.decoded?.name);
                 var data = response.data; 
-                var time = new Date(data.lastWithdrawRequest);
+                var time = new Date(data.lastWithdraw);
                 const strTime = time.toLocaleString();
-                data.lastWithdrawRequest = strTime.substring(0, strTime.length - 3);
+                data.lastWithdraw = strTime.substring(0, strTime.length - 3);
                 setUser(data);
                 setIsLoading(false);
             }
