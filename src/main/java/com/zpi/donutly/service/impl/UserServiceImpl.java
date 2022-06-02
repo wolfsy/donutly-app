@@ -107,6 +107,7 @@ public class UserServiceImpl implements UserService {
                 user.getAccountNumber(),
                 user.getPhone(),
                 user.getAvatarUrl(),
+                user.getLogin(),
                 user.getEmail(),
                 user.getFirstName(),
                 user.getLastName(),
