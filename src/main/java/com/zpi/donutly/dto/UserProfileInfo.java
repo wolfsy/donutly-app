@@ -11,6 +11,7 @@ public record UserProfileInfo(
         String avatarURL,
         String login,
         String email,
+        String login,
         String firstName,
         String lastName,
         String profileDescription,

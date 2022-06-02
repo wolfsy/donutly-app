@@ -100,7 +100,7 @@ public class UserServiceImpl implements UserService {
             return null;
         }
 
-        UserProfileInfo userProfileInfo = new UserProfileInfo(
+        return new UserProfileInfo(
                 user.getPayment().getTotalPaymentBalance(),
                 user.getPayment().getPaymentBalance(),
                 user.getPayment().getLastWithdraw(),
@@ -109,6 +109,7 @@ public class UserServiceImpl implements UserService {
                 user.getAvatarUrl(),
                 user.getLogin(),
                 user.getEmail(),
+                user.getLogin(),
                 user.getFirstName(),
                 user.getLastName(),
                 user.getProfileDescription(),
@@ -123,8 +124,6 @@ public class UserServiceImpl implements UserService {
                 user.getAddress().getCity(),
                 user.getAddress().getZipCode()
         );
-
-        return userProfileInfo;
     }
 
     @Override
