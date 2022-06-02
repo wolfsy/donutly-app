@@ -10,6 +10,7 @@ public record UserProfileInfo(
         String phone,
         String avatarURL,
         String email,
+        String login,
         String firstName,
         String lastName,
         String profileDescription,
