@@ -2,10 +2,11 @@ package com.zpi.donutly.controller;
 
 import com.zpi.donutly.dto.LoginRequestForm;
 import com.zpi.donutly.dto.RegistrationRequest;
+import com.zpi.donutly.dto.UserProfileInfo;
 import com.zpi.donutly.model.Address;
 import com.zpi.donutly.model.Category;
 import com.zpi.donutly.model.User;
-import com.zpi.donutly.model.UserInfo;
+import com.zpi.donutly.dto.UserInfo;
 import com.zpi.donutly.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -163,7 +164,7 @@ public class UserController {
         return ResponseEntity.ok(category);
     }
 
-    // wyświetlenie informacji o użytkowniku
+    // wyświetlenie informacji o użytkowniku dla admina
     @GetMapping(value = "/info/{username}/{currentUserLogin}")
     public ResponseEntity<UserInfo> getUserInfo(@PathVariable String username, @PathVariable String currentUserLogin) {
         UserInfo userInfo = userService.getUserInfo(username, currentUserLogin);
@@ -171,5 +172,15 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(userInfo);
+    }
+
+    // wyświetlenie informacji o użytkowniku w profilu użytkownika
+    @GetMapping(value = "/info/{username}")
+    public ResponseEntity<UserProfileInfo> getUserInfoForUser(@PathVariable String username) {
+        UserProfileInfo userProfileInfo = userService.getUserProfileInfo(username);
+        if (userProfileInfo == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(userProfileInfo);
     }
 }

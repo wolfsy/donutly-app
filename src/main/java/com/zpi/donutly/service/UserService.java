@@ -2,10 +2,11 @@ package com.zpi.donutly.service;
 
 import com.zpi.donutly.dto.LoginRequestForm;
 import com.zpi.donutly.dto.RegistrationRequest;
+import com.zpi.donutly.dto.UserProfileInfo;
 import com.zpi.donutly.model.Address;
 import com.zpi.donutly.model.Category;
 import com.zpi.donutly.model.User;
-import com.zpi.donutly.model.UserInfo;
+import com.zpi.donutly.dto.UserInfo;
 
 import java.util.List;
 import java.util.Optional;
@@ -53,4 +54,6 @@ public interface UserService {
     Optional<User> getUserByLoginForRole(String login, String currentUserLogin);
 
     UserInfo getUserInfo(String username, String currentUserLogin);
+
+    UserProfileInfo getUserProfileInfo(String username);
 }

@@ -4,6 +4,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.zpi.donutly.dto.LoginRequestForm;
 import com.zpi.donutly.dto.RegistrationRequest;
+import com.zpi.donutly.dto.UserInfo;
+import com.zpi.donutly.dto.UserProfileInfo;
 import com.zpi.donutly.model.*;
 import com.zpi.donutly.repository.AddressRepository;
 import com.zpi.donutly.repository.EmailVerificationRepository;
@@ -88,6 +90,40 @@ public class UserServiceImpl implements UserService {
         userInfo.setZipCode(address.getZipCode());
 
         return userInfo;
+    }
+
+    @Override
+    public UserProfileInfo getUserProfileInfo(String username) {
+        User user = userRepository.findUserByLogin(username).orElse(null);
+
+        if (user == null) {
+            return null;
+        }
+
+        UserProfileInfo userProfileInfo = new UserProfileInfo(
+                user.getPayment().getTotalPaymentBalance(),
+                user.getPayment().getPaymentBalance(),
+                user.getPayment().getLastWithdraw(),
+                user.getAccountNumber(),
+                user.getPhone(),
+                user.getAvatarUrl(),
+                user.getLogin(),
+                user.getEmail(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getProfileDescription(),
+                user.getStatus(),
+                user.getEmailVerification(),
+                user.getAdminVerification(),
+                user.getInstagramUrl(),
+                user.getYoutubeUrl(),
+                user.getTiktokUrl(),
+                user.getAddress().getStreet(),
+                user.getAddress().getNumber(),
+                user.getAddress().getCity(),
+                user.getAddress().getZipCode()
+        );
+
     }
 
     @Override

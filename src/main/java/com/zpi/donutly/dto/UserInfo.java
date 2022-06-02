@@ -1,4 +1,4 @@
-package com.zpi.donutly.model;
+package com.zpi.donutly.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
