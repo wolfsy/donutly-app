@@ -40,12 +40,12 @@ function DonationModal({ showModal, handleCloseModal, selectedAmount, userId }) 
         const { amount, message } = form;
         const errors = {};
 
-        console.log(message.length);
-
         if(!amount)
             errors.amount = "Amount is required";   
         else if(isNaN(amount))
             errors.amount = "Amount must be a number";
+        else if(amount.includes(".") || amount.includes(","))
+            errors.amount = "Amount must be an integer number";
         else if(selectedAmount === "?" && amount < 100)
             errors.amount = "Amount must be at least 100";
         if(message && message.length > 500)
