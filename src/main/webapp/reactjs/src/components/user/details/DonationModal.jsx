@@ -37,7 +37,7 @@ function DonationModal({ showModal, handleCloseModal, selectedAmount, userId }) 
     }
 
     const validateForm = () => {
-        const { amount, message } = form;
+        const { amount, donator, message } = form;
         const errors = {};
 
         if(!amount)
@@ -48,8 +48,10 @@ function DonationModal({ showModal, handleCloseModal, selectedAmount, userId }) 
             errors.amount = "Amount must be an integer number";
         else if(selectedAmount === "?" && amount < 100)
             errors.amount = "Amount must be at least 100";
-        if(message && message.length > 500)
-            errors.message = "Message must be less than 500 characters";
+        if(donator && donator.length > 30)
+            errors.donator = "Donator must be less than 50 characters";
+        if(message && message.length > 255)
+            errors.message = "Message must be less than 255 characters";
 
         return errors;
     }
@@ -155,7 +157,11 @@ function DonationModal({ showModal, handleCloseModal, selectedAmount, userId }) 
                                         placeholder="Donator"
                                         value={form.donator || ""}
                                         onChange={(e) => setField("donator", e.target.value)}
+                                        isInvalid={!!formErrors.donator}
                                     />
+                                    <Form.Control.Feedback type="invalid">
+                                        {formErrors.donator}
+                                    </Form.Control.Feedback>
                                 </InputGroup>
                             </Form.Group>
                             <Form.Group className="mb-2">
