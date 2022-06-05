@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,6 +40,7 @@ public class DepositServiceImpl implements DepositService {
         deposit.setId(depositRepository.count() + 1);
         user.getDepositList().add(deposit);
         deposit.setUser(user);
+        deposit.setTime(LocalDateTime.now());
         return depositRepository.save(deposit);
     }
 

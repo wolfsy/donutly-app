@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService {
         Payment payment = user.getPayment();
         Address address = user.getAddress();
 
-        UserProfileInfo userProfileInfo = new UserProfileInfo(
+        return new UserProfileInfo(
                 payment != null ? payment.getTotalPaymentBalance() : null,
                 payment != null ? payment.getPaymentBalance() : null,
                 payment != null ? payment.getLastWithdraw() : null,
@@ -126,8 +126,6 @@ public class UserServiceImpl implements UserService {
                 address != null ? address.getCity() : null,
                 address != null ? address.getZipCode() : null
         );
-
-        return userProfileInfo;
     }
 
     @Override
