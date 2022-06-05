@@ -1,12 +1,13 @@
 import { useState, useEffect, useLayoutEffect } from 'react'
-import { Container, Row, Col, Image } from 'react-bootstrap';
+import { Container, Row, Col, Image, Spinner } from 'react-bootstrap';
 import AvatarRow from './AvatarRow';
 import UserService from '../../services/UserService'
 
 function AvatarGrid() {
 
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([]);
   const [rowSize, setRowSize] = useState(15);
+  const [isLoading , setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,8 +18,9 @@ function AvatarGrid() {
           const fillArray = new Array(75 - response.data.length).fill({avatarUrl: defaultImg});
           response.data = response.data.concat(fillArray);
         }
-          
-        setUsers(response.data);  
+        
+        setUsers(response.data); 
+        setIsLoading(false);
     }
 
     fetchData();
@@ -63,20 +65,37 @@ function AvatarGrid() {
   }, []);
 
   return (
-    <Container className="position-relative" fluid>
-      <Row>
-        <Col xs={7} sm={7} md={4} lg={3} xl={3} xxl={3}
-             className="logo p-3">
-          <Image fluid src={process.env.PUBLIC_URL + "donutly_logo.png"}/>
-        </Col>
-      </Row>
-      <Row className="mx-auto my-3">
-        <AvatarRow avatars={users.slice(0, rowSize)} />
-        <AvatarRow avatars={users.slice(rowSize, rowSize * 2)} />
-        <AvatarRow avatars={users.slice(rowSize * 2, rowSize * 3)} />
-        <AvatarRow avatars={users.slice(rowSize * 3, rowSize * 4)} />
-        <AvatarRow avatars={users.slice(rowSize * 4, rowSize * 5)} />
-      </Row>
+    <Container id="avatar-grid-container"
+               className="position-relative d-flex" fluid>
+      {
+        isLoading ?
+        <Row className="justify-content-center align-content-center w-100 text-secondary">
+          <Spinner
+            as="span"
+            animation="border"
+            role="status"
+            aria-hidden="true"
+            id="loading-spinner"
+          />
+        </Row>
+        :
+        <>
+          <Row>
+            <Col xs={7} sm={7} md={4} lg={3} xl={3} xxl={3}
+                className="logo p-3">
+              <Image fluid src={process.env.PUBLIC_URL + "donutly_logo.png"}/>
+            </Col>
+          </Row>
+          <Row className="mx-auto my-3">
+            <AvatarRow avatars={users.slice(0, rowSize)} />
+            <AvatarRow avatars={users.slice(rowSize, rowSize * 2)} />
+            <AvatarRow avatars={users.slice(rowSize * 2, rowSize * 3)} />
+            <AvatarRow avatars={users.slice(rowSize * 3, rowSize * 4)} />
+            <AvatarRow avatars={users.slice(rowSize * 4, rowSize * 5)} />
+          </Row>
+        </>
+      }
+      
     </Container>
   )
 

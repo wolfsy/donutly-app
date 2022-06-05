@@ -15,3 +15,12 @@
     transform: translate(-50%, -50%);
     z-index: 1;
 }
+
+#loading-spinner {
+    height: 100px;
+    width: 100px;
+}
+
+#avatar-grid-container {
+    min-height: 680px;
+}
