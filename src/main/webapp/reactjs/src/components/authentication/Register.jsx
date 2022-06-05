@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Form, InputGroup, Modal, Stack, Row, Spinner } from "react-bootstrap";
+import ModalCloseXmark from "../common/ModalCloseXmark";
 
 import UserService from "../../services/UserService";
 
@@ -120,8 +121,9 @@ const Register = ({ handleCloseRegister, showRegister }) => {
           centered={true}
           aria-labelledby="contained-modal-title-vcenter"
       >
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Sign up</Modal.Title>
+          <ModalCloseXmark handleClose={modalClose} />
         </Modal.Header>
         <Modal.Body>
             {
@@ -141,7 +143,6 @@ const Register = ({ handleCloseRegister, showRegister }) => {
                                         value={form.firstName || ""}
                                         onChange={(e) => setField("firstName", e.target.value)}
                                         isInvalid={!!formErrors.firstName}
-                                        autoFocus
                                     />
                                     <Form.Control.Feedback type="invalid">
                                         {formErrors.firstName}

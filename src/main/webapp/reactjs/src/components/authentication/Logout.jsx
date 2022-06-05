@@ -1,6 +1,5 @@
-
 import { Modal, Stack } from "react-bootstrap";
-
+import ModalCloseXmark from "../common/ModalCloseXmark";
 
 import './authentication.css';
 
@@ -13,8 +12,9 @@ const Logout = ({ handleCloseLogout, showLogout }) => {
             centered={true}
             aria-labelledby="contained-modal-title-vcenter"
         >
-            <Modal.Header closeButton>
+            <Modal.Header>
                 <Modal.Title>Sign out</Modal.Title>
+                <ModalCloseXmark handleClose={handleCloseLogout} />
             </Modal.Header>
             <Modal.Body>
                     <h4>You have signed out successfully!</h4>

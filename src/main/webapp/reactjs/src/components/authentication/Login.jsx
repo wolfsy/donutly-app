@@ -2,6 +2,7 @@ import { useState, useEffect, useContext, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Form, InputGroup, Modal, Stack, Spinner } from "react-bootstrap";
+import ModalCloseXmark from "../common/ModalCloseXmark";
 
 import AuthContext from "../../context/AuthProvider";
 import UserService from "../../services/UserService";
@@ -110,8 +111,9 @@ const Login = ({ handleCloseLogin, showLogin }) => {
           centered={true}
           aria-labelledby="contained-modal-title-vcenter"
         >
-            <Modal.Header closeButton>
+            <Modal.Header>
                 <Modal.Title>Sign In</Modal.Title>
+                <ModalCloseXmark handleClose={modalClose} />
             </Modal.Header>
             <Modal.Body>
                 {   !success ?
@@ -130,7 +132,6 @@ const Login = ({ handleCloseLogin, showLogin }) => {
                                         onChange={(e) => setField("email", e.target.value)}
                                         isInvalid={!!formErrors.email}
                                         required
-                                        autoFocus
                                     />
                                     <Form.Control.Feedback type="invalid">
                                         {formErrors.email}

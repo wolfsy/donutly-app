@@ -91,3 +91,14 @@ h1 {
   -moz-box-shadow: 3px 7px 17px -4px rgba(223, 223, 223, 1);
   box-shadow: 3px 7px 17px -4px rgba(223, 223, 223, 1);
 }
+
+.modal-close-xmark {
+  height: 25px;
+  width: 25px;
+  color: #7e7b7b;
+  cursor: pointer;
+}
+
+.modal-close-xmark:hover {
+  color: #403e3e;
+}

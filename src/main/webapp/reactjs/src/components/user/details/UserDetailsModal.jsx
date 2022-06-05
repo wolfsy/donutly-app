@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { Row, Col, Modal, Spinner } from "react-bootstrap";
+import ModalCloseXmark from '../../common/ModalCloseXmark';
 
 import UserService from '../../../services/UserService';
 
@@ -44,8 +45,9 @@ function UserDetailsModal({ showModal, handleCloseModal, username, token }) {
         centered={true}
         aria-labelledby="contained-modal-title-vcenter"
     >
-        <Modal.Header closeButton>
+        <Modal.Header>
             <Modal.Title>Personal user details</Modal.Title>
+            <ModalCloseXmark handleClose={handleCloseModal} />
         </Modal.Header>
         <Modal.Body>
             <Row className="justify-content-center">

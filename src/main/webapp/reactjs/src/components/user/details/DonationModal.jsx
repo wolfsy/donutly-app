@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { Form, InputGroup, Modal, Stack, Spinner } from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ModalCloseXmark from '../../common/ModalCloseXmark';
 
 import DepositService from '../../../services/DepositService';
 
@@ -116,8 +117,9 @@ function DonationModal({ showModal, handleCloseModal, selectedAmount, userId }) 
           centered={true}
           aria-labelledby="contained-modal-title-vcenter"
     >
-            <Modal.Header closeButton>
+            <Modal.Header>
                 <Modal.Title>Donate</Modal.Title>
+                <ModalCloseXmark handleClose={modalClose} />
             </Modal.Header>
             <Modal.Body>
                 {
