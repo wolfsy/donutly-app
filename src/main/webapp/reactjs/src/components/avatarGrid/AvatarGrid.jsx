@@ -86,7 +86,7 @@ function AvatarGrid() {
               <Image fluid src={process.env.PUBLIC_URL + "donutly_logo.png"}/>
             </Col>
           </Row>
-          <Row className="mx-auto my-3">
+          <Row className="ms-4 my-3 w-100">
             <AvatarRow avatars={users.slice(0, rowSize)} />
             <AvatarRow avatars={users.slice(rowSize, rowSize * 2)} />
             <AvatarRow avatars={users.slice(rowSize * 2, rowSize * 3)} />
