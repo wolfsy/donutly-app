@@ -2,10 +2,7 @@ package com.zpi.donutly.service.impl;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.zpi.donutly.dto.LoginRequestForm;
-import com.zpi.donutly.dto.RegistrationRequest;
-import com.zpi.donutly.dto.UserInfo;
-import com.zpi.donutly.dto.UserProfileInfo;
+import com.zpi.donutly.dto.*;
 import com.zpi.donutly.model.*;
 import com.zpi.donutly.repository.AddressRepository;
 import com.zpi.donutly.repository.EmailVerificationRepository;
@@ -126,6 +123,34 @@ public class UserServiceImpl implements UserService {
                 address != null ? address.getCity() : null,
                 address != null ? address.getZipCode() : null
         );
+    }
+
+    @Override
+    public boolean updateUserAccountBankNumber(String emailAddress, String bankNumber) {
+        Optional<User> optionalUser = userRepository.findUserByEmail(emailAddress);
+
+        if (optionalUser.isEmpty() || bankNumber == null) {
+            return false;
+        }
+
+        User currentUser = optionalUser.get();
+        currentUser.setAccountNumber(bankNumber);
+        userRepository.save(currentUser);
+        return true;
+    }
+
+    @Override
+    public boolean updateUserAccountPhoneNumber(String emailAddress, String phoneNumber) {
+        Optional<User> optionalUser = userRepository.findUserByEmail(emailAddress);
+
+        if (optionalUser.isEmpty() || phoneNumber == null) {
+            return false;
+        }
+
+        User currentUser = optionalUser.get();
+        currentUser.setPhone(phoneNumber);
+        userRepository.save(currentUser);
+        return true;
     }
 
     @Override

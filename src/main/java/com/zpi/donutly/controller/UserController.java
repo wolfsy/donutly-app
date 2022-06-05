@@ -1,16 +1,14 @@
 package com.zpi.donutly.controller;
 
-import com.zpi.donutly.dto.LoginRequestForm;
-import com.zpi.donutly.dto.RegistrationRequest;
-import com.zpi.donutly.dto.UserProfileInfo;
+import com.zpi.donutly.dto.*;
 import com.zpi.donutly.model.Address;
 import com.zpi.donutly.model.Category;
 import com.zpi.donutly.model.User;
-import com.zpi.donutly.dto.UserInfo;
 import com.zpi.donutly.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -77,8 +75,6 @@ public class UserController {
         return ResponseEntity.ok(usersList);
     }
 
-
-
     // wyświetlenie listy użytkowników do danej kategorii
     @GetMapping(value = "/users/{categoryId}/all")
     public ResponseEntity<List<User>> getAllUsersByCategoryId(@PathVariable Long categoryId) {
@@ -103,11 +99,11 @@ public class UserController {
     // edycja hasła użytkownika
     @PatchMapping(value = "/password")
     public ResponseEntity<User> editUserPassword(@RequestBody User user) {
-        User newUser = userService.editUserPassword(user);
-        if (newUser == null) {
+        User currentUser = userService.editUserPassword(user);
+        if (currentUser == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(newUser);
+        return ResponseEntity.ok(currentUser);
     }
 
     // edycja opisu użytkownika
@@ -148,6 +144,20 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(newUser);
+    }
+
+    @PatchMapping(value = "/account/banknumber")
+    public ResponseEntity<Void> updateUserAccountBankNumber(@RequestBody String accountNumber) {
+        String emailAddress = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        return userService.updateUserAccountBankNumber(emailAddress, accountNumber) ?
+                new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PatchMapping(value = "/account/phonenumber")
+    public ResponseEntity<Void> updateUserAccountPhoneNumber(@RequestBody String phoneNumber) {
+        String emailAddress = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        return userService.updateUserAccountPhoneNumber(emailAddress, phoneNumber) ?
+                new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     // wyświetlenie adresu użytkownika
