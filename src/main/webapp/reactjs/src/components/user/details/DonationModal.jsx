@@ -71,7 +71,7 @@ function DonationModal({ showModal, handleCloseModal, selectedAmount, userId }) 
                     amount: parseInt(form.amount),
                     donator: form.donator ? form.donator : "Anonymous",
                     message: form.message,
-                    time: new Date(),
+                    time: null,
                     visibility: true
                 }
 
