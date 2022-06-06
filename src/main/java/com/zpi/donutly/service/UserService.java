@@ -59,4 +59,6 @@ public interface UserService {
     boolean updateUserAccountPhoneNumber(String userLogin, String phoneNumber);
 
     User getUserByEmail(String emailAddress);
+
+    boolean updateUserAccountAddress(String userLogin, AddressForm addressForm);
 }

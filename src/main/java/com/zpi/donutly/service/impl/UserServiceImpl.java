@@ -2,12 +2,10 @@ package com.zpi.donutly.service.impl;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.zpi.donutly.dto.LoginRequestForm;
-import com.zpi.donutly.dto.RegistrationRequest;
-import com.zpi.donutly.dto.UserInfo;
-import com.zpi.donutly.dto.UserProfileInfo;
+import com.zpi.donutly.dto.*;
 import com.zpi.donutly.model.*;
 import com.zpi.donutly.repository.AddressRepository;
+import com.zpi.donutly.repository.CategoryRepository;
 import com.zpi.donutly.repository.EmailVerificationRepository;
 import com.zpi.donutly.repository.UserRepository;
 import com.zpi.donutly.service.EmailVerificationService;
@@ -155,6 +153,28 @@ public class UserServiceImpl implements UserService {
         }
 
         currentUser.setPhone(phoneNumber);
+        userRepository.save(currentUser);
+        return true;
+    }
+
+    @Override
+    public boolean updateUserAccountAddress(String userLogin, AddressForm addressForm) {
+        User currentUser = userRepository.findUserByLogin(userLogin).orElse(null);
+
+        if (currentUser == null || addressForm == null) {
+            return false;
+        }
+
+        Address newAddress = Address.builder()
+                .id(currentUser.getId())
+                .street(addressForm.street())
+                .number(addressForm.number())
+                .zipCode(addressForm.zipCode())
+                .city(addressForm.city())
+                .build();
+
+
+        currentUser.setAddress(newAddress);
         userRepository.save(currentUser);
         return true;
     }
@@ -332,7 +352,7 @@ public class UserServiceImpl implements UserService {
                 request.email(), passwordEncoder.encode(request.password()), null, null,
                 false, UserRole.USER, "https://i0.wp.com/sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png?fit=256%2C256&ssl=1",
                 false, false, null, null,
-                null, null, null, null, null);
+                null, new Address(addressRepository.count() + 1, null, null, null, null), null , null, null);
         user = userRepository.save(user);
 
         try {

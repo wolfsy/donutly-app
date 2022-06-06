@@ -154,6 +154,7 @@ public class UserController {
         return ResponseEntity.ok(newUser);
     }
 
+    // modyfikowanie numeru karty kredytowej klienta
     @PatchMapping(value = "/account/banknumber")
     public ResponseEntity<Void> updateUserAccountBankNumber(@RequestBody String accountNumber) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -162,11 +163,20 @@ public class UserController {
                 new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+    //modyfikowanie numeru telefonu klienta
     @PatchMapping(value = "/account/phonenumber")
     public ResponseEntity<Void> updateUserAccountPhoneNumber(@RequestBody String phoneNumber) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String userLogin = userDetails.getUsername();
         return userService.updateUserAccountPhoneNumber(userLogin, phoneNumber) ?
+                new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PatchMapping(value = "/account/address")
+    public ResponseEntity<Void> updateUserAccountAddress(@RequestBody AddressForm addressForm) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userLogin = userDetails.getUsername();
+        return userService.updateUserAccountAddress(userLogin, addressForm) ?
                 new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
