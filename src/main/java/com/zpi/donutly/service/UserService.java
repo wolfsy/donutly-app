@@ -71,4 +71,6 @@ public interface UserService {
     boolean updateUserAccountAvatar(String userLogin, String avatarUrl);
 
     boolean updateUserAccountProfileDescription(String userLogin, String description);
+
+    boolean updateUserAccountProfileLogin(String userLogin, String login);
 }

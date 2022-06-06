@@ -226,6 +226,15 @@ public class UserController {
                 new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+    //modyfikacja loginu uzytkownika
+    @PatchMapping(value = "/account/login")
+    public ResponseEntity<Void> updateUserAccountLogin(@RequestBody String login) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userLogin = userDetails.getUsername();
+        return userService.updateUserAccountProfileLogin(userLogin, login) ?
+                new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
     // wyświetlenie adresu użytkownika
     @GetMapping(value = "/address/{username}")
     public ResponseEntity<Address> getUserAddress(@PathVariable String username) {

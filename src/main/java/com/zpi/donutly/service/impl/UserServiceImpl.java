@@ -200,7 +200,7 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
-        currentUser.setInstagramUrl(youtubeUrl);
+        currentUser.setYoutubeUrl(youtubeUrl);
         userRepository.save(currentUser);
         return true;
     }
@@ -213,7 +213,7 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
-        currentUser.setInstagramUrl(tiktokUrl);
+        currentUser.setTiktokUrl(tiktokUrl);
         userRepository.save(currentUser);
         return true;
     }
@@ -226,7 +226,7 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
-        currentUser.setInstagramUrl(avatarUrl);
+        currentUser.setAvatarUrl(avatarUrl);
         userRepository.save(currentUser);
         return true;
     }
@@ -239,11 +239,23 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
-        currentUser.setInstagramUrl(description);
+        currentUser.setProfileDescription(description);
         userRepository.save(currentUser);
         return true;
     }
 
+    @Override
+    public boolean updateUserAccountProfileLogin(String userLogin, String login) {
+        User currentUser = userRepository.findUserByLogin(userLogin).orElse(null);
+
+        if (currentUser == null || login == null) {
+            return false;
+        }
+
+        currentUser.setLogin(login);
+        userRepository.save(currentUser);
+        return true;
+    }
 
 
     @Override
