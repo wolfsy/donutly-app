@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -60,6 +61,13 @@ public class UserController {
     @GetMapping(value = "/{login}")
     public ResponseEntity<User> getUserByLogin(@PathVariable String login) {
         return ResponseEntity.of(userService.getUserByLogin(login));
+    }
+
+    @GetMapping(value = "/details")
+    public ResponseEntity<User> getUser() {
+        String emailAddress = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        User user = userService.getUserByEmail(emailAddress);
+        return ResponseEntity.ok(user);
     }
 
     // wyświetlenie pojedynczego użytkownika po nazwie dla dalej roli (wnioskowanej na podstweir loginu)
@@ -148,15 +156,17 @@ public class UserController {
 
     @PatchMapping(value = "/account/banknumber")
     public ResponseEntity<Void> updateUserAccountBankNumber(@RequestBody String accountNumber) {
-        String emailAddress = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
-        return userService.updateUserAccountBankNumber(emailAddress, accountNumber) ?
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userLogin = userDetails.getUsername();
+        return userService.updateUserAccountBankNumber(userLogin, accountNumber) ?
                 new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PatchMapping(value = "/account/phonenumber")
     public ResponseEntity<Void> updateUserAccountPhoneNumber(@RequestBody String phoneNumber) {
-        String emailAddress = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
-        return userService.updateUserAccountPhoneNumber(emailAddress, phoneNumber) ?
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userLogin = userDetails.getUsername();
+        return userService.updateUserAccountPhoneNumber(userLogin, phoneNumber) ?
                 new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 

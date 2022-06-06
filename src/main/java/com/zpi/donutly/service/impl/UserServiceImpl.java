@@ -2,7 +2,10 @@ package com.zpi.donutly.service.impl;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.zpi.donutly.dto.*;
+import com.zpi.donutly.dto.LoginRequestForm;
+import com.zpi.donutly.dto.RegistrationRequest;
+import com.zpi.donutly.dto.UserInfo;
+import com.zpi.donutly.dto.UserProfileInfo;
 import com.zpi.donutly.model.*;
 import com.zpi.donutly.repository.AddressRepository;
 import com.zpi.donutly.repository.EmailVerificationRepository;
@@ -41,6 +44,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> getUserByLogin(String login) {
         return userRepository.findUserByLogin(login).or(Optional::empty);
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.findUserByEmail(email).orElse(null);
     }
 
     @Override
@@ -126,28 +134,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updateUserAccountBankNumber(String emailAddress, String bankNumber) {
-        Optional<User> optionalUser = userRepository.findUserByEmail(emailAddress);
+    public boolean updateUserAccountBankNumber(String userLogin, String bankNumber) {
+        User currentUser = userRepository.findUserByLogin(userLogin).orElse(null);
 
-        if (optionalUser.isEmpty() || bankNumber == null) {
+        if (currentUser == null || bankNumber == null) {
             return false;
         }
 
-        User currentUser = optionalUser.get();
         currentUser.setAccountNumber(bankNumber);
         userRepository.save(currentUser);
         return true;
     }
 
     @Override
-    public boolean updateUserAccountPhoneNumber(String emailAddress, String phoneNumber) {
-        Optional<User> optionalUser = userRepository.findUserByEmail(emailAddress);
+    public boolean updateUserAccountPhoneNumber(String userLogin, String phoneNumber) {
+        User currentUser = userRepository.findUserByLogin(userLogin).orElse(null);
 
-        if (optionalUser.isEmpty() || phoneNumber == null) {
+        if (currentUser == null || phoneNumber == null) {
             return false;
         }
 
-        User currentUser = optionalUser.get();
         currentUser.setPhone(phoneNumber);
         userRepository.save(currentUser);
         return true;

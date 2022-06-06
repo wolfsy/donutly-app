@@ -54,7 +54,9 @@ public interface UserService {
 
     UserProfileInfo getUserProfileInfo(String username);
 
-    boolean updateUserAccountBankNumber(String emailAddress, String accountNumber);
+    boolean updateUserAccountBankNumber(String userLogin, String accountNumber);
 
-    boolean updateUserAccountPhoneNumber(String emailAddress, String phoneNumber);
+    boolean updateUserAccountPhoneNumber(String userLogin, String phoneNumber);
+
+    User getUserByEmail(String emailAddress);
 }
