@@ -1,18 +1,19 @@
 import { useState, useEffect } from 'react'
-import { Row, Form, Col } from 'react-bootstrap';
+import FormTemplate from './FormTemplate';
 
 import UserService from '../../../../services/UserService';
 
-function ChangeAccountNumber() {
-
-    const [accountNumber, setAccountNumber] = useState('');
+function ChangeAccountNumber({ currentNumber }) {
+    
+    const [accountNumber, setAccountNumber] = useState(currentNumber);
+    const [currentAccountNumber, setCurrentAccountNumber] = useState(currentNumber);
     const [formError, setFormError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [validated, setValidated] = useState(false);
+    const [success, setSuccess] = useState(false);
 
     useEffect(() => {
         setFormError('');
-        setValidated(false)
+        setSuccess(false);
     }, [accountNumber]);
 
     const validateForm = () => {
@@ -26,57 +27,47 @@ function ChangeAccountNumber() {
             setFormError('Account number must be a number');
             return false;
         }
+        else if(accountNumber === currentAccountNumber)
+        {
+            setFormError('New account number is the same as the current one');
+            return false;
+        }
 
         return true;
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        
-        if(!validateForm())
-            return;
-        else 
-        {
+
+        const apiCall = async () => {
             try {
-                const response = await UserService.updateUserAccountBankNumber(accountNumber);
-                console.log(response);
+                setIsLoading(true);
+                await UserService.updateUserAccountBankNumber(accountNumber);
+                setCurrentAccountNumber(accountNumber);
+                setSuccess(true);
+                setIsLoading(false);
             }
             catch(err) {
                 setFormError('Error while updating account number');
             }
         }
-        
+
+        e.preventDefault();
+
+        if(validateForm())
+            apiCall();
     }
 
   return (
-    <Row>
-        <Col xs={12} className="d-flex">
-            <Form validated={validated} className="w-75">
-                <Form.Group className="text-start">
-                    <Form.Label>Account number</Form.Label>
-                    <Form.Control 
-                        type="text"
-                        value={accountNumber || ""}
-                        onChange={(e) => setAccountNumber(e.target.value)}
-                        isInvalid={!!formError}
-                        required
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        {formError}
-                    </Form.Control.Feedback>
-                    <Form.Control.Feedback>
-                        Account number has been updated
-                    </Form.Control.Feedback>
-                </Form.Group>
-                
-            </Form>
-            <button className="app-button form-confirm-button ms-4"
-                    onClick={handleSubmit}
-            >
-                    Confirm
-            </button>
-        </Col>
-    </Row>
+    <FormTemplate 
+        label={"Account number"}
+        value={accountNumber}
+        success={success}
+        successMsg={"Account number has been updated"}
+        errorMsg={formError}
+        loading={isLoading}
+        onChange={(e) => setAccountNumber(e.target.value)}
+        onSubmit={handleSubmit}
+    />
   )
 }
 

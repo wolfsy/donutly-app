@@ -36,7 +36,9 @@ function UserSettingsPanel() {
             }
         }
 
-        fetchData();
+        if(token.decoded)
+            fetchData();
+            
     }, [token]);
 
   return (
