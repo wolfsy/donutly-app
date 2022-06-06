@@ -70,6 +70,21 @@ class UserService {
         return response;
     }
 
+    async updateUserAccountBankNumber(number) {
+        const response = await axios.patch(USER_API_BASE_URL + 'account/banknumber',
+             number,
+            {
+                headers: 
+                {
+                     'Content-Type': 'application/json',
+                     'Authorization': 'Bearer '
+                },
+            }
+        );
+        
+        return response;
+    }
+
 }
 
 export default new UserService()
