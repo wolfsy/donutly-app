@@ -59,4 +59,20 @@ public interface UserService {
     boolean updateUserAccountPhoneNumber(String userLogin, String phoneNumber);
 
     User getUserByEmail(String emailAddress);
+
+    boolean updateUserAccountAddress(String userLogin, AddressChangeForm addressForm);
+
+    boolean updateUserAccountInstagram(String userLogin, String instagramUrl);
+
+    boolean updateUserAccountYoutube(String userLogin, String youtubeUrl);
+
+    boolean updateUserAccountTiktok(String userLogin, String tiktokUrl);
+
+    boolean updateUserAccountAvatar(String userLogin, String avatarUrl);
+
+    boolean updateUserAccountProfileDescription(String userLogin, String description);
+
+    boolean updateUserAccountProfileLogin(String userLogin, String login);
+
+    boolean updateUserAccountProfilePassword(String userLogin, PasswordChangeForm passwordChangeForm);
 }

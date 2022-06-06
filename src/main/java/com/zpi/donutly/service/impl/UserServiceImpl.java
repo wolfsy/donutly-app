@@ -2,10 +2,7 @@ package com.zpi.donutly.service.impl;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.zpi.donutly.dto.LoginRequestForm;
-import com.zpi.donutly.dto.RegistrationRequest;
-import com.zpi.donutly.dto.UserInfo;
-import com.zpi.donutly.dto.UserProfileInfo;
+import com.zpi.donutly.dto.*;
 import com.zpi.donutly.model.*;
 import com.zpi.donutly.repository.AddressRepository;
 import com.zpi.donutly.repository.EmailVerificationRepository;
@@ -160,6 +157,121 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean updateUserAccountAddress(String userLogin, AddressChangeForm addressForm) {
+        User currentUser = userRepository.findUserByLogin(userLogin).orElse(null);
+
+        if (currentUser == null || addressForm == null) {
+            return false;
+        }
+
+        Address newAddress = Address.builder()
+                .id(currentUser.getId())
+                .street(addressForm.street())
+                .number(addressForm.number())
+                .zipCode(addressForm.zipCode())
+                .city(addressForm.city())
+                .build();
+
+
+        currentUser.setAddress(newAddress);
+        userRepository.save(currentUser);
+        return true;
+    }
+
+    @Override
+    public boolean updateUserAccountInstagram(String userLogin, String instagramUrl) {
+        User currentUser = userRepository.findUserByLogin(userLogin).orElse(null);
+
+        if (currentUser == null || instagramUrl == null) {
+            return false;
+        }
+
+        currentUser.setInstagramUrl(instagramUrl);
+        userRepository.save(currentUser);
+        return true;
+    }
+
+    @Override
+    public boolean updateUserAccountYoutube(String userLogin, String youtubeUrl) {
+        User currentUser = userRepository.findUserByLogin(userLogin).orElse(null);
+
+        if (currentUser == null || youtubeUrl == null) {
+            return false;
+        }
+
+        currentUser.setYoutubeUrl(youtubeUrl);
+        userRepository.save(currentUser);
+        return true;
+    }
+
+    @Override
+    public boolean updateUserAccountTiktok(String userLogin, String tiktokUrl) {
+        User currentUser = userRepository.findUserByLogin(userLogin).orElse(null);
+
+        if (currentUser == null || tiktokUrl == null) {
+            return false;
+        }
+
+        currentUser.setTiktokUrl(tiktokUrl);
+        userRepository.save(currentUser);
+        return true;
+    }
+
+    @Override
+    public boolean updateUserAccountAvatar(String userLogin, String avatarUrl) {
+        User currentUser = userRepository.findUserByLogin(userLogin).orElse(null);
+
+        if (currentUser == null || avatarUrl == null) {
+            return false;
+        }
+
+        currentUser.setAvatarUrl(avatarUrl);
+        userRepository.save(currentUser);
+        return true;
+    }
+
+    @Override
+    public boolean updateUserAccountProfileDescription(String userLogin, String description) {
+        User currentUser = userRepository.findUserByLogin(userLogin).orElse(null);
+
+        if (currentUser == null || description == null) {
+            return false;
+        }
+
+        currentUser.setProfileDescription(description);
+        userRepository.save(currentUser);
+        return true;
+    }
+
+    @Override
+    public boolean updateUserAccountProfileLogin(String userLogin, String login) {
+        User currentUser = userRepository.findUserByLogin(userLogin).orElse(null);
+
+        if (currentUser == null || login == null) {
+            return false;
+        }
+
+        currentUser.setLogin(login);
+        userRepository.save(currentUser);
+        return true;
+    }
+
+    @Override
+    public boolean updateUserAccountProfilePassword(String userLogin, PasswordChangeForm passwordChangeForm) {
+        User currentUser = userRepository.findUserByLogin(userLogin).orElse(null);
+
+        if (currentUser == null || passwordChangeForm == null ||
+                !passwordEncoder.matches(passwordChangeForm.oldPassword(), currentUser.getPassword())) {
+            return false;
+        }
+
+        String newUserPassword = passwordEncoder.encode(passwordChangeForm.newPassword());
+        currentUser.setPassword(newUserPassword);
+        userRepository.save(currentUser);
+        return true;
+    }
+
+    @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -220,97 +332,6 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    //TODO: do poprawy
-/*
-    @Override
-    public User editUserPassword(User user) {
-        String login = user.getLogin();
-        Optional<User> userToEdit = userRepository.findUserByLogin(login);
-
-        if(userToEdit.isEmpty()) return Optional.empty();
-        if (userToEdit.isPresent()) {
-            String password = user.getPassword();
-            userToEdit.setPassword(password);
-            userRepository.save(userToEdit);
-            return userToEdit;
-        }
-        return null;
-    }
-
-    @Override
-    public User editUserDescription(User user) {
-        String login = user.getLogin();
-        User userToEdit = userRepository.findUserByLogin(login);
-
-        if (userToEdit != null) {
-            String description = user.getProfileDescription();
-            userToEdit.setProfileDescription(description);
-            userRepository.save(userToEdit);
-            return userToEdit;
-        }
-        return null;
-    }
-
-    @Override
-    public User editUserAvatar(User user) {
-        String login = user.getLogin();
-        User userToEdit = userRepository.findUserByLogin(login);
-
-        if (userToEdit != null) {
-            URL avatar = user.getAvatarUrl();
-            userToEdit.setAvatarUrl(avatar);
-            userRepository.save(userToEdit);
-            return userToEdit;
-        }
-        return null;
-    }
-
-    @Override
-    public User editUserStatus(User user) {
-        String login = user.getLogin();
-        User userToEdit = userRepository.findUserByLogin(login);
-
-        if (userToEdit != null) {
-            Boolean status = user.getStatus();
-            userToEdit.setStatus(status);
-            userRepository.save(userToEdit);
-            return userToEdit;
-        }
-        return null;
-    }
-
-    @Override
-    public User editUserAddress(String username, Address address) {
-        User userToEdit = userRepository.findUserByLogin(username);
-
-        if (userToEdit != null) {
-            address.setId(userToEdit.getAddress().getId());
-            userToEdit.setAddress(address);
-            userRepository.save(userToEdit);
-            return userToEdit;
-        }
-        return null;
-    }
-
-    @Override
-    public Address getUserAddress(String username) {
-        User user = userRepository.findUserByLogin(username);
-        if (user != null) {
-            return user.getAddress();
-        }
-        return null;
-    }
-
-    @Override
-    public Category getUserCategory(String username) {
-        Optional<User> user = userRepository.findUserByLogin(username);
-        if (user.isPresent()) {
-            return user.getCategory();
-        }
-        return null;
-    }
-*/
-
     @Override
     public boolean loginAlreadyExists(String login) {
         return userRepository.findUserByLogin(login).isPresent();
@@ -332,7 +353,7 @@ public class UserServiceImpl implements UserService {
                 request.email(), passwordEncoder.encode(request.password()), null, null,
                 false, UserRole.USER, "https://i0.wp.com/sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png?fit=256%2C256&ssl=1",
                 false, false, null, null,
-                null, null, null, null, null);
+                null, new Address(addressRepository.count() + 1, null, null, null, null), null , null, null);
         user = userRepository.save(user);
 
         try {

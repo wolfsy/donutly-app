@@ -154,6 +154,7 @@ public class UserController {
         return ResponseEntity.ok(newUser);
     }
 
+    // modyfikowanie numeru karty kredytowej klienta
     @PatchMapping(value = "/account/banknumber")
     public ResponseEntity<Void> updateUserAccountBankNumber(@RequestBody String accountNumber) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -162,6 +163,7 @@ public class UserController {
                 new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+    //modyfikowanie numeru telefonu klienta
     @PatchMapping(value = "/account/phonenumber")
     public ResponseEntity<Void> updateUserAccountPhoneNumber(@RequestBody String phoneNumber) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -169,6 +171,79 @@ public class UserController {
         return userService.updateUserAccountPhoneNumber(userLogin, phoneNumber) ?
                 new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
+    //modyfikacja adresu korespondencyjnego klienta
+    @PatchMapping(value = "/account/address")
+    public ResponseEntity<Void> updateUserAccountAddress(@RequestBody AddressChangeForm addressForm) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userLogin = userDetails.getUsername();
+        return userService.updateUserAccountAddress(userLogin, addressForm) ?
+                new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    //modyfikacja linku do domeny internetowej instagram
+    @PatchMapping(value = "/account/instagram")
+    public ResponseEntity<Void> updateUserAccountInstagram(@RequestBody String instagramUrl) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userLogin = userDetails.getUsername();
+        return userService.updateUserAccountInstagram(userLogin, instagramUrl) ?
+                new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    //modyfikacja linku do domeny internetowej youtube
+    @PatchMapping(value = "/account/youtube")
+    public ResponseEntity<Void> updateUserAccountYoutube(@RequestBody String youtubeUrl) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userLogin = userDetails.getUsername();
+        return userService.updateUserAccountYoutube(userLogin, youtubeUrl) ?
+                new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    //modyfikacja linku do domeny internetowej tiktok
+    @PatchMapping(value = "/account/tiktok")
+    public ResponseEntity<Void> updateUserAccountTiktok(@RequestBody String tiktokUrl) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userLogin = userDetails.getUsername();
+        return userService.updateUserAccountTiktok(userLogin, tiktokUrl) ?
+                new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    //modyfikacja zdjecia profilu uzytkownika
+    @PatchMapping(value = "/account/avatarUrl")
+    public ResponseEntity<Void> updateUserAccountAvatar(@RequestBody String avatarUrl) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userLogin = userDetails.getUsername();
+        return userService.updateUserAccountAvatar(userLogin, avatarUrl) ?
+                new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    //modyfikacja opisu profilu uzytkownika
+    @PatchMapping(value = "/account/description")
+    public ResponseEntity<Void> updateUserAccountProfileDescription(@RequestBody String description) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userLogin = userDetails.getUsername();
+        return userService.updateUserAccountProfileDescription(userLogin, description) ?
+                new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    //modyfikacja loginu uzytkownika
+    @PatchMapping(value = "/account/login")
+    public ResponseEntity<Void> updateUserAccountLogin(@RequestBody String login) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userLogin = userDetails.getUsername();
+        return userService.updateUserAccountProfileLogin(userLogin, login) ?
+                new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    //modyfikacja hasla uzytkownika
+    @PatchMapping(value = "/account/password")
+    public ResponseEntity<Void> updateUserAccountPassword(@RequestBody PasswordChangeForm passwordChangeForm) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userLogin = userDetails.getUsername();
+        return userService.updateUserAccountProfilePassword(userLogin, passwordChangeForm) ?
+                new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
 
     // wyświetlenie adresu użytkownika
     @GetMapping(value = "/address/{username}")
