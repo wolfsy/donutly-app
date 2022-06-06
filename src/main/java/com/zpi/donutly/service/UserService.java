@@ -61,4 +61,10 @@ public interface UserService {
     User getUserByEmail(String emailAddress);
 
     boolean updateUserAccountAddress(String userLogin, AddressForm addressForm);
+
+    boolean updateUserAccountInstagram(String userLogin, String instagramUrl);
+
+    boolean updateUserAccountYoutube(String userLogin, String youtubeUrl);
+
+    boolean updateUserAccountTiktok(String userLogin, String tiktokUrl);
 }

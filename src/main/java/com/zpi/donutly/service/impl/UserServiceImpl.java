@@ -180,6 +180,45 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean updateUserAccountInstagram(String userLogin, String instagramUrl) {
+        User currentUser = userRepository.findUserByLogin(userLogin).orElse(null);
+
+        if (currentUser == null || instagramUrl == null) {
+            return false;
+        }
+
+        currentUser.setInstagramUrl(instagramUrl);
+        userRepository.save(currentUser);
+        return true;
+    }
+
+    @Override
+    public boolean updateUserAccountYoutube(String userLogin, String youtubeUrl) {
+        User currentUser = userRepository.findUserByLogin(userLogin).orElse(null);
+
+        if (currentUser == null || youtubeUrl == null) {
+            return false;
+        }
+
+        currentUser.setInstagramUrl(youtubeUrl);
+        userRepository.save(currentUser);
+        return true;
+    }
+
+    @Override
+    public boolean updateUserAccountTiktok(String userLogin, String tiktokUrl) {
+        User currentUser = userRepository.findUserByLogin(userLogin).orElse(null);
+
+        if (currentUser == null || tiktokUrl == null) {
+            return false;
+        }
+
+        currentUser.setInstagramUrl(tiktokUrl);
+        userRepository.save(currentUser);
+        return true;
+    }
+
+    @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }

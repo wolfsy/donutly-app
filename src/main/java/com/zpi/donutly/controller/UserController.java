@@ -172,11 +172,39 @@ public class UserController {
                 new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+    //modyfikacja adresu korespondencyjnego klienta
     @PatchMapping(value = "/account/address")
     public ResponseEntity<Void> updateUserAccountAddress(@RequestBody AddressForm addressForm) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String userLogin = userDetails.getUsername();
         return userService.updateUserAccountAddress(userLogin, addressForm) ?
+                new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    //modyfikacja linku do domeny internetowej instagram
+    @PatchMapping(value = "/account/instagram")
+    public ResponseEntity<Void> updateUserAccountInstagram(@RequestBody String instagramUrl) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userLogin = userDetails.getUsername();
+        return userService.updateUserAccountInstagram(userLogin, instagramUrl) ?
+                new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    //modyfikacja linku do domeny internetowej youtube
+    @PatchMapping(value = "/account/youtube")
+    public ResponseEntity<Void> updateUserAccountYoutube(@RequestBody String youtubeUrl) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userLogin = userDetails.getUsername();
+        return userService.updateUserAccountYoutube(userLogin, youtubeUrl) ?
+                new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    //modyfikacja linku do domeny internetowej tiktok
+    @PatchMapping(value = "/account/tiktok")
+    public ResponseEntity<Void> updateUserAccountTiktok(@RequestBody String tiktokUrl) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userLogin = userDetails.getUsername();
+        return userService.updateUserAccountTiktok(userLogin, tiktokUrl) ?
                 new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 

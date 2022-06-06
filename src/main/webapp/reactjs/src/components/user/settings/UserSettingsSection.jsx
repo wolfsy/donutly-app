@@ -1,7 +1,7 @@
 import React from 'react'
 import { Row, Col, Card } from 'react-bootstrap';
 import ChangeAccountNumber from './forms/ChangeAccountNumber';
-import ChangePhoneNumber from './forms/ChangePhoneNumber';
+// import ChangePhoneNumber from './forms/ChangePhoneNumber';
 
 function UserSettingsSection({ user }) {
   return (
