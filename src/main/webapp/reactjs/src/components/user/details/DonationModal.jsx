@@ -100,7 +100,7 @@ function DonationModal({ showModal, handleCloseModal, selectedAmount, userId }) 
         if(success)
         {
             setSuccess(false);
-            window.location.reload();
+            window.location.href = "/browser";
         }
     }
 
