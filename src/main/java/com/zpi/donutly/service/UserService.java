@@ -67,4 +67,8 @@ public interface UserService {
     boolean updateUserAccountYoutube(String userLogin, String youtubeUrl);
 
     boolean updateUserAccountTiktok(String userLogin, String tiktokUrl);
+
+    boolean updateUserAccountAvatar(String userLogin, String avatarUrl);
+
+    boolean updateUserAccountProfileDescription(String userLogin, String description);
 }

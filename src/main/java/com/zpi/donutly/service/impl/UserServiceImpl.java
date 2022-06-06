@@ -219,6 +219,34 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean updateUserAccountAvatar(String userLogin, String avatarUrl) {
+        User currentUser = userRepository.findUserByLogin(userLogin).orElse(null);
+
+        if (currentUser == null || avatarUrl == null) {
+            return false;
+        }
+
+        currentUser.setInstagramUrl(avatarUrl);
+        userRepository.save(currentUser);
+        return true;
+    }
+
+    @Override
+    public boolean updateUserAccountProfileDescription(String userLogin, String description) {
+        User currentUser = userRepository.findUserByLogin(userLogin).orElse(null);
+
+        if (currentUser == null || description == null) {
+            return false;
+        }
+
+        currentUser.setInstagramUrl(description);
+        userRepository.save(currentUser);
+        return true;
+    }
+
+
+
+    @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }

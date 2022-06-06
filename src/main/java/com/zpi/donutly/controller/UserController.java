@@ -208,6 +208,24 @@ public class UserController {
                 new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+    //modyfikacja zdjecia profilu uzytkownika
+    @PatchMapping(value = "/account/avatarUrl")
+    public ResponseEntity<Void> updateUserAccountAvatar(@RequestBody String avatarUrl) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userLogin = userDetails.getUsername();
+        return userService.updateUserAccountAvatar(userLogin, avatarUrl) ?
+                new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    //modyfikacja opisu profilu uzytkownika
+    @PatchMapping(value = "/account/description")
+    public ResponseEntity<Void> updateUserAccountProfileDescription(@RequestBody String description) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userLogin = userDetails.getUsername();
+        return userService.updateUserAccountProfileDescription(userLogin, description) ?
+                new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
     // wyświetlenie adresu użytkownika
     @GetMapping(value = "/address/{username}")
     public ResponseEntity<Address> getUserAddress(@PathVariable String username) {
