@@ -1,9 +1,11 @@
 package com.zpi.donutly.service.impl;
 
 import com.zpi.donutly.model.Deposit;
+import com.zpi.donutly.model.Payment;
 import com.zpi.donutly.model.User;
 import com.zpi.donutly.model.UserRole;
 import com.zpi.donutly.repository.DepositRepository;
+import com.zpi.donutly.repository.PaymentRepository;
 import com.zpi.donutly.repository.UserRepository;
 import com.zpi.donutly.service.DepositService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ public class DepositServiceImpl implements DepositService {
 
     private final DepositRepository depositRepository;
     private final UserRepository userRepository;
+    private final PaymentRepository paymentRepository;
 
     @Override
     public Deposit editVisibilityById(Long id, boolean visibility) {
@@ -41,6 +44,12 @@ public class DepositServiceImpl implements DepositService {
         user.getDepositList().add(deposit);
         deposit.setUser(user);
         deposit.setTime(LocalDateTime.now());
+
+        Payment payment = user.getPayment();
+        payment.setPaymentBalance(payment.getPaymentBalance() + deposit.getAmount());
+        payment.setTotalPaymentBalance(payment.getTotalPaymentBalance() + deposit.getAmount());
+        paymentRepository.save(payment);
+
         return depositRepository.save(deposit);
     }
 
