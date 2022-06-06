@@ -1,4 +1,5 @@
 import axios from 'axios';
+import getAuthToken from './AuthService';
 
 const USER_API_BASE_URL = 'http://localhost:8080/api/user/';
 
@@ -77,7 +78,7 @@ class UserService {
                 headers: 
                 {
                      'Content-Type': 'application/json',
-                     'Authorization': 'Bearer '
+                     'Authorization': getAuthToken()
                 },
             }
         );
