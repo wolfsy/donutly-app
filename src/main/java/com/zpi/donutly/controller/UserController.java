@@ -174,7 +174,7 @@ public class UserController {
 
     //modyfikacja adresu korespondencyjnego klienta
     @PatchMapping(value = "/account/address")
-    public ResponseEntity<Void> updateUserAccountAddress(@RequestBody AddressForm addressForm) {
+    public ResponseEntity<Void> updateUserAccountAddress(@RequestBody AddressChangeForm addressForm) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String userLogin = userDetails.getUsername();
         return userService.updateUserAccountAddress(userLogin, addressForm) ?
@@ -234,6 +234,16 @@ public class UserController {
         return userService.updateUserAccountProfileLogin(userLogin, login) ?
                 new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
+    //modyfikacja hasla uzytkownika
+    @PatchMapping(value = "/account/password")
+    public ResponseEntity<Void> updateUserAccountPassword(@RequestBody PasswordChangeForm passwordChangeForm) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userLogin = userDetails.getUsername();
+        return userService.updateUserAccountProfilePassword(userLogin, passwordChangeForm) ?
+                new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
 
     // wyświetlenie adresu użytkownika
     @GetMapping(value = "/address/{username}")

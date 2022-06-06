@@ -60,7 +60,7 @@ public interface UserService {
 
     User getUserByEmail(String emailAddress);
 
-    boolean updateUserAccountAddress(String userLogin, AddressForm addressForm);
+    boolean updateUserAccountAddress(String userLogin, AddressChangeForm addressForm);
 
     boolean updateUserAccountInstagram(String userLogin, String instagramUrl);
 
@@ -73,4 +73,6 @@ public interface UserService {
     boolean updateUserAccountProfileDescription(String userLogin, String description);
 
     boolean updateUserAccountProfileLogin(String userLogin, String login);
+
+    boolean updateUserAccountProfilePassword(String userLogin, PasswordChangeForm passwordChangeForm);
 }

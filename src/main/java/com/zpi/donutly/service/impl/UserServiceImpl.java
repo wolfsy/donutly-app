@@ -5,7 +5,6 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.zpi.donutly.dto.*;
 import com.zpi.donutly.model.*;
 import com.zpi.donutly.repository.AddressRepository;
-import com.zpi.donutly.repository.CategoryRepository;
 import com.zpi.donutly.repository.EmailVerificationRepository;
 import com.zpi.donutly.repository.UserRepository;
 import com.zpi.donutly.service.EmailVerificationService;
@@ -158,7 +157,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updateUserAccountAddress(String userLogin, AddressForm addressForm) {
+    public boolean updateUserAccountAddress(String userLogin, AddressChangeForm addressForm) {
         User currentUser = userRepository.findUserByLogin(userLogin).orElse(null);
 
         if (currentUser == null || addressForm == null) {
@@ -257,6 +256,20 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    @Override
+    public boolean updateUserAccountProfilePassword(String userLogin, PasswordChangeForm passwordChangeForm) {
+        User currentUser = userRepository.findUserByLogin(userLogin).orElse(null);
+
+        if (currentUser == null || passwordChangeForm == null ||
+                !passwordEncoder.matches(passwordChangeForm.oldPassword(), currentUser.getPassword())) {
+            return false;
+        }
+
+        String newUserPassword = passwordEncoder.encode(passwordChangeForm.newPassword());
+        currentUser.setPassword(newUserPassword);
+        userRepository.save(currentUser);
+        return true;
+    }
 
     @Override
     public List<User> getAllUsers() {
@@ -318,97 +331,6 @@ public class UserServiceImpl implements UserService {
     public Category getUserCategory(String username) {
         return null;
     }
-
-    //TODO: do poprawy
-/*
-    @Override
-    public User editUserPassword(User user) {
-        String login = user.getLogin();
-        Optional<User> userToEdit = userRepository.findUserByLogin(login);
-
-        if(userToEdit.isEmpty()) return Optional.empty();
-        if (userToEdit.isPresent()) {
-            String password = user.getPassword();
-            userToEdit.setPassword(password);
-            userRepository.save(userToEdit);
-            return userToEdit;
-        }
-        return null;
-    }
-
-    @Override
-    public User editUserDescription(User user) {
-        String login = user.getLogin();
-        User userToEdit = userRepository.findUserByLogin(login);
-
-        if (userToEdit != null) {
-            String description = user.getProfileDescription();
-            userToEdit.setProfileDescription(description);
-            userRepository.save(userToEdit);
-            return userToEdit;
-        }
-        return null;
-    }
-
-    @Override
-    public User editUserAvatar(User user) {
-        String login = user.getLogin();
-        User userToEdit = userRepository.findUserByLogin(login);
-
-        if (userToEdit != null) {
-            URL avatar = user.getAvatarUrl();
-            userToEdit.setAvatarUrl(avatar);
-            userRepository.save(userToEdit);
-            return userToEdit;
-        }
-        return null;
-    }
-
-    @Override
-    public User editUserStatus(User user) {
-        String login = user.getLogin();
-        User userToEdit = userRepository.findUserByLogin(login);
-
-        if (userToEdit != null) {
-            Boolean status = user.getStatus();
-            userToEdit.setStatus(status);
-            userRepository.save(userToEdit);
-            return userToEdit;
-        }
-        return null;
-    }
-
-    @Override
-    public User editUserAddress(String username, Address address) {
-        User userToEdit = userRepository.findUserByLogin(username);
-
-        if (userToEdit != null) {
-            address.setId(userToEdit.getAddress().getId());
-            userToEdit.setAddress(address);
-            userRepository.save(userToEdit);
-            return userToEdit;
-        }
-        return null;
-    }
-
-    @Override
-    public Address getUserAddress(String username) {
-        User user = userRepository.findUserByLogin(username);
-        if (user != null) {
-            return user.getAddress();
-        }
-        return null;
-    }
-
-    @Override
-    public Category getUserCategory(String username) {
-        Optional<User> user = userRepository.findUserByLogin(username);
-        if (user.isPresent()) {
-            return user.getCategory();
-        }
-        return null;
-    }
-*/
 
     @Override
     public boolean loginAlreadyExists(String login) {
