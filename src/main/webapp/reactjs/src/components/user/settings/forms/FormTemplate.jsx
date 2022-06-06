@@ -1,29 +1,47 @@
-import { Row, Form, Col } from 'react-bootstrap';
+import { Row, Form, Col, Spinner } from 'react-bootstrap';
 
-function FormTemplate({ label, value, onChange, error, submit }) {
+function FormTemplate({ label, value, loading, success, successMsg,
+     errorMsg, onChange, onSubmit }) {
   return (
     <Row>
-        <Col xs={12} className="d-flex">
-            <Form className="w-75">
-                <Form.Group className="text-start">
-                    <Form.Label>{label}</Form.Label>
-                    <Form.Control 
-                        type="text"
-                        value={value || ""}
-                        onChange={onChange}
-                        isInvalid={!!error}
-                        required
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        {error}
-                    </Form.Control.Feedback>
-                </Form.Group>
-                
-            </Form>
-            <button className="app-button form-confirm-button ms-4"
-                    onClick={submit}
+        <Col xs={9} className="">
+            <fieldset disabled={loading}>
+                <Form validated={success}>
+                    <Form.Group className="text-start">
+                        <Form.Label>{label}</Form.Label>
+                        <Form.Control 
+                            type="text"
+                            value={value || ""}
+                            onChange={onChange}
+                            isInvalid={!!errorMsg}
+                            required
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errorMsg}
+                        </Form.Control.Feedback>
+                        <Form.Control.Feedback>
+                            {successMsg}
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                </Form>
+            </fieldset>
+        </Col>
+        <Col xs={3}>
+            <button className="app-button form-confirm-button"
+                        onClick={onSubmit}
+                        disabled={loading}
             >
-                    Confirm
+            {
+                loading ?
+                <Spinner
+                    as="span"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                /> : 
+                <span>Confirm</span>
+            }
             </button>
         </Col>
     </Row>
