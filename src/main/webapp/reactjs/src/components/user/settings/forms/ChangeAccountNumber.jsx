@@ -3,7 +3,7 @@ import FormTemplate from './FormTemplate';
 
 import UserService from '../../../../services/UserService';
 
-function ChangeAccountNumber({ currentNumber }) {
+function ChangeAccountNumber({ currentNumber, parentCallback }) {
     
     const [accountNumber, setAccountNumber] = useState(currentNumber);
     const [currentAccountNumber, setCurrentAccountNumber] = useState(currentNumber);
@@ -45,6 +45,7 @@ function ChangeAccountNumber({ currentNumber }) {
                 setCurrentAccountNumber(accountNumber);
                 setSuccess(true);
                 setIsLoading(false);
+                parentCallback(true);
             }
             catch(err) {
                 setFormError('Error while updating account number');
