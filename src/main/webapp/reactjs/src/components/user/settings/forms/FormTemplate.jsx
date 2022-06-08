@@ -1,7 +1,8 @@
 import { Row, Form, Col, Spinner } from 'react-bootstrap';
 
 function FormTemplate({ label, value, loading, success, successMsg,
-     errorMsg, onChange, onSubmit }) {
+     errorMsg, isTextArea, onChange, onSubmit }) {
+
   return (
     <Row>
         <Col xs={9} className="">
@@ -9,13 +10,26 @@ function FormTemplate({ label, value, loading, success, successMsg,
                 <Form validated={success}>
                     <Form.Group className="text-start">
                         <Form.Label>{label}</Form.Label>
-                        <Form.Control 
-                            type="text"
-                            value={value || ""}
-                            onChange={onChange}
-                            isInvalid={!!errorMsg}
-                            required
-                        />
+                        {
+                            isTextArea ?
+                            <Form.Control 
+                                as="textarea" 
+                                rows="7"
+                                type="text"
+                                value={value || ""}
+                                onChange={onChange}
+                                isInvalid={!!errorMsg}
+                                required
+                            />
+                            :
+                            <Form.Control 
+                                type="text"
+                                value={value || ""}
+                                onChange={onChange}
+                                isInvalid={!!errorMsg}
+                                required
+                            />
+                        }
                         <Form.Control.Feedback type="invalid">
                             {errorMsg}
                         </Form.Control.Feedback>

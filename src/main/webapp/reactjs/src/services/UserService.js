@@ -161,6 +161,21 @@ class UserService {
         return response;
     }
 
+    async updateUserAccountDescription(description) {
+        const response = await axios.patch(USER_API_BASE_URL + 'account/description',
+            description,
+            {
+                headers: 
+                {
+                     'Content-Type': 'text/plain',
+                     'Authorization': getAuthToken()
+                },
+            }
+        );
+        
+        return response;
+    }
+
 }
 
 export default new UserService()

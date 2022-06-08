@@ -6,6 +6,7 @@ import ChangeAccountAvatar from './forms/ChangeAccountAvatar';
 import ChangeAccountInstagram from './forms/ChangeAccountInstagram';
 import ChangeAccountYouTube from './forms/ChangeAccountYouTube';
 import ChangeAccountTikTok from './forms/ChangeAccountTikTok';
+import ChangeAccountDescription from './forms/ChangeAccountDescription';
 
 function UserSettingsSection({ user, parentCallback }) {
 
@@ -31,6 +32,9 @@ function UserSettingsSection({ user, parentCallback }) {
                 <Stack gap={4}>
                     <ChangeAccountAvatar currentAvatar={user.avatarURL}
                                          parentCallback={updateCallback}
+                    />
+                    <ChangeAccountDescription currentDescription={user.profileDescription}
+                                              parentCallback={updateCallback}
                     />
                 </Stack>
                 <h5 className="mt-5 mb-4">Socials</h5>
