@@ -7,6 +7,7 @@ import ChangeAccountInstagram from './forms/ChangeAccountInstagram';
 import ChangeAccountYouTube from './forms/ChangeAccountYouTube';
 import ChangeAccountTikTok from './forms/ChangeAccountTikTok';
 import ChangeAccountDescription from './forms/ChangeAccountDescription';
+import ChangeAccountPassword from './forms/ChangeAccountPassword';
 
 function UserSettingsSection({ user, parentCallback }) {
 
@@ -37,6 +38,8 @@ function UserSettingsSection({ user, parentCallback }) {
                                               parentCallback={updateCallback}
                     />
                 </Stack>
+                <h5 className="mt-5 mb-4">Change password</h5>
+                <ChangeAccountPassword />
                 <h5 className="mt-5 mb-4">Socials</h5>
                 <Stack gap={4}>
                     <ChangeAccountInstagram currentInstagram={user.InstagramURL}

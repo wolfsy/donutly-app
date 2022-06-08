@@ -176,6 +176,21 @@ class UserService {
         return response;
     }
 
+    async updateUserAccountPassword(oldPassword, newPassword, repeatedPassword) {
+        const response = await axios.patch(USER_API_BASE_URL + 'account/password',
+            JSON.stringify({ oldPassword, newPassword, repeatedPassword }),
+            {
+                headers: 
+                {
+                     'Content-Type': 'application/json',
+                     'Authorization': getAuthToken()
+                },
+            }
+        );
+        
+        return response;
+    }
+
 }
 
 export default new UserService()
