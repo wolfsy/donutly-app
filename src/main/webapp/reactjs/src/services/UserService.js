@@ -67,7 +67,7 @@ class UserService {
 
     async getUserInfoForUser(login) {
         const response = await axios.get(USER_API_BASE_URL + `info/${login}`);
-        
+
         return response;
     }
 
@@ -93,6 +93,21 @@ class UserService {
                 headers: 
                 {
                      'Content-Type': 'application/json',
+                     'Authorization': getAuthToken()
+                },
+            }
+        );
+        
+        return response;
+    }
+
+    async updateUserAccountAvatar(avatarUrl) {
+        const response = await axios.patch(USER_API_BASE_URL + 'account/avatarUrl',
+        avatarUrl,
+            {
+                headers: 
+                {
+                     'Content-Type': 'text/plain',
                      'Authorization': getAuthToken()
                 },
             }

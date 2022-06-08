@@ -2,6 +2,7 @@ import { Row, Col, Card, Stack } from 'react-bootstrap';
 
 import ChangeAccountNumber from './forms/ChangeAccountNumber';
 import ChangePhoneNumber from './forms/ChangePhoneNumber';
+import ChangeAccountAvatar from './forms/ChangeAccountAvatar';
 
 function UserSettingsSection({ user, parentCallback }) {
 
@@ -16,11 +17,17 @@ function UserSettingsSection({ user, parentCallback }) {
                 <h3 className="mb-5">Update user data</h3>
                 <Stack gap={4}>
                     <ChangeAccountNumber currentNumber={user.accountNumber}
-                                        parentCallback={updateCallback}
+                                         parentCallback={updateCallback}
                     />
 
                     <ChangePhoneNumber currentNumber={user.phone}
-                                      parentCallback={updateCallback}
+                                       parentCallback={updateCallback}
+                    />
+                </Stack>
+                <h5 className="my-5">User account details</h5>
+                <Stack gap={4}>
+                    <ChangeAccountAvatar currentAvatar={user.avatarURL}
+                                         parentCallback={updateCallback}
                     />
                 </Stack>
             </Card>
