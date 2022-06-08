@@ -116,6 +116,21 @@ class UserService {
         return response;
     }
 
+    async updateUserAccountInstagram(instagramUrl) {
+        const response = await axios.patch(USER_API_BASE_URL + 'account/instagram',
+            instagramUrl,
+            {
+                headers: 
+                {
+                     'Content-Type': 'text/plain',
+                     'Authorization': getAuthToken()
+                },
+            }
+        );
+        
+        return response;
+    }
+
 }
 
 export default new UserService()

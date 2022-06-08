@@ -3,6 +3,7 @@ import { Row, Col, Card, Stack } from 'react-bootstrap';
 import ChangeAccountNumber from './forms/ChangeAccountNumber';
 import ChangePhoneNumber from './forms/ChangePhoneNumber';
 import ChangeAccountAvatar from './forms/ChangeAccountAvatar';
+import ChangeAccountInstagram from './forms/ChangeAccountInstagram';
 
 function UserSettingsSection({ user, parentCallback }) {
 
@@ -28,6 +29,12 @@ function UserSettingsSection({ user, parentCallback }) {
                 <Stack gap={4}>
                     <ChangeAccountAvatar currentAvatar={user.avatarURL}
                                          parentCallback={updateCallback}
+                    />
+                </Stack>
+                <h5 className="mt-5 mb-4">Socials</h5>
+                <Stack gap={4}>
+                    <ChangeAccountInstagram currentInstagram={user.InstagramURL}
+                                            parentCallback={updateCallback}
                     />
                 </Stack>
             </Card>
