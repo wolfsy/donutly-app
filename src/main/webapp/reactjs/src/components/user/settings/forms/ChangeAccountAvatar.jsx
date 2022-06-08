@@ -18,7 +18,7 @@ function ChangeAccountAvatar({ currentAvatar, parentCallback }) {
     const validateForm = () => {
         if(accountAvatar === currentAvatar)
         {
-            setFormError('New account avatar url is the same as the current one');
+            setFormError('New Avatar URL is the same as the current one');
             return false;
         }
         
@@ -26,6 +26,7 @@ function ChangeAccountAvatar({ currentAvatar, parentCallback }) {
     }
 
     const handleSubmit = async (e) => {
+
         const apiCall = async () => {
             try {
                 setIsLoading(true);
@@ -35,7 +36,7 @@ function ChangeAccountAvatar({ currentAvatar, parentCallback }) {
                 parentCallback(true);
             }
             catch(err) {
-                setFormError('Error while updating account avatar url');
+                setFormError('Error while updating Avatar URL');
             }
         }
 
@@ -47,10 +48,10 @@ function ChangeAccountAvatar({ currentAvatar, parentCallback }) {
 
   return (
     <FormTemplate 
-        label={"Account avatar url"}
+        label={"Avatar URL"}
         value={accountAvatar}
         success={success}
-        successMsg={"Account avatar url has been updated"}
+        successMsg={"Avatar URL has been updated"}
         errorMsg={formError}
         loading={isLoading}
         onChange={(e) => setAccountAvatar(e.target.value)}
