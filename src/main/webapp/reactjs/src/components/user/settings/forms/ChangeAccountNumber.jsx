@@ -6,7 +6,6 @@ import UserService from '../../../../services/UserService';
 function ChangeAccountNumber({ currentNumber, parentCallback }) {
     
     const [accountNumber, setAccountNumber] = useState(currentNumber);
-    const [currentAccountNumber, setCurrentAccountNumber] = useState(currentNumber);
     const [formError, setFormError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -17,17 +16,12 @@ function ChangeAccountNumber({ currentNumber, parentCallback }) {
     }, [accountNumber]);
 
     const validateForm = () => {
-        if(!accountNumber)
-        {
-            setFormError('Account number is required');
-            return false;
-        }
-        else if(isNaN(accountNumber))
+        if(isNaN(accountNumber))
         {
             setFormError('Account number must be a number');
             return false;
         }
-        else if(accountNumber === currentAccountNumber)
+        else if(accountNumber ===  currentNumber)
         {
             setFormError('New account number is the same as the current one');
             return false;
@@ -42,7 +36,6 @@ function ChangeAccountNumber({ currentNumber, parentCallback }) {
             try {
                 setIsLoading(true);
                 await UserService.updateUserAccountBankNumber(accountNumber);
-                setCurrentAccountNumber(accountNumber);
                 setSuccess(true);
                 setIsLoading(false);
                 parentCallback(true);
@@ -53,7 +46,7 @@ function ChangeAccountNumber({ currentNumber, parentCallback }) {
         }
 
         e.preventDefault();
-
+        setSuccess(false);
         if(validateForm())
             apiCall();
     }

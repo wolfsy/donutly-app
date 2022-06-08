@@ -73,11 +73,11 @@ class UserService {
 
     async updateUserAccountBankNumber(number) {
         const response = await axios.patch(USER_API_BASE_URL + 'account/banknumber',
-             number,
+            number,
             {
                 headers: 
                 {
-                     'Content-Type': 'application/json',
+                     'Content-Type': 'text/plain',
                      'Authorization': getAuthToken()
                 },
             }
@@ -88,11 +88,11 @@ class UserService {
 
     async updateUserAccountPhoneNumber(number) {
         const response = await axios.patch(USER_API_BASE_URL + 'account/phonenumber',
-             number,
+            number,
             {
                 headers: 
                 {
-                     'Content-Type': 'application/json',
+                     'Content-Type': 'text/plain',
                      'Authorization': getAuthToken()
                 },
             }
@@ -103,7 +103,7 @@ class UserService {
 
     async updateUserAccountAvatar(avatarUrl) {
         const response = await axios.patch(USER_API_BASE_URL + 'account/avatarUrl',
-        avatarUrl,
+            avatarUrl,
             {
                 headers: 
                 {

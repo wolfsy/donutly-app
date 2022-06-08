@@ -4,20 +4,11 @@ import FormTemplate from './FormTemplate';
 import UserService from '../../../../services/UserService';
 
 function ChangePhoneNumber({ currentNumber, parentCallback }) {
+
     const [phoneNumber, setPhoneNumber] = useState(currentNumber);
-    const [currentPhoneNumber, setCurrentPhoneNumber] = useState(currentNumber);
     const [formError, setFormError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [success, setSuccess] = useState(false);
-
-    useEffect(() => {
-        if(isNaN(currentNumber))
-        {
-            const number = currentNumber.replace(/['"]+/g, '');
-            setPhoneNumber(number);
-            setCurrentPhoneNumber(number);
-        }
-    }, []);
 
     useEffect(() => {
         setFormError('');
@@ -25,12 +16,7 @@ function ChangePhoneNumber({ currentNumber, parentCallback }) {
     }, [phoneNumber]);
 
     const validateForm = () => {
-        if(!phoneNumber)
-        {
-            setFormError('Phone number is required');
-            return false;
-        }
-        else if(phoneNumber === currentPhoneNumber)
+        if(phoneNumber === currentNumber)
         {
             setFormError('New phone number is the same as the current one');
             return false;
@@ -44,7 +30,6 @@ function ChangePhoneNumber({ currentNumber, parentCallback }) {
             try {
                 setIsLoading(true);
                 await UserService.updateUserAccountPhoneNumber(phoneNumber);
-                setCurrentPhoneNumber(phoneNumber);
                 setSuccess(true);
                 setIsLoading(false);
                 parentCallback(true);
@@ -56,7 +41,6 @@ function ChangePhoneNumber({ currentNumber, parentCallback }) {
 
         e.preventDefault();
         setSuccess(false);
-
         if(validateForm())
             apiCall();
     }

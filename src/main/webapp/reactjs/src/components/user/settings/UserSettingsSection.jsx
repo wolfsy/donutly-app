@@ -24,7 +24,7 @@ function UserSettingsSection({ user, parentCallback }) {
                                        parentCallback={updateCallback}
                     />
                 </Stack>
-                <h5 className="my-5">User account details</h5>
+                <h5 className="mt-5 mb-4">User account details</h5>
                 <Stack gap={4}>
                     <ChangeAccountAvatar currentAvatar={user.avatarURL}
                                          parentCallback={updateCallback}

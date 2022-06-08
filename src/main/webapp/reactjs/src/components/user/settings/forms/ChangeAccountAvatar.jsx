@@ -39,8 +39,8 @@ function ChangeAccountAvatar({ currentAvatar, parentCallback }) {
             }
         }
 
-        setSuccess(false);
         e.preventDefault();
+        setSuccess(false);
         if(validateForm())
             apiCall();
     }
