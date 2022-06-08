@@ -1,9 +1,20 @@
+import { useEffect, useState } from 'react';
 import { Row, Col, Card, Image } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import "./UserSettings.css";
 
 function UserInfoSection({ user }) {
+
+    const [phone, setPhone] = useState(user.phone);
+
+    useEffect(() => {
+        if(isNaN(user.phone))
+        {
+            setPhone(user.phone.replace(/['"]+/g, ''));
+        }
+    }, [user]);
+
   return (
     <Row>
         <Col>
@@ -28,7 +39,7 @@ function UserInfoSection({ user }) {
                     </p>
                     <p>
                         <b>Phone number: </b>
-                        <span className="text-secondary">{user.phone}</span>
+                        <span className="text-secondary">{phone}</span>
                     </p>
                 </Card>
                 <Row className="my-5 justify-content-center">

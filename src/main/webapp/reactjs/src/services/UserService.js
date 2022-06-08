@@ -86,6 +86,21 @@ class UserService {
         return response;
     }
 
+    async updateUserAccountPhoneNumber(number) {
+        const response = await axios.patch(USER_API_BASE_URL + 'account/phonenumber',
+             number,
+            {
+                headers: 
+                {
+                     'Content-Type': 'application/json',
+                     'Authorization': getAuthToken()
+                },
+            }
+        );
+        
+        return response;
+    }
+
 }
 
 export default new UserService()
