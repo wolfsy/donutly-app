@@ -6,6 +6,7 @@ import com.zpi.donutly.dto.*;
 import com.zpi.donutly.model.*;
 import com.zpi.donutly.repository.AddressRepository;
 import com.zpi.donutly.repository.EmailVerificationRepository;
+import com.zpi.donutly.repository.PaymentRepository;
 import com.zpi.donutly.repository.UserRepository;
 import com.zpi.donutly.service.EmailVerificationService;
 import com.zpi.donutly.service.UserService;
@@ -35,6 +36,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     private final AddressRepository addressRepository;
+    private final PaymentRepository paymentRepository;
     private final EmailVerificationService emailVerificationService;
     private final EmailVerificationRepository emailVerificationRepository;
 
@@ -353,7 +355,8 @@ public class UserServiceImpl implements UserService {
                 request.email(), passwordEncoder.encode(request.password()), null, null,
                 false, UserRole.USER, "https://i0.wp.com/sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png?fit=256%2C256&ssl=1",
                 false, false, null, null,
-                null, new Address(addressRepository.count() + 1, null, null, null, null), null , null, null);
+                null, new Address(addressRepository.count() + 1, null, null, null, null), null , null,
+                new Payment(paymentRepository.count() + 1, 0.00, LocalDateTime.now(), 0.00));
         user = userRepository.save(user);
 
         try {
