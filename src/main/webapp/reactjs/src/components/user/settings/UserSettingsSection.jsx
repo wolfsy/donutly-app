@@ -5,6 +5,7 @@ import ChangePhoneNumber from './forms/ChangePhoneNumber';
 import ChangeAccountAvatar from './forms/ChangeAccountAvatar';
 import ChangeAccountInstagram from './forms/ChangeAccountInstagram';
 import ChangeAccountYouTube from './forms/ChangeAccountYouTube';
+import ChangeAccountTikTok from './forms/ChangeAccountTikTok';
 
 function UserSettingsSection({ user, parentCallback }) {
 
@@ -38,6 +39,9 @@ function UserSettingsSection({ user, parentCallback }) {
                                             parentCallback={updateCallback}
                     />
                     <ChangeAccountYouTube  currentYouTube={user.YouTubeURL}
+                                            parentCallback={updateCallback}
+                    />
+                    <ChangeAccountTikTok  currentTikTok={user.TikTokURL}
                                             parentCallback={updateCallback}
                     />
                 </Stack>

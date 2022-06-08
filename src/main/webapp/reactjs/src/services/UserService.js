@@ -146,6 +146,21 @@ class UserService {
         return response;
     }
 
+    async updateUserAccountTiktok(tikTokUrl) {
+        const response = await axios.patch(USER_API_BASE_URL + 'account/tiktok',
+            tikTokUrl,
+            {
+                headers: 
+                {
+                     'Content-Type': 'text/plain',
+                     'Authorization': getAuthToken()
+                },
+            }
+        );
+        
+        return response;
+    }
+
 }
 
 export default new UserService()
