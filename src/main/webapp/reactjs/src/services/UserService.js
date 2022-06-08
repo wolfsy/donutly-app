@@ -131,6 +131,21 @@ class UserService {
         return response;
     }
 
+    async updateUserAccountYoutube(youTubeUrl) {
+        const response = await axios.patch(USER_API_BASE_URL + 'account/youtube',
+            youTubeUrl,
+            {
+                headers: 
+                {
+                     'Content-Type': 'text/plain',
+                     'Authorization': getAuthToken()
+                },
+            }
+        );
+        
+        return response;
+    }
+
 }
 
 export default new UserService()
