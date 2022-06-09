@@ -303,26 +303,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User addUser(User user) {
-        return null;
-    }
-
-    @Override
-    public User editUserPassword(User user) {
-        return null;
-    }
-
-    @Override
-    public User editUserDescription(User user) {
-        return null;
-    }
-
-    @Override
-    public User editUserAvatar(User user) {
-        return null;
-    }
-
-    @Override
     public User editUserStatus(Long userId) {
         User user = userRepository.findUserById(userId);
         if (user != null) {
@@ -330,16 +310,6 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
             return user;
         }
-        return null;
-    }
-
-    @Override
-    public Address getUserAddress(String username) {
-        return null;
-    }
-
-    @Override
-    public Category getUserCategory(String username) {
         return null;
     }
 

@@ -1,8 +1,6 @@
 package com.zpi.donutly.controller;
 
 import com.zpi.donutly.dto.*;
-import com.zpi.donutly.model.Address;
-import com.zpi.donutly.model.Category;
 import com.zpi.donutly.model.User;
 import com.zpi.donutly.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -102,36 +100,6 @@ public class UserController {
     public ResponseEntity<List<User>> getUsersByCategoryIdForRole(@PathVariable Long categoryId, @PathVariable String login) {
         List<User> userList = userService.getUsersByCategoryIdForRole(categoryId, login);
         return ResponseEntity.ok(userList);
-    }
-
-    // edycja hasła użytkownika
-    @PatchMapping(value = "/password")
-    public ResponseEntity<User> editUserPassword(@RequestBody User user) {
-        User currentUser = userService.editUserPassword(user);
-        if (currentUser == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(currentUser);
-    }
-
-    // edycja opisu użytkownika
-    @PatchMapping(value = "/description")
-    public ResponseEntity<User> editUserDescription(@RequestBody User user) {
-        User newUser = userService.editUserDescription(user);
-        if (newUser == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(newUser);
-    }
-
-    // edycja avataru użytkownika
-    @PatchMapping(value = "/avatar")
-    public ResponseEntity<User> editUserAvatar(@RequestBody User user) {
-        User newUser = userService.editUserAvatar(user);
-        if (newUser == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(newUser);
     }
 
     // edycja statusu zablokowania - "status" = true - zablokowany, "status" = false - odblokowany
@@ -241,21 +209,6 @@ public class UserController {
         String userLogin = userDetails.getUsername();
         return userService.updateUserAccountProfilePassword(userLogin, passwordChangeForm) ?
                 new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
-
-
-    // wyświetlenie adresu użytkownika
-    @GetMapping(value = "/address/{username}")
-    public ResponseEntity<Address> getUserAddress(@PathVariable String username) {
-        Address address = userService.getUserAddress(username);
-        return ResponseEntity.ok(address);
-    }
-
-    // wyświetlenie kategorii użytkownika
-    @GetMapping(value = "/category/{username}")
-    public ResponseEntity<Category> getUserCategory(@PathVariable String username) {
-        Category category = userService.getUserCategory(username);
-        return ResponseEntity.ok(category);
     }
 
     // wyświetlenie informacji o użytkowniku dla admina
