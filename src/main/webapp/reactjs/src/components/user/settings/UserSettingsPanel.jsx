@@ -61,10 +61,10 @@ function UserSettingsPanel() {
                     (   
                         !errorMsg ?
                         <>
-                            <Col md={5}>
+                            <Col xs={12} md={10} lg={6} xl={5} className="my-3">
                                 <UserInfoSection user={user} />
                             </Col>
-                            <Col md={5}>
+                            <Col xs={12} md={10} lg={6} xl={5} className="my-3">
                                 <UserSettingsSection user={user}
                                                      parentCallback={updateCallback}
                                  />

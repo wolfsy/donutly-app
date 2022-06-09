@@ -89,7 +89,7 @@ function ChangeAccountPassword() {
 
   return (
     <Row>
-        <Col xs={9} className="">
+        <Col xs={8} className="">
             <fieldset disabled={isLoading}>
                 <Form ref={formRef}>
                     <Form.Group className="text-start">

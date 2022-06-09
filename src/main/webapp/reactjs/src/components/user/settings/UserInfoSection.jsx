@@ -33,10 +33,12 @@ function UserInfoSection({ user }) {
                     </p>
                 </Card>
                 <Row className="my-5 justify-content-center">
-                    <Col xl={4}>
-                        <Card className="ps-4 py-4 user-settings-smaller-card">
-                            <Image className="user-card-img" src={user.avatarURL} />
-                        </Card>
+                    <Col xs={6} sm={7} xl={4}>
+                        <div className="d-flex justify-content-center">
+                            <Card className="p-4 user-settings-smaller-card">
+                                <Image className="user-card-img" src={user.avatarURL} />
+                            </Card>
+                        </div>
                     </Col>
                 </Row>
                 <Card className="user-settings-smaller-card text-start" body>
