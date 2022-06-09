@@ -206,6 +206,21 @@ class UserService {
         return response;
     }
 
+    async updateUserAccountCategory(category) {
+        const response = await axios.patch(USER_API_BASE_URL + 'account/category',
+            JSON.stringify({ id: category }),
+            {
+                headers: 
+                {
+                     'Content-Type': 'application/json',
+                     'Authorization': getAuthToken()
+                },
+            }
+        );
+        
+        return response;
+    }
+
 }
 
 export default new UserService()
