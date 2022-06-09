@@ -8,6 +8,7 @@ import ChangeAccountYouTube from './forms/ChangeAccountYouTube';
 import ChangeAccountTikTok from './forms/ChangeAccountTikTok';
 import ChangeAccountDescription from './forms/ChangeAccountDescription';
 import ChangeAccountPassword from './forms/ChangeAccountPassword';
+import ChangeAccountAddress from './forms/ChangeAccountAddress';
 
 function UserSettingsSection({ user, parentCallback }) {
 
@@ -52,6 +53,10 @@ function UserSettingsSection({ user, parentCallback }) {
                                             parentCallback={updateCallback}
                     />
                 </Stack>
+                <h5 className="mt-5 mb-4">Address</h5>
+                <ChangeAccountAddress  currentAddress={{ street: user.street, number: user.number, city: user.city, zipCode: user.zipCode }}
+                                       parentCallback={updateCallback}
+                />
             </Card>
         </Col>
     </Row>

@@ -191,6 +191,21 @@ class UserService {
         return response;
     }
 
+    async updateUserAccountAddress(address) {
+        const response = await axios.patch(USER_API_BASE_URL + 'account/address',
+            JSON.stringify(address),
+            {
+                headers: 
+                {
+                     'Content-Type': 'application/json',
+                     'Authorization': getAuthToken()
+                },
+            }
+        );
+        
+        return response;
+    }
+
 }
 
 export default new UserService()
