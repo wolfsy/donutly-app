@@ -21,6 +21,11 @@ function ChangeAccountAvatar({ currentAvatar, parentCallback }) {
             setFormError('New Avatar URL is the same as the current one');
             return false;
         }
+        else if(accountAvatar.length > 255)
+        {
+            setFormError('Avatar URL must be less than 255 characters');
+            return false;
+        }
         
         return true;
     }

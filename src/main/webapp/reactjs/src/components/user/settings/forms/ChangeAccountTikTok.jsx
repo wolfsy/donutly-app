@@ -21,6 +21,11 @@ function ChangeAccountTikTok({ currentTikTok, parentCallback }) {
             setFormError('New TikTok URL is the same as the current one');
             return false;
         }
+        else if(accountTikTok.length > 255)
+        {
+            setFormError('TikTok URL must be less than 255 characters');
+            return false;
+        }
         
         return true;
     }

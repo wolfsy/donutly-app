@@ -21,7 +21,12 @@ function ChangePhoneNumber({ currentNumber, parentCallback }) {
             setFormError('New phone number is the same as the current one');
             return false;
         }
-
+        else if(phoneNumber.length > 30)
+        {
+            setFormError('Phone number must be less than 30 characters');
+            return false;
+        }
+        
         return true;
     }
 

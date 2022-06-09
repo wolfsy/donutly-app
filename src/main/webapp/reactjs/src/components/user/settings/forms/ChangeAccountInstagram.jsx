@@ -21,6 +21,11 @@ function ChangeAccountInstagram({ currentInstagram, parentCallback }) {
             setFormError('New Instagram URL is the same as the current one');
             return false;
         }
+        else if(accountInstagram.length > 255)
+        {
+            setFormError('Instagram URL must be less than 255 characters');
+            return false;
+        }
         
         return true;
     }

@@ -21,6 +21,11 @@ function ChangeAccountYouTube({ currentYouTube, parentCallback }) {
             setFormError('New YouTube URL is the same as the current one');
             return false;
         }
+        else if(accountYouTube.length > 255)
+        {
+            setFormError('YouTube URL must be less than 255 characters');
+            return false;
+        }
         
         return true;
     }

@@ -21,6 +21,11 @@ function ChangeAccountDescription({ currentDescription, parentCallback }) {
             setFormError('New Description is the same as the current one');
             return false;
         }
+        else if(accountDescription.length > 255)
+        {
+            setFormError('Description must be less than 255 characters');
+            return false;
+        }
         
         return true;
     }

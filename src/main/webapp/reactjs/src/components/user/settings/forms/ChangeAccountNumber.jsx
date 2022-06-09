@@ -18,12 +18,17 @@ function ChangeAccountNumber({ currentNumber, parentCallback }) {
     const validateForm = () => {
         if(isNaN(accountNumber))
         {
-            setFormError('Account number must be a number');
+            setFormError('Bank account number must be a number');
             return false;
         }
         else if(accountNumber ===  currentNumber)
         {
-            setFormError('New account number is the same as the current one');
+            setFormError('New bank account number is the same as the current one');
+            return false;
+        }
+        else if(accountNumber.length > 255)
+        {
+            setFormError('Bank account must be less than 255 characters');
             return false;
         }
 
