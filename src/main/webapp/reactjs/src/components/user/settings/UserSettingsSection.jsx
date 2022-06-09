@@ -9,6 +9,8 @@ import ChangeAccountTikTok from './forms/ChangeAccountTikTok';
 import ChangeAccountDescription from './forms/ChangeAccountDescription';
 import ChangeAccountPassword from './forms/ChangeAccountPassword';
 import ChangeAccountAddress from './forms/ChangeAccountAddress';
+import ChangeAccountCategory from './forms/ChangeAccountCategory';
+import RequestWithdraw from './forms/RequestWithdraw';
 
 function UserSettingsSection({ user, parentCallback }) {
 
@@ -20,7 +22,10 @@ function UserSettingsSection({ user, parentCallback }) {
     <Row>
         <Col>
             <Card className="user-settings-card bg-light-powder" body>
-                <h3 className="mb-5">Update user data</h3>
+                <h3>Update user data</h3>
+                <div className="mt-2 mb-5">
+                    <RequestWithdraw />
+                </div>
                 <Stack gap={4}>
                     <ChangeAccountNumber currentNumber={user.accountNumber}
                                          parentCallback={updateCallback}
@@ -37,6 +42,9 @@ function UserSettingsSection({ user, parentCallback }) {
                     />
                     <ChangeAccountDescription currentDescription={user.profileDescription}
                                               parentCallback={updateCallback}
+                    />
+                    <ChangeAccountCategory currentCategory={user.categoryId}
+                                           parentCallback={updateCallback}
                     />
                 </Stack>
                 <h5 className="mt-5 mb-4">Change password</h5>
