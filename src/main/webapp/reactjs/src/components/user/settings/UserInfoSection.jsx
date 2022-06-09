@@ -43,6 +43,10 @@ function UserInfoSection({ user }) {
                 </Row>
                 <Card className="user-settings-smaller-card text-start" body>
                     <p className="mb-3 mt-2">
+                        <b>Category: </b>
+                        <span className="text-secondary">{user.category}</span>
+                    </p>
+                    <p className="mb-3">
                         <b>Login: </b>
                         <span className="text-secondary">{user.login}</span>
                     </p>

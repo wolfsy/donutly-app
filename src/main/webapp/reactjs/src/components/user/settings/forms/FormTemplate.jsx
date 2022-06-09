@@ -5,7 +5,7 @@ function FormTemplate({ label, value, loading, success, successMsg,
 
   return (
     <Row>
-        <Col xs={8} className="">
+        <Col xs={8} xl={9} className="">
             <fieldset disabled={loading}>
                 <Form validated={success}>
                     <Form.Group className="text-start">

@@ -86,7 +86,7 @@ function ChangeAccountAddress({ currentAddress, parentCallback }) {
 
   return (
     <Row>
-        <Col xs={8} className="">
+        <Col xs={8} xl={9} className="">
             <fieldset disabled={isLoading}>
                 <Form ref={formRef}>
                     <Form.Group className="text-start">
