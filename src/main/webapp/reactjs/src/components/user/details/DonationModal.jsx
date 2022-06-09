@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useRef, useState, useEffect } from 'react';
 import { Form, InputGroup, Modal, Stack, Spinner } from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,6 +8,7 @@ import DepositService from '../../../services/DepositService';
 
 function DonationModal({ showModal, handleCloseModal, selectedAmount, userId }) {
 
+    const navigate = useNavigate();
     const formRef = useRef();
     const errorRef = useRef();
     const [form, setForm] = useState({});
@@ -100,7 +102,7 @@ function DonationModal({ showModal, handleCloseModal, selectedAmount, userId }) 
         if(success)
         {
             setSuccess(false);
-            window.location.href = "/browser";
+            navigate("/browser");
         }
     }
 
