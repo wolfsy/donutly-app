@@ -27,5 +27,5 @@ public record UserProfileInfo(
         @Null String number,
         @Null String city,
         @Null String zipCode
-){
+) {
 }

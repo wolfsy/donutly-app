@@ -28,8 +28,6 @@ public interface UserService {
 
     User editUserStatus(Long userId);
 
-    User editUserAddress(String username, Address address);
-
     Address getUserAddress(String username);
 
     Category getUserCategory(String username);
@@ -76,5 +74,5 @@ public interface UserService {
 
     boolean updateUserAccountProfilePassword(String userLogin, PasswordChangeForm passwordChangeForm);
 
-    boolean updateUserAccountCategory(String userLogin, String category);
+    boolean updateUserAccountCategory(String userLogin, CategoryChangeForm categoryForm);
 }
