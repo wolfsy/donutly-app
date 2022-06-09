@@ -288,6 +288,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean updateUserAccountBalanceAndLastWithdraw(String userLogin) {
+        User currentUser = userRepository.findUserByLogin(userLogin).orElse(null);
+
+        if (currentUser == null) {
+            return false;
+        }
+
+        currentUser.getPayment().setPaymentBalance(0.0);
+        currentUser.getPayment().setLastWithdraw(LocalDateTime.now());
+        userRepository.save(currentUser);
+        return true;
+    }
+
+    @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }

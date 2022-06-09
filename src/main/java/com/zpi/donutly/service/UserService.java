@@ -61,4 +61,6 @@ public interface UserService {
     boolean updateUserAccountProfilePassword(String userLogin, PasswordChangeForm passwordChangeForm);
 
     boolean updateUserAccountCategory(String userLogin, CategoryChangeForm categoryForm);
+
+    boolean updateUserAccountBalanceAndLastWithdraw(String userLogin);
 }

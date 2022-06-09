@@ -139,6 +139,15 @@ public class UserController {
                 new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+    //modyfikacja obecnej ilosci pieniedzy uzytkownika i czasu wyplaty
+    @PatchMapping(value = "/account/withdraw")
+    public ResponseEntity<Void> updateUserAccountBalanceAndLastWithdraw() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userLogin = userDetails.getUsername();
+        return userService.updateUserAccountBalanceAndLastWithdraw(userLogin) ?
+                new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
     //modyfikacja linku do domeny internetowej instagram
     @PatchMapping(value = "/account/instagram")
     public ResponseEntity<Void> updateUserAccountInstagram(@RequestBody String instagramUrl) {
