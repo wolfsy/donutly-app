@@ -144,16 +144,6 @@ public class UserController {
         return ResponseEntity.ok(newUser);
     }
 
-    // edycja adresu zamieszkania użytkownika
-    @PatchMapping(value = "/address/{username}")
-    public ResponseEntity<User> editUserAddress(@PathVariable String username, @RequestBody Address address) {
-        User newUser = userService.editUserAddress(username, address);
-        if (newUser == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(newUser);
-    }
-
     // modyfikowanie numeru karty kredytowej klienta
     @PatchMapping(value = "/account/banknumber")
     public ResponseEntity<Void> updateUserAccountBankNumber(@RequestBody String accountNumber) {
@@ -219,10 +209,10 @@ public class UserController {
 
     // modyfikacja kategorii uzytkownika
     @PatchMapping(value = "/account/category")
-    public ResponseEntity<Void> updateUserAccountCategory(@RequestBody String category) {
+    public ResponseEntity<Void> updateUserAccountCategory(@RequestBody CategoryChangeForm categoryForm) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String userLogin = userDetails.getUsername();
-        return userService.updateUserAccountCategory(userLogin, category) ?
+        return userService.updateUserAccountCategory(userLogin, categoryForm) ?
                 new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 

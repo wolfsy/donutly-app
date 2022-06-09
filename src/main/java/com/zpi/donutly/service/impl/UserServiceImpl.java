@@ -274,11 +274,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updateUserAccountCategory(String userLogin, String category) {
+    public boolean updateUserAccountCategory(String userLogin, CategoryChangeForm categoryForm) {
         User currentUser = userRepository.findUserByLogin(userLogin).orElse(null);
-        Category categoryEntity = categoryRepository.findCategoryByName(category).orElse(null);
+        Category categoryEntity = categoryRepository.findCategoryById(categoryForm.idCategory()).orElse(null);
 
-        if (currentUser == null || category == null || categoryEntity == null) {
+        if (currentUser == null || categoryEntity == null) {
             return false;
         }
 
@@ -334,11 +334,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User editUserAddress(String username, Address address) {
-        return null;
-    }
-
-    @Override
     public Address getUserAddress(String username) {
         return null;
     }
@@ -369,7 +364,7 @@ public class UserServiceImpl implements UserService {
                 request.email(), passwordEncoder.encode(request.password()), null, null,
                 false, UserRole.USER, "https://i0.wp.com/sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png?fit=256%2C256&ssl=1",
                 false, false, null, null,
-                null, new Address(addressRepository.count() + 1, null, null, null, null), null , null,
+                null, new Address(addressRepository.count() + 1, null, null, null, null), null, null,
                 new Payment(paymentRepository.count() + 1, 0.00, LocalDateTime.now(), 0.00));
         user = userRepository.save(user);
 
