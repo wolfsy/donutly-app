@@ -119,6 +119,7 @@ public class UserServiceImpl implements UserService {
                 user.getFirstName(),
                 user.getLastName(),
                 user.getProfileDescription(),
+                user.getCategory() != null ? user.getCategory().getName() : null,
                 user.getStatus(),
                 user.getEmailVerification(),
                 user.getAdminVerification(),

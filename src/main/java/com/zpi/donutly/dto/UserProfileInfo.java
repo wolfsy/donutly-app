@@ -15,6 +15,7 @@ public record UserProfileInfo(
         String firstName,
         String lastName,
         @Null String profileDescription,
+        @Null String Category,
         Boolean status,
         Boolean emailVerification,
         Boolean adminVerification,
