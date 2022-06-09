@@ -24,7 +24,9 @@ function UserSettingsSection({ user, parentCallback }) {
             <Card className="user-settings-card bg-light-powder" body>
                 <h3>Update user data</h3>
                 <div className="mt-2 mb-5">
-                    <RequestWithdraw />
+                    <RequestWithdraw currentBalance={user.paymentBalance}
+                                     parentCallback={updateCallback}
+                    />
                 </div>
                 <Stack gap={4}>
                     <ChangeAccountNumber currentNumber={user.accountNumber}

@@ -13,11 +13,11 @@ function UserInfoSection({ user }) {
                 <Card className="user-settings-smaller-card text-start mt-4" body>
                     <p className="mb-3 mt-2">
                         <b>Total user balance: </b>
-                        <span className="text-secondary">{user.totalPaymentBalance}</span>
+                        <span className="text-secondary">{user.totalPaymentBalance} PLN</span>
                     </p>
                     <p className="mb-3">
                         <b>Current user balance: </b>
-                        <span className="text-secondary">{user.paymentBalance}</span>
+                        <span className="text-secondary">{user.paymentBalance} PLN</span>
                     </p>
                     <p className="mb-3">
                         <b>Last withdraw request: </b>

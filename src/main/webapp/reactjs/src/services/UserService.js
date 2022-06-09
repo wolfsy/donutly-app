@@ -221,6 +221,21 @@ class UserService {
         return response;
     }
 
+    async updateUserAccountBalanceAndLastWithdraw() {
+        const response = await axios.patch(USER_API_BASE_URL + 'account/withdraw',
+            {},
+            {
+                headers: 
+                {
+                     'Content-Type': 'application/json',
+                     'Authorization': getAuthToken()
+                },
+            }
+        );
+        
+        return response;
+    }
+
 }
 
 export default new UserService()
