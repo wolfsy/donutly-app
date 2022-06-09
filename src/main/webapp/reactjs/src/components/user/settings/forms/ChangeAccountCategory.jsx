@@ -41,7 +41,7 @@ function ChangeAccountCategory({ currentCategory, parentCallback }) {
             setFormError('Please select a category');
             return false;
         }
-        else if(category === currentCategory) {
+        if(category === currentCategory) {
             console.log(category === currentCategory);
             setFormError('New Category is the same as the current one');
             return false;
@@ -82,6 +82,7 @@ function ChangeAccountCategory({ currentCategory, parentCallback }) {
                             value={category}
                             isInvalid={!!formError}
                         >
+                            <option value=""></option>
                             {
                                 categories.map((category) => (
                                     <option
