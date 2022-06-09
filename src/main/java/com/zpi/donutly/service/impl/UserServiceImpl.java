@@ -4,10 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.zpi.donutly.dto.*;
 import com.zpi.donutly.model.*;
-import com.zpi.donutly.repository.AddressRepository;
-import com.zpi.donutly.repository.EmailVerificationRepository;
-import com.zpi.donutly.repository.PaymentRepository;
-import com.zpi.donutly.repository.UserRepository;
+import com.zpi.donutly.repository.*;
 import com.zpi.donutly.service.EmailVerificationService;
 import com.zpi.donutly.service.UserService;
 import lombok.AllArgsConstructor;
@@ -35,6 +32,7 @@ public class UserServiceImpl implements UserService {
     private final Algorithm jwtAlgorithm;
     private final UserRepository userRepository;
 
+    private final CategoryRepository categoryRepository;
     private final AddressRepository addressRepository;
     private final PaymentRepository paymentRepository;
     private final EmailVerificationService emailVerificationService;
@@ -271,6 +269,20 @@ public class UserServiceImpl implements UserService {
 
         String newUserPassword = passwordEncoder.encode(passwordChangeForm.newPassword());
         currentUser.setPassword(newUserPassword);
+        userRepository.save(currentUser);
+        return true;
+    }
+
+    @Override
+    public boolean updateUserAccountCategory(String userLogin, String category) {
+        User currentUser = userRepository.findUserByLogin(userLogin).orElse(null);
+        Category categoryEntity = categoryRepository.findCategoryByName(category).orElse(null);
+
+        if (currentUser == null || category == null || categoryEntity == null) {
+            return false;
+        }
+
+        currentUser.setCategory(categoryEntity);
         userRepository.save(currentUser);
         return true;
     }

@@ -217,6 +217,15 @@ public class UserController {
                 new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+    // modyfikacja kategorii uzytkownika
+    @PatchMapping(value = "/account/category")
+    public ResponseEntity<Void> updateUserAccountCategory(@RequestBody String category) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userLogin = userDetails.getUsername();
+        return userService.updateUserAccountCategory(userLogin, category) ?
+                new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
     //modyfikacja opisu profilu uzytkownika
     @PatchMapping(value = "/account/description")
     public ResponseEntity<Void> updateUserAccountProfileDescription(@RequestBody String description) {

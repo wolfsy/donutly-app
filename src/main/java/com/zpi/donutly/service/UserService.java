@@ -75,4 +75,6 @@ public interface UserService {
     boolean updateUserAccountProfileLogin(String userLogin, String login);
 
     boolean updateUserAccountProfilePassword(String userLogin, PasswordChangeForm passwordChangeForm);
+
+    boolean updateUserAccountCategory(String userLogin, String category);
 }
